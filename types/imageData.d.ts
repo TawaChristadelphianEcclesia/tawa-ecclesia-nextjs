@@ -1,4 +1,4 @@
 interface IImageData {
-  src: string;
+  url: string;
   alt?: string;
 }

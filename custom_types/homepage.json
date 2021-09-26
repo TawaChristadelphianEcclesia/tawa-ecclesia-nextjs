@@ -1,0 +1,55 @@
+{
+  "Main": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "title",
+        "placeholder": "Home page title..."
+      }
+    },
+    "subtitle": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph,heading2,strong,em,hyperlink",
+        "label": "Subtitle",
+        "placeholder": "Homepage subtitle/description"
+      }
+    },
+    "title_color": {
+      "type": "Color",
+      "config": {
+        "label": "Title colour"
+      }
+    },
+    "hero_image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Hero image"
+      }
+    },
+    "show_featured_post": {
+      "type": "Boolean",
+      "config": {
+        "default_value": false,
+        "label": "show featured post"
+      }
+    },
+    "featured_post": {
+      "type": "Link",
+      "config": {
+        "select": "document",
+        "label": "featured post"
+      }
+    },
+    "show_events": {
+      "type": "Boolean",
+      "config": {
+        "default_value": false,
+        "label": "show events"
+      }
+    }
+  }
+}

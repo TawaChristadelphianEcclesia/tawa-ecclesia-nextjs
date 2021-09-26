@@ -2,7 +2,7 @@ import React from "react";
 import "twin.macro";
 import tw, { styled } from "twin.macro";
 import Layout from "../components/layout";
-import Header from "../components/header";
+import HeaderNavBar from "../components/headerNavBar";
 // import { RichText, RichTextBlock } from "prismic-reactjs";
 import Heading from "../components/heading";
 import Card from "../components/card";
@@ -17,6 +17,7 @@ import {
   IHeaderData,
 } from "../lib/headerFooter";
 import { getAllEvents, IAllEventsData, IEventData } from "../lib/events";
+import { RichText } from "prismic-reactjs";
 
 const Button = styled.button`
   ${tw`bg-blue-500 hover:bg-blue-800 text-white p-2 rounded`}
@@ -33,12 +34,12 @@ const IndexPage: React.FC<{
   eventsData: IAllEventsData;
 }> = ({ pageData, headerData, footerData, eventsData }) => (
   <Layout>
-    <Header headerData={headerData} />
+    <HeaderNavBar headerData={headerData} />
     <Heading
       type="Full Bleed"
-      title={pageData.title}
-      subtitle={pageData.subtitle}
-      imageSrc={pageData.image.src}
+      title={RichText.render(pageData.title)}
+      subtitle={RichText.render(pageData.subtitle)}
+      imageSrc={pageData.image.url}
       textColor={pageData.textColor}
     />
     <div tw="bg-gradient-to-t from-gray-200 to-gray-50 py-10 px-2">
@@ -58,9 +59,9 @@ const IndexPage: React.FC<{
           {eventsData.map((event, key) => (
             <Event
               key={key}
-              title={event.title}
-              presenter={event.presenter}
-              description={event.description}
+              title={RichText.render(event.title)}
+              presenter={RichText.render(event.presenter)}
+              description={RichText.render(event.description)}
               datetime={new Date(event.time)}
             ></Event>
           ))}

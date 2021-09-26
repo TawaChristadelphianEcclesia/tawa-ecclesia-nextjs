@@ -1,18 +1,23 @@
+import { RichTextBlock } from "prismic-reactjs";
+import { Client } from "../prismic-config";
+
 export interface IHomePageData {
-  title: string;
-  subtitle: string;
+  title: RichTextBlock[];
+  subtitle: RichTextBlock[];
   image: IImageData;
   textColor: string;
 }
 
 export async function getHomePageData(): Promise<IHomePageData> {
+  const homepage = await Client.getSingle("homepage", {});
+  //   console.log(homepage);
   return {
-    title: "Lorem Ipsum",
-    subtitle:
-      "In ante metus dictum at tempor commodo ullamcorper. Laoreet id donec ultrices tincidunt arcu non.",
+    title: homepage.data.title,
+    subtitle: homepage.data.subtitle,
     image: {
-      src: "https://images.ctfassets.net/2xwhdgg5nph4/5iaJQ7mqHJ1S3WBynKDdLO/f9e7abccf62d55abc830d31568dbd589/photo-1509021436665-8f07dbf5bf1d?w=1920&h=1440&q=100&fm=webp&fit=fill",
+      url: homepage.data.hero_image.url,
+      alt: homepage.data.hero_image.alt,
     },
-    textColor: "#ffffff",
+    textColor: homepage.data.title_color,
   };
 }
