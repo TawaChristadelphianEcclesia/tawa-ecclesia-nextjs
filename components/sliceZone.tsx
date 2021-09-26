@@ -2,18 +2,16 @@ import "twin.macro";
 import tw, { css } from "twin.macro";
 import { RichText } from "prismic-reactjs";
 import React from "react";
-import { GeneralPageQuery_prismicGeneralPage_data } from "../pages/__generated__/GeneralPageQuery";
+import { ISliceData } from "../lib/api";
 
-type Slices = GeneralPageQuery_prismicGeneralPage_data["body"];
-
-const SliceZone: React.FC<{ data: Slices }> = ({ data }) => {
+const SliceZone: React.FC<{ slices: ISliceData[] }> = ({ slices }) => {
   return (
     <>
-      {data.map((slice) => {
+      {slices.map((slice) => {
         if (slice.slice_type === "text") {
           return (
-            <article tw="prose">
-              {RichText.render(slice.primary.text.raw)}
+            <article tw="prose max-w-screen-sm mx-auto font-serif text-gray-900 px-5">
+              {RichText.render(slice.primary.text)}
             </article>
           );
         } else {

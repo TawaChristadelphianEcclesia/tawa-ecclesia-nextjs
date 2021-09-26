@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
 import tw, { css, styled } from "twin.macro";
-import { getHeaderData, IHeaderData } from "../lib/headerFooter";
+import { IHeaderData } from "../lib/api";
 import { RichText } from "prismic-reactjs";
 
 const NavLink: React.FC<{ href: string }> = ({ href, children }) => (

@@ -1,8 +1,6 @@
 import React from "react";
-// import { graphql, Link, useStaticQuery } from "gatsby";
 // import { RichText } from "prismic-reactjs";
-import { getFooterData, IFooterData } from "../lib/headerFooter";
-import { GetStaticProps } from "next";
+import { IFooterData } from "../lib/api";
 import Link from "next/link";
 
 const Footer: React.FC<{ footerData: IFooterData }> = ({ footerData }) => {
@@ -43,12 +41,3 @@ const Footer: React.FC<{ footerData: IFooterData }> = ({ footerData }) => {
 };
 
 export default Footer;
-
-export const getStaticProps: GetStaticProps = async () => {
-  const footerData = getFooterData();
-  return {
-    props: {
-      footerData,
-    },
-  };
-};

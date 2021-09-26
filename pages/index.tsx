@@ -3,20 +3,22 @@ import "twin.macro";
 import tw, { styled } from "twin.macro";
 import Layout from "../components/layout";
 import HeaderNavBar from "../components/headerNavBar";
-// import { RichText, RichTextBlock } from "prismic-reactjs";
 import Heading from "../components/heading";
 import Card from "../components/card";
 import Event from "../components/event";
 import Footer from "../components/footer";
-import { getHomePageData, IHomePageData } from "../lib/homepage";
+import { IHomePageData } from "../lib/api";
 import { GetStaticProps } from "next";
 import {
+  getHomePageData,
   getFooterData,
   getHeaderData,
   IFooterData,
   IHeaderData,
-} from "../lib/headerFooter";
-import { getAllEvents, IAllEventsData, IEventData } from "../lib/events";
+  getAllEvents,
+  IAllEventsData,
+  IEventData,
+} from "../lib/api";
 import { RichText } from "prismic-reactjs";
 
 const Button = styled.button`
