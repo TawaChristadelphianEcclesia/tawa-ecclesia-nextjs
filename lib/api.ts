@@ -36,10 +36,17 @@ export interface IEventData {
 export type IAllEventsData = IEventData[];
 
 export async function getAllEvents(): Promise<IAllEventsData> {
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
   const eventDocuments = await PrismicClient.query(
-    Prismic.predicates.at("document.type", "event"),
-    { pageSize: 100 }
+    [
+      Prismic.predicates.at("document.type", "event"),
+      Prismic.predicates.dateAfter("my.event.event_date", yesterday),
+    ],
+    { orderings: "[my.event.event_date]", pageSize: 100 }
   );
+  console.log(eventDocuments.results.map((doc) => doc.data));
   const eventData = eventDocuments.results.map((result) => {
     return {
       title: result.data.title,
@@ -59,10 +66,12 @@ interface ILinkData {
 export interface IFooterData {
   footerText: RichTextBlock[];
   footerLinks: ILinkData[];
+  footerIcon: IImageData;
 }
 // inteface IFoot
 export async function getFooterData(): Promise<IFooterData> {
   var layoutDocument = await PrismicClient.getSingle("layout", {});
+  console.log(layoutDocument.data)
   return {
     footerLinks: layoutDocument.data.footer_links.map(
       (link: PrismicLinkField) => {
@@ -73,6 +82,10 @@ export async function getFooterData(): Promise<IFooterData> {
       }
     ),
     footerText: layoutDocument.data.footer_text,
+    footerIcon: {
+      url: layoutDocument.data.footer_icon.url,
+      alt: layoutDocument.data.footer_icon.alt,
+    },
   };
 }
 
@@ -112,11 +125,12 @@ export interface IHomePageData {
   subtitle: RichTextBlock[];
   image: IImageData;
   textColor: string;
+  showEvents: boolean;
 }
 
 export async function getHomePageData(): Promise<IHomePageData> {
   const homepage = await PrismicClient.getSingle("homepage", {});
-  //   console.log(homepage);
+  console.log(homepage);
   return {
     title: homepage.data.title,
     subtitle: homepage.data.subtitle,
@@ -125,6 +139,7 @@ export async function getHomePageData(): Promise<IHomePageData> {
       alt: homepage.data.hero_image.alt,
     },
     textColor: homepage.data.title_color,
+    showEvents: homepage.data.show_events,
   };
 }
 
@@ -179,4 +194,31 @@ export async function getPageData(uid: string): Promise<IPageData> {
     textColor: pageData.data.title_color,
     body: pageData.data.body,
   };
+}
+
+export interface IBlogPageData {
+  title: string;
+}
+
+export async function getBlogPageData(): Promise<IBlogPageData> {
+  const blogpage = await PrismicClient.getSingle("blog_page", {});
+  console.log(blogpage);
+  return {
+    title: RichText.asText(blogpage.data.title),
+  };
+}
+
+export interface IPostData {}
+
+export async function getPostData(uid: string): Promise<IPostData> {
+  var postData = await PrismicClient.getByUID("blog_post", uid, {});
+  return {};
+}
+
+export async function getAllPosts(): Promise<IPostData[]> {
+  const eventDocuments = await PrismicClient.query(
+    [Prismic.predicates.at("document.type", "post_data")],
+    { orderings: "[my.event.event_date]", pageSize: 100 }
+  );
+  return [];
 }

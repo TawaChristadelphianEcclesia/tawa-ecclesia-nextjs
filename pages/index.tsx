@@ -29,6 +29,14 @@ const Button = styled.button`
 //   bg-blue-500 hover:bg-blue-800 text-white p-2 rounded
 // `
 
+const dateAfterYesterday = (dateString: string) => {
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const compareDate = new Date(dateString);
+  return yesterday < compareDate;
+};
+
 const IndexPage: React.FC<{
   pageData: IHomePageData;
   headerData: IHeaderData;
@@ -47,28 +55,32 @@ const IndexPage: React.FC<{
     />
     <div tw="bg-gradient-to-t from-gray-200 to-gray-50 py-10 px-2">
       <div tw="max-w-screen-sm mx-auto">
-        <Card>
-          <div
-            style={{
-              marginTop: "10px",
-              borderBottom: "1px solid #f1f1f1",
-              padding: 10,
-            }}
-          >
-            <div>
-              <h2 tw="text-gray-900 text-4xl">What&apos;s coming up?</h2>
+        {pageData.showEvents && (
+          <Card>
+            <div
+              style={{
+                marginTop: "10px",
+                borderBottom: "1px solid #f1f1f1",
+                padding: 10,
+              }}
+            >
+              <div>
+                <h2 tw="text-gray-900 text-4xl">What&apos;s coming up?</h2>
+              </div>
             </div>
-          </div>
-          {eventsData.map((event, key) => (
-            <Event
-              key={key}
-              title={RichText.render(event.title)}
-              presenter={RichText.render(event.presenter)}
-              description={RichText.render(event.description)}
-              datetime={new Date(event.time)}
-            ></Event>
-          ))}
-        </Card>
+            {eventsData
+              .filter((event) => dateAfterYesterday(event.time))
+              .map((event, key) => (
+                <Event
+                  key={key}
+                  title={RichText.render(event.title)}
+                  presenter={RichText.render(event.presenter)}
+                  description={RichText.render(event.description)}
+                  datetime={new Date(event.time)}
+                ></Event>
+              ))}
+          </Card>
+        )}
       </div>
     </div>
     <Footer footerData={footerData} />
