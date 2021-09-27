@@ -27,7 +27,12 @@ const FullBleedHeading: React.FC<IBasicHeading> = ({
             position: "relative",
           }}
         >
-          <Image src={imageSrc} alt={alt || ""} />
+          <Image
+            src={imageSrc}
+            alt={alt || ""}
+            layout="fill"
+            objectFit="cover"
+          />
         </div>
       )}
     </div>

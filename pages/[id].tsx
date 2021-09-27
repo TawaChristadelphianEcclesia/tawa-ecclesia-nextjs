@@ -28,10 +28,10 @@ const GeneralPage: React.FC<{
     <Layout>
       <HeaderNavBar headerData={headerData} />
       <Heading
-        type="Full Bleed"
+        type={pageData.headingType}
         title={RichText.render(pageData.title)}
         subtitle={RichText.render(pageData.subtitle)}
-        imageSrc={pageData.image.url}
+        imageSrc={pageData.heroImage.url}
         textColor={pageData.textColor}
       />
       <SliceZone slices={pageData.body} />

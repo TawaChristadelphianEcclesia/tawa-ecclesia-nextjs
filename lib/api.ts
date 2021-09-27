@@ -169,7 +169,8 @@ export async function getAllPageIds(): Promise<IPageId[]> {
 export interface IPageData {
   title: RichTextBlock[];
   subtitle: RichTextBlock[];
-  image: IImageData;
+  heroImage: IImageData;
+  headingType: "Full Bleed" | "Standard"
   textColor: string;
   body: ISliceData[];
 }
@@ -187,10 +188,11 @@ export async function getPageData(uid: string): Promise<IPageData> {
   return {
     title: pageData.data.title,
     subtitle: pageData.data.subtitle,
-    image: {
+    heroImage: {
       url: pageData.data.hero_image.url,
       alt: pageData.data.hero_image.alt,
     },
+    headingType: pageData.data.hero_display,
     textColor: pageData.data.title_color,
     body: pageData.data.body,
   };
