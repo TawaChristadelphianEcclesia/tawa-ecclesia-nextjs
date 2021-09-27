@@ -12,6 +12,7 @@ export interface IHeading {
   alt?: string;
   type: "Full Bleed" | "Standard" | "YouTube";
   textColor?: string;
+  textPosition?: "top" | "bottom";
   url?: string;
 }
 
@@ -22,6 +23,7 @@ const Heading: React.FC<IHeading> = ({
   alt,
   type,
   textColor,
+  textPosition,
   url,
 }) => {
   return (
@@ -33,6 +35,7 @@ const Heading: React.FC<IHeading> = ({
           image={imageSrc}
           alt={alt}
           textColor={textColor}
+          textPosition={textPosition}
         />
       )}
       {type != "YouTube" && (!imageSrc || type == "Standard") && (

@@ -43,6 +43,7 @@ const IndexPage: React.FC<{
       subtitle={RichText.render(pageData.subtitle)}
       imageSrc={pageData.image.url}
       textColor={pageData.textColor}
+      textPosition={"top"}
     />
     <div tw="bg-gradient-to-t from-gray-200 to-gray-50 py-10 px-2">
       <div tw="max-w-screen-sm mx-auto">
@@ -55,7 +56,7 @@ const IndexPage: React.FC<{
             }}
           >
             <div>
-              <h2 tw="text-gray-900 text-4xl">What's coming up?</h2>
+              <h2 tw="text-gray-900 text-4xl">What&apos;s coming up?</h2>
             </div>
           </div>
           {eventsData.map((event, key) => (

@@ -62,11 +62,16 @@ const HeaderNavBar = ({ headerData }: { headerData: IHeaderData }) => {
         tw="px-4 pt-2 pb-4 sm:flex sm:p-0 transition-all"
         css={[open ? tw`block` : tw`hidden`]}
       >
-        <NavLink href="/articles">Articles</NavLink>
+        {headerData.headerLinks.map((link, index) => (
+          <NavLink key={index} href={link.url}>
+            {link.label}
+          </NavLink>
+        ))}
+        {/* <NavLink href="/articles">Articles</NavLink>
         <NavLink href="/articles/who-are-we">Who Are We?</NavLink>
         <NavLink href="/articles/gods-purpose-with-the-earth">
           Our Beliefs
-        </NavLink>
+        </NavLink> */}
       </div>
     </header>
   );

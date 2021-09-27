@@ -2,6 +2,7 @@ import React from "react";
 // import { RichText } from "prismic-reactjs";
 import { IFooterData } from "../lib/api";
 import Link from "next/link";
+import { RichText } from "prismic-reactjs";
 
 const Footer: React.FC<{ footerData: IFooterData }> = ({ footerData }) => {
   return (
@@ -19,13 +20,13 @@ const Footer: React.FC<{ footerData: IFooterData }> = ({ footerData }) => {
             {footerData.footerLinks.map((link) => (
               <>
                 <br />
-                <Link href={link.src}>
+                <Link href={link.url}>
                   <a>{link.label}</a>
                 </Link>
               </>
             ))}
             <br />
-            {footerData.footerText}
+            {RichText.render(footerData.footerText)}
           </div>
         </div>
       </div>

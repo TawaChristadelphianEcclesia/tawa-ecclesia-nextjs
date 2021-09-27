@@ -12,6 +12,7 @@ interface IFullBleedHeading {
   image: string;
   alt?: string;
   textColor?: string;
+  textPosition?: "top" | "bottom";
 }
 
 const FullBleedHeading: React.FC<IFullBleedHeading> = ({
@@ -20,6 +21,7 @@ const FullBleedHeading: React.FC<IFullBleedHeading> = ({
   image,
   alt,
   textColor,
+  textPosition,
 }) => {
   return (
     <div
@@ -33,13 +35,21 @@ const FullBleedHeading: React.FC<IFullBleedHeading> = ({
         overflow: "hidden",
       }}
     >
-      <Image src={image} alt={alt || ""} layout="fill" sizes="100%" objectFit="cover"/>
+      <Image
+        src={image}
+        alt={alt || ""}
+        layout="fill"
+        sizes="100%"
+        objectFit="cover"
+      />
       <div
         style={{
           position: "absolute",
-          bottom: 0,
           margin: "20px",
           color: textColor,
+          ...(!textPosition || textPosition == "bottom"
+            ? { bottom: 0 }
+            : { top: 0 }),
         }}
       >
         <h1 tw="text-5xl sm:text-7xl font-bold font-serif">{title}</h1>
