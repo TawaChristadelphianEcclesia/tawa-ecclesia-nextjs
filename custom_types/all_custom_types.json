@@ -1,0 +1,400 @@
+[
+    {
+        "id": "blog_post",
+        "label": "Blog post",
+        "repeatable": true,
+        "json": {
+            "Main": {
+                "title": {
+                    "type": "StructuredText",
+                    "config": {
+                        "single": "heading1",
+                        "label": "Title",
+                        "placeholder": "Blog post title..."
+                    }
+                },
+                "release_date": {
+                    "type": "Date",
+                    "config": {
+                        "label": "Release Date"
+                    }
+                },
+                "author": {
+                    "type": "Link",
+                    "config": {
+                        "select": "document",
+                        "label": "Author",
+                        "placeholder": "Link to an author document"
+                    }
+                },
+                "summary": {
+                    "type": "StructuredText",
+                    "config": {
+                        "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,list-item,o-list-item,rtl",
+                        "label": "summary"
+                    }
+                },
+                "body": {
+                    "type": "Slices",
+                    "fieldset": "Slice zone",
+                    "config": {
+                        "choices": {
+                            "text": {
+                                "type": "Slice",
+                                "fieldset": "Text",
+                                "description": "A rich text section",
+                                "icon": "text_fields",
+                                "non-repeat": {
+                                    "text": {
+                                        "type": "StructuredText",
+                                        "config": {
+                                            "multi": "paragraph,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,list-item,o-list-item",
+                                            "allowTargetBlank": true,
+                                            "label": "Text",
+                                            "placeholder": "Enter your text..."
+                                        }
+                                    }
+                                },
+                                "repeat": {}
+                            },
+                            "quote": {
+                                "type": "Slice",
+                                "fieldset": "Quote",
+                                "description": "A featured quote",
+                                "icon": "format_quote",
+                                "non-repeat": {
+                                    "quote": {
+                                        "type": "StructuredText",
+                                        "config": {
+                                            "single": "paragraph,strong,em",
+                                            "label": "quote",
+                                            "placeholder": "Enter quote..."
+                                        }
+                                    }
+                                },
+                                "repeat": {}
+                            },
+                            "image": {
+                                "type": "Slice",
+                                "fieldset": "Image",
+                                "description": "An image with optional caption",
+                                "icon": "image",
+                                "non-repeat": {
+                                    "image": {
+                                        "type": "Image",
+                                        "config": {
+                                            "constraint": {},
+                                            "thumbnails": [],
+                                            "label": "Image"
+                                        }
+                                    },
+                                    "caption": {
+                                        "type": "StructuredText",
+                                        "config": {
+                                            "single": "paragraph,strong,em,hyperlink",
+                                            "allowTargetBlank": true,
+                                            "label": "Caption",
+                                            "placeholder": "Optional image caption..."
+                                        }
+                                    }
+                                },
+                                "repeat": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "status": true
+    },
+    {
+        "id": "general_page",
+        "label": "General Page",
+        "repeatable": true,
+        "json": {
+            "Main": {
+                "uid": {
+                    "type": "UID",
+                    "config": {
+                        "label": "UID",
+                        "placeholder": ""
+                    }
+                },
+                "title": {
+                    "type": "StructuredText",
+                    "config": {
+                        "single": "heading1",
+                        "label": "title",
+                        "placeholder": "Page title..."
+                    }
+                },
+                "subtitle": {
+                    "type": "StructuredText",
+                    "config": {
+                        "single": "paragraph,heading2,strong,em,hyperlink",
+                        "label": "Subtitle",
+                        "placeholder": "Homepage subtitle/description"
+                    }
+                },
+                "title_color": {
+                    "type": "Color",
+                    "config": {
+                        "label": "Title colour"
+                    }
+                },
+                "hero_image": {
+                    "type": "Image",
+                    "config": {
+                        "constraint": {},
+                        "thumbnails": [],
+                        "label": "Hero image"
+                    }
+                },
+                "hero_display": {
+                    "type": "Select",
+                    "config": {
+                        "options": [
+                            "Standard",
+                            "Full Bleed"
+                        ],
+                        "default_value": "Standard",
+                        "label": "hero_display",
+                        "placeholder": "set the display of the hero image"
+                    }
+                },
+                "body": {
+                    "type": "Slices",
+                    "fieldset": "Slice zone",
+                    "config": {
+                        "labels": {},
+                        "choices": {
+                            "text": {
+                                "type": "Slice",
+                                "fieldset": "Text",
+                                "description": "A rich text section",
+                                "icon": "text_fields",
+                                "non-repeat": {
+                                    "text": {
+                                        "type": "StructuredText",
+                                        "config": {
+                                            "multi": "paragraph,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,list-item,o-list-item",
+                                            "allowTargetBlank": true,
+                                            "label": "Text",
+                                            "placeholder": "Enter your text..."
+                                        }
+                                    }
+                                },
+                                "repeat": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "status": true
+    },
+    {
+        "id": "event",
+        "label": "event",
+        "repeatable": true,
+        "json": {
+            "Main": {
+                "title": {
+                    "type": "StructuredText",
+                    "config": {
+                        "single": "heading1",
+                        "label": "title",
+                        "placeholder": "Event name..."
+                    }
+                },
+                "event_date": {
+                    "type": "Timestamp",
+                    "config": {
+                        "label": "event date",
+                        "placeholder": "Event date and time"
+                    }
+                },
+                "presenter": {
+                    "type": "StructuredText",
+                    "config": {
+                        "single": "paragraph",
+                        "label": "Presenter",
+                        "placeholder": "who's presenting?"
+                    }
+                },
+                "event_description": {
+                    "type": "StructuredText",
+                    "config": {
+                        "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,list-item,o-list-item,rtl",
+                        "label": "event description",
+                        "placeholder": "short description of the event..."
+                    }
+                }
+            }
+        },
+        "status": true
+    },
+    {
+        "id": "layout",
+        "label": "layout",
+        "repeatable": false,
+        "json": {
+            "Header": {
+                "site_logo": {
+                    "type": "Image",
+                    "config": {
+                        "constraint": {
+                            "width": null,
+                            "height": null
+                        },
+                        "thumbnails": [],
+                        "label": "Site Logo"
+                    }
+                },
+                "site_tagline": {
+                    "type": "StructuredText",
+                    "config": {
+                        "single": "paragraph,strong,em",
+                        "label": "Site Tagline",
+                        "placeholder": "Site Tagline..."
+                    }
+                },
+                "tagline_text_color": {
+                    "type": "Color",
+                    "config": {
+                        "label": "Tagline Text Color"
+                    }
+                },
+                "header_links": {
+                    "type": "Group",
+                    "config": {
+                        "fields": {
+                            "link_label": {
+                                "type": "StructuredText",
+                                "config": {
+                                    "single": "paragraph",
+                                    "label": "Link Label",
+                                    "placeholder": "Link Label..."
+                                }
+                            },
+                            "link": {
+                                "type": "Link",
+                                "config": {
+                                    "label": "Link",
+                                    "select": null
+                                }
+                            }
+                        },
+                        "label": "Header Links"
+                    }
+                }
+            },
+            "Footer": {
+                "footer_links": {
+                    "type": "Group",
+                    "config": {
+                        "fields": {
+                            "link_label": {
+                                "type": "StructuredText",
+                                "config": {
+                                    "single": "paragraph",
+                                    "label": "Link Label",
+                                    "placeholder": "Link Label..."
+                                }
+                            },
+                            "link": {
+                                "type": "Link",
+                                "config": {
+                                    "label": "Link",
+                                    "select": null
+                                }
+                            }
+                        },
+                        "label": "Footer Links"
+                    }
+                },
+                "footer_icon": {
+                    "type": "Image",
+                    "config": {
+                        "constraint": {
+                            "width": 25,
+                            "height": 25
+                        },
+                        "thumbnails": [],
+                        "label": "Footer Icon"
+                    }
+                },
+                "footer_text": {
+                    "type": "StructuredText",
+                    "config": {
+                        "single": "paragraph,strong,em",
+                        "label": "Footer Text",
+                        "placeholder": "Enter footer text..."
+                    }
+                }
+            }
+        },
+        "status": true
+    },
+    {
+        "id": "homepage",
+        "label": "Homepage",
+        "repeatable": false,
+        "json": {
+            "Main": {
+                "title": {
+                    "type": "StructuredText",
+                    "config": {
+                        "single": "heading1",
+                        "label": "title",
+                        "placeholder": "Home page title..."
+                    }
+                },
+                "subtitle": {
+                    "type": "StructuredText",
+                    "config": {
+                        "single": "paragraph,heading2,strong,em,hyperlink",
+                        "label": "Subtitle",
+                        "placeholder": "Homepage subtitle/description"
+                    }
+                },
+                "title_color": {
+                    "type": "Color",
+                    "config": {
+                        "label": "Title colour"
+                    }
+                },
+                "hero_image": {
+                    "type": "Image",
+                    "config": {
+                        "constraint": {},
+                        "thumbnails": [],
+                        "label": "Hero image"
+                    }
+                },
+                "show_featured_post": {
+                    "type": "Boolean",
+                    "config": {
+                        "default_value": false,
+                        "label": "show featured post"
+                    }
+                },
+                "featured_post": {
+                    "type": "Link",
+                    "config": {
+                        "select": "document",
+                        "label": "featured post"
+                    }
+                },
+                "show_events": {
+                    "type": "Boolean",
+                    "config": {
+                        "default_value": false,
+                        "label": "show events"
+                    }
+                }
+            }
+        },
+        "status": true
+    }
+]

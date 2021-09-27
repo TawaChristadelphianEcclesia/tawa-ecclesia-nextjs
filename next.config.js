@@ -8,6 +8,6 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ["images.prismic.io", "tawa-website-poc.cdn.prismic.io"],
+    domains: ["images.prismic.io", "tawa-ecclesial-website.cdn.prismic.io"],
   },
 };
