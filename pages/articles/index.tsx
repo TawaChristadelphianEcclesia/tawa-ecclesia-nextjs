@@ -43,6 +43,9 @@ const BlogPage: React.FC<{
               summary={RichText.render(post.summary)}
               url={post.url}
               isLast={postData.length == i + 1}
+              tags={post.tags}
+              datePublished={new Date(post.datePublished)}
+              readingTime={post.readingTime}
             />
           ))}
           <div tw="px-4 py-2 border-gray-300">

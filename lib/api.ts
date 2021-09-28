@@ -227,15 +227,38 @@ export interface IPostData {
   title: string;
   summary: RichTextBlock[];
   body: SliceZone;
+  tags: string[];
+  datePublished: string;
+  readingTime: number;
+}
+
+export function getTextReadingTime(text: string) {
+  return Math.round(text.split(" ").filter((word) => word !== "").length / 220);
+}
+
+export function getSliceZoneTextReadingTime(sliceZone: any) {
+  return sliceZone
+    .filter((slice: any) => slice.slice_type == "text")
+    .reduce((totalReadingTime: number, slice: any) => {
+      var readingTime = getTextReadingTime(
+        RichText.asText(slice.primary.text as RichTextBlock[])
+      );
+      return totalReadingTime + readingTime;
+    }, 0);
 }
 
 export async function getPostData(uid: string): Promise<IPostData> {
   var postData = await PrismicClient.getByUID("blog_post", uid, {});
+  // var linkedPosts = await 
+  console.log(postData.data.linked_posts);
   return {
     url: prismicLinkResolver(postData),
     title: RichText.asText(postData.data.title),
     summary: postData.data.summary,
     body: postData.data.body,
+    tags: postData.data.article_tags.map(({ tag }: any) => tag),
+    datePublished: postData.data.release_date,
+    readingTime: getSliceZoneTextReadingTime(postData.data.body),
   };
 }
 
@@ -262,11 +285,15 @@ export async function getAllPosts(): Promise<IPostData[]> {
     { orderings: "[document.last_publication_date]", pageSize: 100 }
   );
   var postsData = postDocuments.results.map((doc) => {
+    console.log(doc.data);
     return {
       url: prismicLinkResolver(doc),
       title: RichText.asText(doc.data.title),
       summary: doc.data.summary,
       body: doc.data.body,
+      tags: doc.data.article_tags.map(({ tag }: any) => tag),
+      datePublished: doc.data.release_date,
+      readingTime: getSliceZoneTextReadingTime(doc.data.body),
     };
   });
   console.log(postsData);
