@@ -1,5 +1,11 @@
 import Prismic from "@prismicio/client";
-import { LinkField, LinkType, PrismicDocument } from "@prismicio/types";
+import { Document } from "@prismicio/client/types/documents";
+import {
+  LinkField,
+  LinkType,
+  PrismicDocument,
+  SliceZone,
+} from "@prismicio/types";
 import { Link, RichText, RichTextBlock } from "prismic-reactjs";
 
 const REPOSITORY = process.env.PRISMIC_REPOSITORY_NAME ?? "tawa-website-poc";
@@ -13,7 +19,7 @@ export const PrismicClient = Prismic.client(REF_API_URL, {
   accessToken: API_TOKEN,
 });
 
-export const prismicLinkResolver = function (doc: PrismicDocument) {
+export const prismicLinkResolver = function (doc: Document | PrismicDocument) {
   // if (doc.isBroken) {
   //   return "/not-found";
   // }
@@ -22,6 +28,12 @@ export const prismicLinkResolver = function (doc: PrismicDocument) {
   }
   if (doc.type === "general_page") {
     return "/" + doc.uid;
+  }
+  if (doc.type === "blog_page") {
+    return "/articles";
+  }
+  if (doc.type === "blog_post") {
+    return "/articles/" + doc.uid;
   }
   return "/";
 };
@@ -46,7 +58,7 @@ export async function getAllEvents(): Promise<IAllEventsData> {
     ],
     { orderings: "[my.event.event_date]", pageSize: 100 }
   );
-  console.log(eventDocuments.results.map((doc) => doc.data));
+  // console.log(eventDocuments.results.map((doc) => doc.data));
   const eventData = eventDocuments.results.map((result) => {
     return {
       title: result.data.title,
@@ -71,7 +83,7 @@ export interface IFooterData {
 // inteface IFoot
 export async function getFooterData(): Promise<IFooterData> {
   var layoutDocument = await PrismicClient.getSingle("layout", {});
-  console.log(layoutDocument.data)
+  // console.log(layoutDocument.data)
   return {
     footerLinks: layoutDocument.data.footer_links.map(
       (link: PrismicLinkField) => {
@@ -130,7 +142,7 @@ export interface IHomePageData {
 
 export async function getHomePageData(): Promise<IHomePageData> {
   const homepage = await PrismicClient.getSingle("homepage", {});
-  console.log(homepage);
+  // console.log(homepage);
   return {
     title: homepage.data.title,
     subtitle: homepage.data.subtitle,
@@ -170,7 +182,7 @@ export interface IPageData {
   title: RichTextBlock[];
   subtitle: RichTextBlock[];
   heroImage: IImageData;
-  headingType: "Full Bleed" | "Standard"
+  headingType: "Full Bleed" | "Standard";
   textColor: string;
   body: ISliceData[];
 }
@@ -204,23 +216,59 @@ export interface IBlogPageData {
 
 export async function getBlogPageData(): Promise<IBlogPageData> {
   const blogpage = await PrismicClient.getSingle("blog_page", {});
-  console.log(blogpage);
+  // console.log(blogpage);
   return {
     title: RichText.asText(blogpage.data.title),
   };
 }
 
-export interface IPostData {}
+export interface IPostData {
+  url: string;
+  title: string;
+  summary: RichTextBlock[];
+  body: SliceZone;
+}
 
 export async function getPostData(uid: string): Promise<IPostData> {
   var postData = await PrismicClient.getByUID("blog_post", uid, {});
-  return {};
+  return {
+    url: prismicLinkResolver(postData),
+    title: RichText.asText(postData.data.title),
+    summary: postData.data.summary,
+    body: postData.data.body,
+  };
+}
+
+export async function getAllPostIds(): Promise<IPageId[]> {
+  const pages = await PrismicClient.query(
+    Prismic.predicates.at("document.type", "blog_post"),
+    { pageSize: 100 }
+  );
+  var ids = pages.results.map((result) => {
+    // console.log(result);
+    return {
+      params: {
+        id: result.uid,
+      },
+    };
+  });
+  //   console.log(ids);
+  return ids;
 }
 
 export async function getAllPosts(): Promise<IPostData[]> {
-  const eventDocuments = await PrismicClient.query(
-    [Prismic.predicates.at("document.type", "post_data")],
-    { orderings: "[my.event.event_date]", pageSize: 100 }
+  const postDocuments = await PrismicClient.query(
+    [Prismic.predicates.at("document.type", "blog_post")],
+    { orderings: "[document.last_publication_date]", pageSize: 100 }
   );
-  return [];
+  var postsData = postDocuments.results.map((doc) => {
+    return {
+      url: prismicLinkResolver(doc),
+      title: RichText.asText(doc.data.title),
+      summary: doc.data.summary,
+      body: doc.data.body,
+    };
+  });
+  console.log(postsData);
+  return postsData;
 }

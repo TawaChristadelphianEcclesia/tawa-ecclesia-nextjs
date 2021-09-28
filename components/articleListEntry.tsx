@@ -1,25 +1,25 @@
-import React from "react";
+import React, { ReactNode } from "react";
 // import { Link } from 'gatsby';
 import Link from "next/link";
 import "twin.macro";
 import tw from "twin.macro";
 
 interface IArticleListEntry {
-  slug: string;
+  url: string;
   title: string;
-  summary: string;
+  summary: string | ReactNode;
   isLast?: boolean;
 }
 
 const ArticleListEntry: React.FC<IArticleListEntry> = ({
-  slug,
+  url,
   title,
   summary,
   isLast = false,
 }) => {
   // slug link
   return (
-    <Link href={slug} passHref>
+    <Link href={url} passHref>
       <div tw="px-4 py-2 border-gray-300" css={[!isLast && tw`border-b`]}>
         <p tw="text-gray-900 font-sans font-semibold text-xs">
           Basics • The Kingdom

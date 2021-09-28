@@ -13,4 +13,9 @@ FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 # RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
 
 # [Optional] Uncomment if you want to install more global node packages
+# Default powerline10k theme, no plugins installed
+# Uses "robbyrussell" theme (original Oh My Zsh theme), with no plugins
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
+ -t agnoster
+
 RUN su node -c "npm install -g prismic-cli"
