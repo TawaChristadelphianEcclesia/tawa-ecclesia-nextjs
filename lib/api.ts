@@ -58,7 +58,6 @@ export async function getAllEvents(): Promise<IAllEventsData> {
     ],
     { orderings: "[my.event.event_date]", pageSize: 100 }
   );
-  // console.log(eventDocuments.results.map((doc) => doc.data));
   const eventData = eventDocuments.results.map((result) => {
     return {
       title: result.data.title,
@@ -83,7 +82,6 @@ export interface IFooterData {
 // inteface IFoot
 export async function getFooterData(): Promise<IFooterData> {
   var layoutDocument = await PrismicClient.getSingle("layout", {});
-  // console.log(layoutDocument.data)
   return {
     footerLinks: layoutDocument.data.footer_links.map(
       (link: PrismicLinkField) => {
@@ -114,7 +112,6 @@ interface PrismicLinkField {
 
 export async function getHeaderData(): Promise<IHeaderData> {
   var layoutDocument = await PrismicClient.getSingle("layout", {});
-  // console.log(layoutDocument.data);
   return {
     siteTagLine: layoutDocument.data.site_tagline,
     siteLogo: {
@@ -142,7 +139,6 @@ export interface IHomePageData {
 
 export async function getHomePageData(): Promise<IHomePageData> {
   const homepage = await PrismicClient.getSingle("homepage", {});
-  // console.log(homepage);
   return {
     title: homepage.data.title,
     subtitle: homepage.data.subtitle,
@@ -167,14 +163,12 @@ export async function getAllPageIds(): Promise<IPageId[]> {
     { pageSize: 100 }
   );
   var ids = pages.results.map((result) => {
-    // console.log(result);
     return {
       params: {
         id: result.uid,
       },
     };
   });
-  //   console.log(ids);
   return ids;
 }
 
@@ -196,7 +190,6 @@ export interface ISliceData {
 
 export async function getPageData(uid: string): Promise<IPageData> {
   var pageData = await PrismicClient.getByUID("general_page", uid, {});
-  console.log(pageData.data.body);
   return {
     title: pageData.data.title,
     subtitle: pageData.data.subtitle,
@@ -216,7 +209,6 @@ export interface IBlogPageData {
 
 export async function getBlogPageData(): Promise<IBlogPageData> {
   const blogpage = await PrismicClient.getSingle("blog_page", {});
-  // console.log(blogpage);
   return {
     title: RichText.asText(blogpage.data.title),
   };
@@ -250,7 +242,6 @@ export function getSliceZoneTextReadingTime(sliceZone: any) {
 export async function getPostData(uid: string): Promise<IPostData> {
   var postData = await PrismicClient.getByUID("blog_post", uid, {});
   // var linkedPosts = await 
-  console.log(postData.data.linked_posts);
   return {
     url: prismicLinkResolver(postData),
     title: RichText.asText(postData.data.title),
@@ -268,14 +259,12 @@ export async function getAllPostIds(): Promise<IPageId[]> {
     { pageSize: 100 }
   );
   var ids = pages.results.map((result) => {
-    // console.log(result);
     return {
       params: {
         id: result.uid,
       },
     };
   });
-  //   console.log(ids);
   return ids;
 }
 
@@ -285,7 +274,6 @@ export async function getAllPosts(): Promise<IPostData[]> {
     { orderings: "[document.last_publication_date]", pageSize: 100 }
   );
   var postsData = postDocuments.results.map((doc) => {
-    console.log(doc.data);
     return {
       url: prismicLinkResolver(doc),
       title: RichText.asText(doc.data.title),
@@ -296,6 +284,5 @@ export async function getAllPosts(): Promise<IPostData[]> {
       readingTime: getSliceZoneTextReadingTime(doc.data.body),
     };
   });
-  console.log(postsData);
   return postsData;
 }
