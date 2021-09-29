@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import { RichText } from "prismic-reactjs";
 import Footer from "../../components/footer";
 import HeaderNavBar from "../../components/headerNavBar";
@@ -22,6 +23,9 @@ const BlogArticle: React.FC<{
 }> = ({ postData, headerData, footerData }) => {
   return (
     <Layout>
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
       <HeaderNavBar headerData={headerData} />
       <Heading
         title={postData.title}

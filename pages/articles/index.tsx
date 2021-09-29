@@ -2,6 +2,7 @@ import React from "react";
 // import { graphql, Link, PageProps } from 'gatsby';
 import "twin.macro";
 import tw from "twin.macro";
+import Head from "next/head";
 import Layout from "../../components/layout";
 // import SEO from '../components/seo';
 import ArticleListEntry from "../../components/articleListEntry";
@@ -31,6 +32,9 @@ const BlogPage: React.FC<{
   // dropshadow and gradeint
   return (
     <Layout>
+      <Head>
+        <title>{pageData.title}</title>
+      </Head>
       <HeaderNavBar headerData={headerData} />
       {/* <SEO title="Articles" /> */}
       <div tw="bg-gradient-to-t from-gray-200 p-2">
