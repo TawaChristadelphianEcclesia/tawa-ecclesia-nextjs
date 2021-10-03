@@ -38,9 +38,9 @@ const ArticleListEntry: React.FC<IArticleListEntry> = ({
             {Intl.DateTimeFormat("en-nz").format(datePublished)}
           </p>
           <p tw="font-sans text-sm">
-            {summary?.length < 100
+            {summary?.length < 120
               ? summary
-              : summary.substring(0, 100) + "..."}
+              : summary.substring(0, 120) + "..."}
           </p>
         </div>
         <div tw="flex-initial w-48 justify-self-end pl-4 hidden sm:block">
