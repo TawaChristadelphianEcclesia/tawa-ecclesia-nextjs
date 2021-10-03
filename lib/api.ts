@@ -243,25 +243,28 @@ export function getSliceZoneTextReadingTime(sliceZone: any) {
 
 export async function getPostData(uid: string): Promise<IPostData> {
   var postData = await PrismicClient.getByUID("blog_post", uid, {});
-  var postIds = postData.data.linked_posts.map(
-    ({ post }: { post: Document }) => post.id
-  );
-  var relatedPosts = await PrismicClient.getByIDs(postIds, {});
-  var relatedPostsData = relatedPosts.results.map((doc) => {
-    return {
-      url: prismicLinkResolver(doc),
-      title: RichText.asText(doc.data.title),
-      titleImage: {
-        url: doc.data.title_image.url,
-        alt: doc.data.title_image.alt,
-      },
-      summary: doc.data.summary,
-      body: doc.data.body,
-      tags: doc.data.article_tags.map(({ tag }: any) => tag),
-      datePublished: doc.data.release_date,
-      readingTime: getSliceZoneTextReadingTime(doc.data.body),
-    };
-  });
+  var postIds = postData.data.linked_posts
+    .map(({ post }: { post: Document }) => post.id)
+    .filter((id: string) => id !== undefined);
+  var relatedPostsData: IPostData[] = [];
+  if (postIds && postIds.length) {
+    var relatedPosts = await PrismicClient.getByIDs(postIds, {});
+    relatedPostsData = relatedPosts.results.map((doc) => {
+      return {
+        url: prismicLinkResolver(doc),
+        title: RichText.asText(doc.data.title),
+        titleImage: {
+          url: doc.data.title_image.url,
+          alt: doc.data.title_image.alt,
+        },
+        summary: doc.data.summary,
+        body: doc.data.body,
+        tags: doc.data.article_tags.map(({ tag }: any) => tag),
+        datePublished: doc.data.release_date,
+        readingTime: getSliceZoneTextReadingTime(doc.data.body),
+      };
+    });
+  }
   return {
     url: prismicLinkResolver(postData),
     title: RichText.asText(postData.data.title),
