@@ -37,30 +37,29 @@ const BlogArticle: React.FC<{
         type={"Standard"}
       />
       <SliceZone slices={postData.body} />
-      <div tw="bg-gradient-to-t from-gray-200 p-2 pt-10">
-        <div tw="rounded-lg bg-white shadow-sm overflow-hidden max-w-screen-sm mx-auto">
-          {postData.relatedPosts && postData.relatedPosts.length && (
-            <h2 tw="text-gray-900 font-sans text-2xl font-bold m-4">Read More</h2>
-          )}
-          {postData.relatedPosts?.map((post, i) => (
-            <ArticleListEntry
-              key={i}
-              title={post.title}
-              titleImage={post.titleImage}
-              summary={RichText.asText(post.summary)}
-              url={post.url}
-              tags={post.tags}
-              datePublished={new Date(post.datePublished)}
-              readingTime={post.readingTime}
-            />
-          ))}
-          {/* <div tw="px-4 py-2 border-gray-300">
-            <button tw="bg-gray-100 hover:bg-gray-200 focus:bg-gray-100 text-gray-900 hover:shadow focus:shadow px-4 py-2 uppercase text-sm block rounded transition-all">
-              More
-            </button>
-          </div> */}
+      {postData.relatedPosts && postData.relatedPosts.length ? (
+        <div tw="bg-gradient-to-t from-gray-200 p-2 py-10">
+          <div tw="rounded-lg bg-white shadow-sm overflow-hidden max-w-screen-sm mx-auto">
+            <h2 tw="text-gray-900 font-sans text-2xl font-bold m-4">
+              Read More
+            </h2>
+            {postData.relatedPosts?.map((post, i) => (
+              <ArticleListEntry
+                key={i}
+                title={post.title}
+                titleImage={post.titleImage}
+                summary={RichText.asText(post.summary)}
+                url={post.url}
+                tags={post.tags}
+                datePublished={new Date(post.datePublished)}
+                readingTime={post.readingTime}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
       <Footer footerData={footerData} />
     </Layout>
   );
