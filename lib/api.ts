@@ -243,11 +243,10 @@ export function getSliceZoneTextReadingTime(sliceZone: any) {
 
 export async function getPostData(uid: string): Promise<IPostData> {
   var postData = await PrismicClient.getByUID("blog_post", uid, {});
-  // To retrieve the API object check how to query the API'
-  var relatedPosts = await PrismicClient.query([
-    Prismic.Predicates.at("document.type", "blog_post"),
-    Prismic.Predicates.at("my.blog_post.linked_posts.post", postData.id),
-  ]);
+  var postIds = postData.data.linked_posts.map(
+    ({ post }: { post: Document }) => post.id
+  );
+  var relatedPosts = await PrismicClient.getByIDs(postIds, {});
   var relatedPostsData = relatedPosts.results.map((doc) => {
     return {
       url: prismicLinkResolver(doc),
@@ -275,7 +274,7 @@ export async function getPostData(uid: string): Promise<IPostData> {
     tags: postData.data.article_tags.map(({ tag }: any) => tag),
     datePublished: postData.data.release_date,
     readingTime: getSliceZoneTextReadingTime(postData.data.body),
-    relatedPosts: relatedPostsData
+    relatedPosts: relatedPostsData,
   };
 }
 
