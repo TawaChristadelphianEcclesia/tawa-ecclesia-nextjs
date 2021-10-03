@@ -10,7 +10,6 @@ interface IArticleListEntry {
   title: string;
   titleImage: IImageData;
   summary: string;
-  isLast?: boolean;
   tags: string[];
   datePublished: Date;
   readingTime: number;
@@ -23,8 +22,7 @@ const ArticleListEntry: React.FC<IArticleListEntry> = ({
   summary,
   tags,
   datePublished,
-  readingTime,
-  isLast = false,
+  readingTime
 }) => {
   // slug link
   return (

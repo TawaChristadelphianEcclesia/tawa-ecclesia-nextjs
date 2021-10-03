@@ -39,7 +39,7 @@ const BlogPage: React.FC<{
       {/* <SEO title="Articles" /> */}
       <div tw="bg-gradient-to-t from-gray-200 p-2">
         <Heading title={pageData.title} subtitle="" type="Standard" />
-        <div tw="rounded-lg bg-white shadow-sm pt-5 overflow-hidden max-w-screen-sm mx-auto">
+        <div tw="rounded-lg bg-white shadow-sm overflow-hidden max-w-screen-sm mx-auto">
           {postData.map((post, i) => (
             <ArticleListEntry
               key={i}
@@ -47,17 +47,16 @@ const BlogPage: React.FC<{
               titleImage={post.titleImage}
               summary={RichText.asText(post.summary)}
               url={post.url}
-              isLast={postData.length == i + 1}
               tags={post.tags}
               datePublished={new Date(post.datePublished)}
               readingTime={post.readingTime}
             />
           ))}
-          <div tw="px-4 py-2 border-gray-300">
-            {/* <button tw="bg-gray-100 hover:bg-gray-200 focus:bg-gray-100 text-gray-900 hover:shadow focus:shadow px-4 py-2 uppercase text-sm block rounded transition-all">
+          {/* <div tw="px-4 py-2 border-gray-300">
+            <button tw="bg-gray-100 hover:bg-gray-200 focus:bg-gray-100 text-gray-900 hover:shadow focus:shadow px-4 py-2 uppercase text-sm block rounded transition-all">
               More
-            </button> */}
-          </div>
+            </button>
+          </div> */}
         </div>
       </div>
       <Footer footerData={footerData} />
