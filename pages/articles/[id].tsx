@@ -30,6 +30,8 @@ const BlogArticle: React.FC<{
       <Heading
         title={postData.title}
         subtitle={RichText.render(postData.summary)}
+        imageSrc={postData.titleImage.url}
+        alt={postData.titleImage.alt}
         type={"Standard"}
       />
       <SliceZone slices={postData.body} />
