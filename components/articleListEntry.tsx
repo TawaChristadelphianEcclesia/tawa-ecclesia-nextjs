@@ -1,13 +1,15 @@
 import React, { ReactNode } from "react";
 // import { Link } from 'gatsby';
 import Link from "next/link";
+import Image from "next/image";
 import "twin.macro";
 import tw from "twin.macro";
 
 interface IArticleListEntry {
   url: string;
   title: string;
-  summary: string | ReactNode;
+  titleImage: IImageData;
+  summary: string;
   isLast?: boolean;
   tags: string[];
   datePublished: Date;
@@ -17,6 +19,7 @@ interface IArticleListEntry {
 const ArticleListEntry: React.FC<IArticleListEntry> = ({
   url,
   title,
+  titleImage,
   summary,
   tags,
   datePublished,
@@ -26,21 +29,31 @@ const ArticleListEntry: React.FC<IArticleListEntry> = ({
   // slug link
   return (
     <Link href={url} passHref>
-      <div
-        tw="px-4 py-2 border-gray-300 cursor-pointer"
-        css={[!isLast && tw`border-b`]}
-      >
-        <p tw="text-gray-900 font-sans font-semibold text-xs">
-          {tags.join(" • ")}
-          {/* Basics • The Kingdom */}
-        </p>
-        <div>
-          <h3 tw="text-gray-900 font-sans text-xl font-bold">{title}</h3>
+      <div tw="flex border-gray-300 cursor-pointer m-4">
+        <div tw="flex-1">
+          <h3 tw="text-gray-900 font-sans text-xl font-bold"><a>{title}</a></h3>
+          <p tw="text-gray-900 font-sans font-semibold text-xs">
+            {tags.join(" • ")}
+          </p>
           <p tw="text-gray-500 text-sm">
             {readingTime} Minute Read •{" "}
             {Intl.DateTimeFormat("en-nz").format(datePublished)}
           </p>
-          <p tw="font-sans text-sm">{summary}</p>
+          <p tw="font-sans text-sm">
+            {summary?.length < 100
+              ? summary
+              : summary.substring(0, 100) + "..."}
+          </p>
+        </div>
+        <div tw="flex-initial w-48 justify-self-end pl-4 hidden sm:block">
+          <div tw="aspect-w-3 aspect-h-2">
+            <Image
+              src={titleImage.url}
+              alt={titleImage.url || ""}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
         </div>
       </div>
     </Link>

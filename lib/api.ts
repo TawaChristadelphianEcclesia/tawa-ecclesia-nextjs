@@ -217,6 +217,7 @@ export async function getBlogPageData(): Promise<IBlogPageData> {
 export interface IPostData {
   url: string;
   title: string;
+  titleImage: IImageData;
   summary: RichTextBlock[];
   body: SliceZone;
   tags: string[];
@@ -241,10 +242,13 @@ export function getSliceZoneTextReadingTime(sliceZone: any) {
 
 export async function getPostData(uid: string): Promise<IPostData> {
   var postData = await PrismicClient.getByUID("blog_post", uid, {});
-  // var linkedPosts = await 
   return {
     url: prismicLinkResolver(postData),
     title: RichText.asText(postData.data.title),
+    titleImage: {
+      url: postData.data.title_image.url,
+      alt: postData.data.title_image.alt,
+    },
     summary: postData.data.summary,
     body: postData.data.body,
     tags: postData.data.article_tags.map(({ tag }: any) => tag),
@@ -271,12 +275,16 @@ export async function getAllPostIds(): Promise<IPageId[]> {
 export async function getAllPosts(): Promise<IPostData[]> {
   const postDocuments = await PrismicClient.query(
     [Prismic.predicates.at("document.type", "blog_post")],
-    { orderings: "[document.last_publication_date]", pageSize: 100 }
+    { orderings: "[my.blog_post.release_date desc]", pageSize: 100 }
   );
   var postsData = postDocuments.results.map((doc) => {
     return {
       url: prismicLinkResolver(doc),
       title: RichText.asText(doc.data.title),
+      titleImage: {
+        url: doc.data.title_image.url,
+        alt: doc.data.title_image.alt,
+      },
       summary: doc.data.summary,
       body: doc.data.body,
       tags: doc.data.article_tags.map(({ tag }: any) => tag),

@@ -44,7 +44,8 @@ const BlogPage: React.FC<{
             <ArticleListEntry
               key={i}
               title={post.title}
-              summary={RichText.render(post.summary)}
+              titleImage={post.titleImage}
+              summary={RichText.asText(post.summary)}
               url={post.url}
               isLast={postData.length == i + 1}
               tags={post.tags}
