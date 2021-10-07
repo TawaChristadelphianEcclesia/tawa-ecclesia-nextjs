@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import { RichText } from "prismic-reactjs";
 import React from "react";
 import Footer from "../components/footer";
@@ -26,6 +27,9 @@ const GeneralPage: React.FC<{
 }> = ({ headerData, footerData, pageData }) => {
   return (
     <Layout>
+      <Head>
+        <title>{RichText.asText(pageData.title)}</title>
+      </Head>
       <HeaderNavBar headerData={headerData} />
       <Heading
         type={pageData.headingType}

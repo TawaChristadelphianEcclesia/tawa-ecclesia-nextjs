@@ -59,7 +59,6 @@ export async function getAllEvents(): Promise<IAllEventsData> {
     ],
     { orderings: "[my.event.event_date]", pageSize: 100 }
   );
-  // console.log(eventDocuments.results.map((doc) => doc.data));
   const eventData = eventDocuments.results.map((result) => {
     return {
       title: result.data.title,
@@ -84,7 +83,6 @@ export interface IFooterData {
 // inteface IFoot
 export async function getFooterData(): Promise<IFooterData> {
   var layoutDocument = await PrismicClient.getSingle("layout", {});
-  // console.log(layoutDocument.data)
   return {
     footerLinks: layoutDocument.data.footer_links.map(
       (link: PrismicLinkField) => {
@@ -115,7 +113,6 @@ interface PrismicLinkField {
 
 export async function getHeaderData(): Promise<IHeaderData> {
   var layoutDocument = await PrismicClient.getSingle("layout", {});
-  // console.log(layoutDocument.data);
   return {
     siteTagLine: layoutDocument.data.site_tagline,
     siteLogo: {
@@ -169,14 +166,12 @@ export async function getAllPageIds(): Promise<IPageId[]> {
     { pageSize: 100 }
   );
   var ids = pages.results.map((result) => {
-    // console.log(result);
     return {
       params: {
         id: result.uid,
       },
     };
   });
-  //   console.log(ids);
   return ids;
 }
 
@@ -219,7 +214,6 @@ export interface IBlogPageData {
 
 export async function getBlogPageData(): Promise<IBlogPageData> {
   const blogpage = await PrismicClient.getSingle("blog_page", {});
-  // console.log(blogpage);
   return {
     title: RichText.asText(blogpage.data.title),
   };
@@ -228,11 +222,13 @@ export async function getBlogPageData(): Promise<IBlogPageData> {
 export interface IPostData {
   url: string;
   title: string;
+  titleImage: IImageData;
   summary: RichTextBlock[];
   body: SliceZone;
   tags: string[];
   datePublished: string;
   readingTime: number;
+  relatedPosts?: IPostData[];
 }
 
 export function getTextReadingTime(text: string) {
@@ -252,16 +248,41 @@ export function getSliceZoneTextReadingTime(sliceZone: any) {
 
 export async function getPostData(uid: string): Promise<IPostData> {
   var postData = await PrismicClient.getByUID("blog_post", uid, {});
-  // var linkedPosts = await 
-  console.log(postData.data.linked_posts);
+  var postIds = postData.data.linked_posts
+    .map(({ post }: { post: Document }) => post.id)
+    .filter((id: string) => id !== undefined);
+  var relatedPostsData: IPostData[] = [];
+  if (postIds && postIds.length) {
+    var relatedPosts = await PrismicClient.getByIDs(postIds, {});
+    relatedPostsData = relatedPosts.results.map((doc) => {
+      return {
+        url: prismicLinkResolver(doc),
+        title: RichText.asText(doc.data.title),
+        titleImage: {
+          url: doc.data.title_image.url,
+          alt: doc.data.title_image.alt,
+        },
+        summary: doc.data.summary,
+        body: doc.data.body,
+        tags: doc.data.article_tags.map(({ tag }: any) => tag),
+        datePublished: doc.data.release_date,
+        readingTime: getSliceZoneTextReadingTime(doc.data.body),
+      };
+    });
+  }
   return {
     url: prismicLinkResolver(postData),
     title: RichText.asText(postData.data.title),
+    titleImage: {
+      url: postData.data.title_image.url,
+      alt: postData.data.title_image.alt,
+    },
     summary: postData.data.summary,
     body: postData.data.body,
     tags: postData.data.article_tags.map(({ tag }: any) => tag),
     datePublished: postData.data.release_date,
     readingTime: getSliceZoneTextReadingTime(postData.data.body),
+    relatedPosts: relatedPostsData,
   };
 }
 
@@ -271,27 +292,28 @@ export async function getAllPostIds(): Promise<IPageId[]> {
     { pageSize: 100 }
   );
   var ids = pages.results.map((result) => {
-    // console.log(result);
     return {
       params: {
         id: result.uid,
       },
     };
   });
-  //   console.log(ids);
   return ids;
 }
 
 export async function getAllPosts(): Promise<IPostData[]> {
   const postDocuments = await PrismicClient.query(
     [Prismic.predicates.at("document.type", "blog_post")],
-    { orderings: "[document.last_publication_date]", pageSize: 100 }
+    { orderings: "[my.blog_post.release_date desc]", pageSize: 100 }
   );
   var postsData = postDocuments.results.map((doc) => {
-    console.log(doc.data);
     return {
       url: prismicLinkResolver(doc),
       title: RichText.asText(doc.data.title),
+      titleImage: {
+        url: doc.data.title_image.url,
+        alt: doc.data.title_image.alt,
+      },
       summary: doc.data.summary,
       body: doc.data.body,
       tags: doc.data.article_tags.map(({ tag }: any) => tag),
@@ -299,6 +321,5 @@ export async function getAllPosts(): Promise<IPostData[]> {
       readingTime: getSliceZoneTextReadingTime(doc.data.body),
     };
   });
-  console.log(postsData);
   return postsData;
 }

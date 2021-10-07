@@ -20,6 +20,7 @@ import {
   IEventData,
 } from "../lib/api";
 import { RichText } from "prismic-reactjs";
+import Head from "next/head";
 
 const Button = styled.button`
   ${tw`bg-blue-500 hover:bg-blue-800 text-white p-2 rounded`}
@@ -44,6 +45,9 @@ const IndexPage: React.FC<{
   eventsData: IAllEventsData;
 }> = ({ pageData, headerData, footerData, eventsData }) => (
   <Layout>
+    <Head>
+      <title>{RichText.asText(pageData.title)}</title>
+    </Head>
     <HeaderNavBar headerData={headerData} />
     <Heading
       type="Full Bleed"

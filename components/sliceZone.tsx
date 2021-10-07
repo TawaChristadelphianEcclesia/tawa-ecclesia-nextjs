@@ -10,7 +10,7 @@ const SliceZone: React.FC<{ slices: ISliceData[] }> = ({ slices }) => {
       {slices.map((slice) => {
         if (slice.slice_type === "text") {
           return (
-            <article tw="prose max-w-screen-sm mx-auto font-serif text-gray-900 p-5">
+            <article tw="prose mx-auto font-serif p-5">
               {RichText.render(slice.primary.text)}
             </article>
           );
