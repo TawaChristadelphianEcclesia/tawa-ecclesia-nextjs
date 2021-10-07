@@ -6,6 +6,7 @@ import {
   PrismicDocument,
   SliceZone,
 } from "@prismicio/types";
+import { getPlaiceholder } from "plaiceholder";
 import { Link, RichText, RichTextBlock } from "prismic-reactjs";
 
 const REPOSITORY = process.env.PRISMIC_REPOSITORY_NAME ?? "tawa-website-poc";
@@ -142,13 +143,14 @@ export interface IHomePageData {
 
 export async function getHomePageData(): Promise<IHomePageData> {
   const homepage = await PrismicClient.getSingle("homepage", {});
-  // console.log(homepage);
+  var plaiceholderData = await getPlaiceholder(homepage.data.hero_image.url);
   return {
     title: homepage.data.title,
     subtitle: homepage.data.subtitle,
     image: {
       url: homepage.data.hero_image.url,
       alt: homepage.data.hero_image.alt,
+      blurDataURL: plaiceholderData.base64 
     },
     textColor: homepage.data.title_color,
     showEvents: homepage.data.show_events,
@@ -196,13 +198,14 @@ export interface ISliceData {
 
 export async function getPageData(uid: string): Promise<IPageData> {
   var pageData = await PrismicClient.getByUID("general_page", uid, {});
-  console.log(pageData.data.body);
+  var plaiceholderData = await getPlaiceholder(pageData.data.hero_image.url);
   return {
     title: pageData.data.title,
     subtitle: pageData.data.subtitle,
     heroImage: {
       url: pageData.data.hero_image.url,
       alt: pageData.data.hero_image.alt,
+      blurDataURL: plaiceholderData.base64
     },
     headingType: pageData.data.hero_display,
     textColor: pageData.data.title_color,
