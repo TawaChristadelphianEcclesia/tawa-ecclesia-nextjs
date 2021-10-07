@@ -147,7 +147,7 @@ export async function getHomePageData(): Promise<IHomePageData> {
     image: {
       url: homepage.data.hero_image.url,
       alt: homepage.data.hero_image.alt,
-      blurDataURL: plaiceholderData.base64 
+      blurDataURL: plaiceholderData.base64,
     },
     textColor: homepage.data.title_color,
     showEvents: homepage.data.show_events,
@@ -200,7 +200,7 @@ export async function getPageData(uid: string): Promise<IPageData> {
     heroImage: {
       url: pageData.data.hero_image.url,
       alt: pageData.data.hero_image.alt,
-      blurDataURL: plaiceholderData.base64
+      blurDataURL: plaiceholderData.base64,
     },
     headingType: pageData.data.hero_display,
     textColor: pageData.data.title_color,
@@ -248,27 +248,32 @@ export function getSliceZoneTextReadingTime(sliceZone: any) {
 
 export async function getPostData(uid: string): Promise<IPostData> {
   var postData = await PrismicClient.getByUID("blog_post", uid, {});
+  var plaiceholderData = await getPlaiceholder(postData.data.title_image.url);
   var postIds = postData.data.linked_posts
     .map(({ post }: { post: Document }) => post.id)
     .filter((id: string) => id !== undefined);
   var relatedPostsData: IPostData[] = [];
   if (postIds && postIds.length) {
     var relatedPosts = await PrismicClient.getByIDs(postIds, {});
-    relatedPostsData = relatedPosts.results.map((doc) => {
-      return {
-        url: prismicLinkResolver(doc),
-        title: RichText.asText(doc.data.title),
-        titleImage: {
-          url: doc.data.title_image.url,
-          alt: doc.data.title_image.alt,
-        },
-        summary: doc.data.summary,
-        body: doc.data.body,
-        tags: doc.data.article_tags.map(({ tag }: any) => tag),
-        datePublished: doc.data.release_date,
-        readingTime: getSliceZoneTextReadingTime(doc.data.body),
-      };
-    });
+    relatedPostsData = await Promise.all(
+      relatedPosts.results.map(async (doc) => {
+        var plaiceholderData = await getPlaiceholder(doc.data.title_image.url);
+        return {
+          url: prismicLinkResolver(doc),
+          title: RichText.asText(doc.data.title),
+          titleImage: {
+            url: doc.data.title_image.url,
+            alt: doc.data.title_image.alt,
+            blurDataURL: plaiceholderData.base64,
+          },
+          summary: doc.data.summary,
+          body: doc.data.body,
+          tags: doc.data.article_tags.map(({ tag }: any) => tag),
+          datePublished: doc.data.release_date,
+          readingTime: getSliceZoneTextReadingTime(doc.data.body),
+        };
+      })
+    );
   }
   return {
     url: prismicLinkResolver(postData),
@@ -276,6 +281,7 @@ export async function getPostData(uid: string): Promise<IPostData> {
     titleImage: {
       url: postData.data.title_image.url,
       alt: postData.data.title_image.alt,
+      blurDataURL: plaiceholderData.base64,
     },
     summary: postData.data.summary,
     body: postData.data.body,
@@ -306,20 +312,24 @@ export async function getAllPosts(): Promise<IPostData[]> {
     [Prismic.predicates.at("document.type", "blog_post")],
     { orderings: "[my.blog_post.release_date desc]", pageSize: 100 }
   );
-  var postsData = postDocuments.results.map((doc) => {
-    return {
-      url: prismicLinkResolver(doc),
-      title: RichText.asText(doc.data.title),
-      titleImage: {
-        url: doc.data.title_image.url,
-        alt: doc.data.title_image.alt,
-      },
-      summary: doc.data.summary,
-      body: doc.data.body,
-      tags: doc.data.article_tags.map(({ tag }: any) => tag),
-      datePublished: doc.data.release_date,
-      readingTime: getSliceZoneTextReadingTime(doc.data.body),
-    };
-  });
+  var postsData = await Promise.all(
+    postDocuments.results.map(async (doc) => {
+      var plaiceholderData = await getPlaiceholder(doc.data.title_image.url);
+      return {
+        url: prismicLinkResolver(doc),
+        title: RichText.asText(doc.data.title),
+        titleImage: {
+          url: doc.data.title_image.url,
+          alt: doc.data.title_image.alt,
+          blurDataURL: plaiceholderData.base64,
+        },
+        summary: doc.data.summary,
+        body: doc.data.body,
+        tags: doc.data.article_tags.map(({ tag }: any) => tag),
+        datePublished: doc.data.release_date,
+        readingTime: getSliceZoneTextReadingTime(doc.data.body),
+      };
+    })
+  );
   return postsData;
 }
