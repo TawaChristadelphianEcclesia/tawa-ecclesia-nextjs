@@ -54,6 +54,7 @@ const IndexPage: React.FC<{
       title={RichText.render(pageData.title)}
       subtitle={RichText.render(pageData.subtitle)}
       imageSrc={pageData.image.url}
+      imageBlurDataURL={pageData.image.blurDataURL}
       textColor={pageData.textColor}
       textPosition={"top"}
     />

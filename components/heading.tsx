@@ -9,6 +9,7 @@ export interface IHeading {
   title: string | ReactNode;
   subtitle: string | ReactNode;
   imageSrc?: string;
+  imageBlurDataURL?: string;
   alt?: string;
   type: "Full Bleed" | "Standard" | "YouTube";
   textColor?: string;
@@ -20,6 +21,7 @@ const Heading: React.FC<IHeading> = ({
   title,
   subtitle,
   imageSrc,
+  imageBlurDataURL,
   alt,
   type,
   textColor,
@@ -33,6 +35,7 @@ const Heading: React.FC<IHeading> = ({
           title={title}
           subtitle={subtitle}
           image={imageSrc}
+          imageBlurDataURL={imageBlurDataURL}
           alt={alt}
           textColor={textColor}
           textPosition={textPosition}
@@ -43,6 +46,7 @@ const Heading: React.FC<IHeading> = ({
           title={title}
           subtitle={subtitle}
           imageSrc={imageSrc}
+          imageBlurDataURL={imageBlurDataURL}
           alt={alt}
         />
       )}

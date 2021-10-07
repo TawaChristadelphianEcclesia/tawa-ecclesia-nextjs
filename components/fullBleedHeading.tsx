@@ -10,6 +10,7 @@ interface IFullBleedHeading {
   title: string | ReactNode;
   subtitle: string | ReactNode;
   image: string;
+  imageBlurDataURL?: string;
   alt?: string;
   textColor?: string;
   textPosition?: "top" | "bottom";
@@ -19,6 +20,7 @@ const FullBleedHeading: React.FC<IFullBleedHeading> = ({
   title,
   subtitle,
   image,
+  imageBlurDataURL,
   alt,
   textColor,
   textPosition,
@@ -41,6 +43,8 @@ const FullBleedHeading: React.FC<IFullBleedHeading> = ({
         layout="fill"
         sizes="100%"
         objectFit="cover"
+        placeholder="blur"
+        blurDataURL={imageBlurDataURL}
       />
       <div
         style={{

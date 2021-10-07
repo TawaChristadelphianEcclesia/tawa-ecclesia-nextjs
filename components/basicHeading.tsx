@@ -7,6 +7,7 @@ interface IBasicHeading {
   title: string | ReactNode;
   subtitle: string | ReactNode;
   imageSrc?: string;
+  imageBlurDataURL?: string;
   alt?: string;
 }
 
@@ -14,6 +15,7 @@ const FullBleedHeading: React.FC<IBasicHeading> = ({
   title,
   subtitle,
   imageSrc,
+  imageBlurDataURL,
   alt,
 }) => {
   return (
@@ -32,6 +34,8 @@ const FullBleedHeading: React.FC<IBasicHeading> = ({
             alt={alt || ""}
             layout="fill"
             objectFit="cover"
+            placeholder="blur"
+            blurDataURL={imageBlurDataURL}
           />
         </div>
       )}

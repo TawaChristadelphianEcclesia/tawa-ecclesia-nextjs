@@ -51,6 +51,8 @@ const ArticleListEntry: React.FC<IArticleListEntry> = ({
                 alt={titleImage.url || ""}
                 layout="fill"
                 objectFit="cover"
+                placeholder="blur"
+                blurDataURL={titleImage.blurDataURL}
               />
             </div>
           </div>
