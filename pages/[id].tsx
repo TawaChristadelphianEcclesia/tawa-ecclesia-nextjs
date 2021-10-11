@@ -36,6 +36,7 @@ const GeneralPage: React.FC<{
         title={RichText.render(pageData.title)}
         subtitle={RichText.render(pageData.subtitle)}
         imageSrc={pageData.heroImage.url}
+        imageBlurDataURL={pageData.heroImage.blurDataURL}
         textColor={pageData.textColor}
       />
       <SliceZone slices={pageData.body} />

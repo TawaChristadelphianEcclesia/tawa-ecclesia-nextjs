@@ -33,6 +33,7 @@ const BlogArticle: React.FC<{
         title={postData.title}
         subtitle={RichText.render(postData.summary)}
         imageSrc={postData.titleImage.url}
+        imageBlurDataURL={postData.titleImage.blurDataURL}
         alt={postData.titleImage.alt}
         type={"Standard"}
       />
