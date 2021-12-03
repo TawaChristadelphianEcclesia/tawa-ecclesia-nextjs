@@ -22,15 +22,6 @@ const HeaderNavBar = ({ headerData }: { headerData: IHeaderData }) => {
     <header tw="sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center shadow">
       <div tw="flex items-center justify-between px-4 py-2 sm:p-0">
         <div tw="flex items-center">
-          {/* <div tw="h-12 w-12 m-0 p-0 mx-2 relative">
-            <Image
-              src={headerData.siteLogo.url}
-              alt={headerData.siteLogo.alt}
-              sizes="100%"
-              layout="fill"
-              objectFit="contain"
-            />
-          </div> */}
           <NavBarLogo logo={headerData.siteLogo}/>
           <Button href="/" navBarBrand>{headerData.siteTagLine}</Button>
         </div>

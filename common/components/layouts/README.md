@@ -1,1 +1,1 @@
-used to wrap page templates ans provide with components displayed by default - e.g. footer and header
+used to wrap page templates and provide with components displayed by default - e.g. footer and header
