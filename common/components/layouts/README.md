@@ -1,0 +1,1 @@
+used to wrap page templates ans provide with components displayed by default - e.g. footer and header
