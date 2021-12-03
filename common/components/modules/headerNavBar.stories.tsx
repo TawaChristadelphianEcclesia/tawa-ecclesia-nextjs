@@ -14,6 +14,10 @@ export const Default = Template.bind({})
 Default.args = {
     headerData: {
         siteTagLine: 'Tawa Christadelphians',
+        siteLogo: {
+            url: '/bible_logo.svg',
+            alt: 'logo'
+        },
         headerLinks: [
             {
                 url: "/articles",

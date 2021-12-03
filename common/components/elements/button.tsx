@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
-import Link from "next/link";
 import React, { useState } from "react";
 import tw, { css, styled } from "twin.macro";
+import Link from "next/link";
 
 interface IButton {
     navBarLink?: boolean,
