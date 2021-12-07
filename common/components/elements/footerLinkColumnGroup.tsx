@@ -11,11 +11,11 @@ const FooterLinkColumnGroup: React.FC<IFooterColumnGroup> = ({
     footerColumns
   }) => {
     return (
-        <div tw="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center px-4 w-full">
+        <ul tw="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center px-4 w-full">
             {footerColumns.map(({title, links}, index) => (
                 <FooterLinkColumn title={title} links={links} key={index}/>
             ))}
-        </div>
+        </ul>
     );
   };
 
