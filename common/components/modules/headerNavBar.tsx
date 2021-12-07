@@ -16,14 +16,14 @@ export interface IHeaderData {
     headerLinks: ILinkData[];
   }
 
-const HeaderNavBar = ({ headerData }: { headerData: IHeaderData }) => {
+const HeaderNavBar: React.FC<IHeaderData> = ({siteLogo, siteTagLine, headerLinks}) => {
   const [open, setOpen] = useState(false);
   return (
     <header tw="sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center shadow">
       <div tw="flex items-center justify-between px-4 py-2 sm:p-0">
         <div tw="flex items-center">
-          <NavBarLogo logo={headerData.siteLogo}/>
-          <Button href="/" navBarBrand>{headerData.siteTagLine}</Button>
+          <NavBarLogo logo={siteLogo}/>
+          <Button href="/" navBarBrand>{siteTagLine}</Button>
         </div>
         <div tw="sm:hidden">
           <HamburgerButton open={open} setOpen={setOpen} />
@@ -33,7 +33,7 @@ const HeaderNavBar = ({ headerData }: { headerData: IHeaderData }) => {
         tw="px-4 pt-2 pb-4 sm:flex sm:p-0 transition-all"
         css={[open ? tw`block` : tw`hidden`]}
       >
-        {headerData.headerLinks.map((link, index) => (
+        {headerLinks.map((link, index) => (
           <Button key={index} href={link.url} navBarLink>
             {link.label}
           </Button>
