@@ -12,25 +12,23 @@ const Template: ComponentStory<typeof HeaderNavBar> = (args) => <HeaderNavBar {.
 export const Default = Template.bind({})
 
 Default.args = {
-    headerData: {
-        siteTagLine: 'Tawa Christadelphians',
-        siteLogo: {
-            url: '/bible_logo.svg',
-            alt: 'logo'
+    siteTagLine: 'Tawa Christadelphians',
+    siteLogo: {
+        url: '/bible_logo.svg',
+        alt: 'logo'
+    },
+    headerLinks: [
+        {
+            url: "/articles",
+            label: "Articles"
         },
-        headerLinks: [
-            {
-                url: "/articles",
-                label: "Articles"
-            },
-            {
-                url: "/articles/who-are-we",
-                label: "Who Are We?"
-            },
-            {
-                url: "/articles/gods-purpose-with-the-earth",
-                label: "Our Beliefs"
-            }
-        ]
-    }
+        {
+            url: "/articles/who-are-we",
+            label: "Who Are We?"
+        },
+        {
+            url: "/articles/gods-purpose-with-the-earth",
+            label: "Our Beliefs"
+        }
+    ]
 }
