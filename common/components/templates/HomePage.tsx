@@ -5,6 +5,7 @@ import { ISeoData } from "../elements/Seo";
 import EventList, { IEventList } from "../elements/EventList";
 import Card from "../elements/Card";
 import GradientContentContainer from "../elements/GradientContentContainer";
+import ContactForm from "../elements/ContactForm";
 
 interface IPageData {
     seo: ISeoData;
@@ -29,7 +30,9 @@ const HomePage: React.FC<IHomePage> = ({ globalData, pageData }) => (
                 <EventList {...pageData.eventData} />
             </Card>
             <Card>Podcast</Card>
-            <Card>Contact Us</Card>
+            <Card>
+                <ContactForm />
+            </Card>
         </GradientContentContainer>
     </DefaultLayout>
 );
