@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { ReactNode, useState } from "react";
 import tw, { css, styled } from "twin.macro";
 
-interface IEventCard {
+export interface IEventCard {
     title: string;
     presenter: string;
     location: string;
