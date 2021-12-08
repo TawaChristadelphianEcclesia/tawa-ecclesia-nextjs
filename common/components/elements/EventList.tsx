@@ -3,7 +3,7 @@ import React, { ReactNode, useState } from "react";
 import tw, { css, styled } from "twin.macro";
 import EventCard, { IEventCard } from "./EventCard";
 
-interface IEventList {
+export interface IEventList {
     title: string;
     filter: "future" | "past" | "all";
     // maxShown: number;

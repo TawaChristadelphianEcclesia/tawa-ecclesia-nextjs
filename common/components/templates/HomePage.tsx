@@ -2,6 +2,9 @@ import React from "react";
 import HeroHeader, { IHeroHeader } from "../elements/HeroHeader";
 import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
 import { ISeoData } from "../elements/Seo";
+import EventList, { IEventList } from "../elements/EventList";
+import Card from "../elements/Card";
+import GradientContentContainer from "../elements/GradientContentContainer";
 
 interface IPageData {
     seo: ISeoData;
@@ -9,6 +12,7 @@ interface IPageData {
 
 type IHomePageData = IPageData & {
     headerData: IHeroHeader;
+    eventData: IEventList;
 };
 
 interface IHomePage {
@@ -19,6 +23,14 @@ interface IHomePage {
 const HomePage: React.FC<IHomePage> = ({ globalData, pageData }) => (
     <DefaultLayout seo={pageData.seo} global={globalData}>
         <HeroHeader {...pageData.headerData} />
+        <GradientContentContainer>
+            <Card>Latest Article</Card>
+            <Card>
+                <EventList {...pageData.eventData} />
+            </Card>
+            <Card>Podcast</Card>
+            <Card>Contact Us</Card>
+        </GradientContentContainer>
     </DefaultLayout>
 );
 
