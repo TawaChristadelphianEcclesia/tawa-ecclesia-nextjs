@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import tw from "twin.macro";
-import FooterLinkColumn, {IFooterLinkColumn} from './footerLinkColumn';
+import FooterLinkColumn, {IFooterLinkColumn} from './FooterLinkColumn';
 
 export interface IFooterColumnGroup {
     footerColumns: IFooterLinkColumn[]

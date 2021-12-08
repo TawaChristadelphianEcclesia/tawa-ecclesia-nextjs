@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import tw from "twin.macro";
-import FooterLink, { ILinkData } from "./footerLink";
+import FooterLink, { ILinkData } from "./FooterLink";
 
 export interface IFooterLinkColumn {
     title: string;

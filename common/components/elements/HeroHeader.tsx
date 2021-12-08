@@ -3,7 +3,7 @@ import React, { ReactNode, useState } from "react";
 import tw, { css, styled } from "twin.macro";
 import Image from "next/image";
 
-interface IHeroHeader {
+export interface IHeroHeader {
     title: string | ReactNode;
     subtitle: string | ReactNode;
     image: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import NavBarLogo from './navBarLogo';
+import NavBarLogo from './NavBarLogo';
 
 export default {
     title: 'Elements/Nav Bar Logo',

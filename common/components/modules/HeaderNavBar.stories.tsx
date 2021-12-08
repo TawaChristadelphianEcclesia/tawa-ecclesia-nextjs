@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import HeaderNavBar from './headerNavBar';
+import HeaderNavBar from './HeaderNavBar';
 
 export default {
     title: 'Modules/HeaderNavBar',

@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import tw, { css, styled } from "twin.macro";
 import { GlobalStyles } from "twin.macro";
 import Seo, { ISeoData } from "../elements/Seo";
-import HeaderNavBar, { IHeaderData } from "../modules/headerNavBar";
-import Footer, { IFooterData } from "../modules/footer";
+import HeaderNavBar, { IHeaderData } from "../modules/HeaderNavBar";
+import Footer, { IFooterData } from "../modules/Footer";
 
-interface IGlobalData {
+export interface IGlobalData {
     headerData: IHeaderData;
     footerData: IFooterData;
 }

@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React from "react";
 import tw from "twin.macro";
-import FooterLinkColumnGroup, { IFooterColumnGroup } from "../elements/footerLinkColumnGroup";
-import FooterText from "../elements/footerText";
-import { IFooterLinkColumn } from "../elements/footerLinkColumn";
+import FooterLinkColumnGroup, { IFooterColumnGroup } from "../elements/FooterLinkColumnGroup";
+import FooterText from "../elements/FooterText";
+import { IFooterLinkColumn } from "../elements/FooterLinkColumn";
 
 export interface IFooterData {
     footerText: string;

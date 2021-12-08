@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import HeroHeader from "./heroHeader";
+import HeroHeader from "./HeroHeader";
 
 export default {
     title: "Elements/Hero Header",

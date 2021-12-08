@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import FooterLinkColumnGroup from './footerLinkColumnGroup';
+import FooterLinkColumnGroup from './FooterLinkColumnGroup';
 
 export default {
     title: 'Elements/Footer Column Group',

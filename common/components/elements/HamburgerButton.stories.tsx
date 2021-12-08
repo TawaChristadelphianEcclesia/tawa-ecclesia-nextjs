@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import HamburgerButton from './hamburgerButton';
+import HamburgerButton from './HamburgerButton';
 
 export default {
     title: 'Elements/Hamburger Button',

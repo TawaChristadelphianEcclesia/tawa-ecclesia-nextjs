@@ -2,9 +2,9 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import tw, { css, styled } from "twin.macro";
-import Button from "../elements/button";
-import HamburgerButton from "../elements/hamburgerButton";
-import NavBarLogo from "../elements/navBarLogo";
+import Button from "../elements/Button";
+import HamburgerButton from "../elements/HamburgerButton";
+import NavBarLogo from "../elements/NavBarLogo";
 
 interface ILinkData {
     label: string;
