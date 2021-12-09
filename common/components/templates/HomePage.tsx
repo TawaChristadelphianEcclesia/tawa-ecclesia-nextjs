@@ -6,6 +6,7 @@ import EventList, { IEventList } from "../elements/EventList";
 import Card from "../elements/Card";
 import GradientContentContainer from "../elements/GradientContentContainer";
 import ContactForm from "../elements/ContactForm";
+import ImageCard from "../elements/ImageCard";
 
 interface IPageData {
     seo: ISeoData;
@@ -29,7 +30,15 @@ const HomePage: React.FC<IHomePage> = ({ globalData, pageData }) => (
             <Card>
                 <EventList {...pageData.eventData} />
             </Card>
-            <Card>Podcast</Card>
+            <Card>
+                <ImageCard src="undraw_podcast.svg" alt="podcast illustration">
+                    <h2 tw="text-gray-900 font-bold text-2xl">Podcast</h2>
+                    <p>
+                        Interested in the truth of the bible? Join us as we
+                        discuss a range of biblical topics.
+                    </p>
+                </ImageCard>
+            </Card>
             <Card>
                 <ContactForm />
             </Card>

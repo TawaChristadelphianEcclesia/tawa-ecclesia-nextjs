@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import tw, { css, styled } from "twin.macro";
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ImageCard from "./ImageCard";
@@ -19,4 +21,13 @@ export const Default = Template.bind({});
 Default.args = {
     src: "undraw_podcast.svg",
     alt: "postcast illustration",
+    children: (
+        <>
+            <h2 tw="text-gray-900 font-bold text-2xl">Podcast</h2>
+            <p>
+                Interested in the truth of the bible? Join us as we discuss a
+                range of biblical topics.
+            </p>
+        </>
+    ),
 };

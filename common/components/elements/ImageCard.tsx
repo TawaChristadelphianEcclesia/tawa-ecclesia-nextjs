@@ -9,20 +9,25 @@ interface IImageCard {
     alt: string;
 }
 
-const ImageCard: React.FC<IImageCard> = ({ src, alt, blurDataUrl }) => (
-    <div>
-        <div tw="flex-initial w-48 justify-self-end pl-4 hidden sm:block">
-            <div tw="aspect-w-3 aspect-h-2">
-                <Image
-                    src={src}
-                    alt={alt}
-                    layout="fill"
-                    objectFit="cover"
-                    // placeholder="blur"
-                    // blurDataURL={blurDataUrl}
-                />
-            </div>
+const ImageCard: React.FC<IImageCard> = ({
+    src,
+    alt,
+    blurDataUrl,
+    children,
+}) => (
+    <div tw="flex flex-col md:flex-row">
+        <div tw="relative h-52 md:h-80 md:flex-1">
+            {/* <div tw="aspect-w-3 aspect-h-2"> */}
+            <Image
+                src={src}
+                alt={alt}
+                layout="fill"
+                // objectFit="fill"
+                placeholder={blurDataUrl ? "blur" : "empty"}
+                blurDataURL={blurDataUrl}
+            />
         </div>
+        <div tw="flex-1">{children}</div>
     </div>
 );
 
