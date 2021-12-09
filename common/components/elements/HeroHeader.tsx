@@ -10,7 +10,16 @@ export interface IHeroHeader {
     imageBlurDataURL?: string;
     alt?: string;
     textColor?: string;
-    textPosition?: "top" | "bottom";
+    textPosition?:
+        | "topleft"
+        | "topcenter"
+        | "topright"
+        | "middleleft"
+        | "middlecenter"
+        | "middleright"
+        | "bottomleft"
+        | "bottomcenter"
+        | "bottomright";
 }
 
 const HeroHeader: React.FC<IHeroHeader> = ({
@@ -48,9 +57,12 @@ const HeroHeader: React.FC<IHeroHeader> = ({
                     position: "absolute",
                     margin: "20px",
                     color: textColor,
-                    ...(!textPosition || textPosition == "bottom"
-                        ? { bottom: 0 }
-                        : { top: 0 }),
+                    ...(!textPosition ||
+                    textPosition == "topcenter" ||
+                    textPosition == "topleft" ||
+                    textPosition == "topright"
+                        ? { top: 0 }
+                        : { bottom: 0 }),
                 }}
             >
                 <h1 tw="text-5xl sm:text-7xl font-bold font-serif">{title}</h1>
