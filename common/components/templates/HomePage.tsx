@@ -26,11 +26,11 @@ const HomePage: React.FC<IHomePage> = ({ globalData, pageData }) => (
     <DefaultLayout seo={pageData.seo} global={globalData}>
         <HeroHeader {...pageData.headerData} />
         <GradientContentContainer>
-            <Card>Latest Article</Card>
-            <Card>
+            <Card animate>Latest Article</Card>
+            <Card animate>
                 <EventList {...pageData.eventData} />
             </Card>
-            <Card>
+            <Card animate>
                 <ImageCard src="undraw_podcast.svg" alt="podcast illustration">
                     <h2 tw="text-gray-900 font-bold text-2xl">Podcast</h2>
                     <p>
@@ -39,7 +39,7 @@ const HomePage: React.FC<IHomePage> = ({ globalData, pageData }) => (
                     </p>
                 </ImageCard>
             </Card>
-            <Card>
+            <Card animate>
                 <ContactForm />
             </Card>
         </GradientContentContainer>
