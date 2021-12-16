@@ -5,6 +5,7 @@ import EventCard, { IEventCard } from "./EventCard";
 
 export interface IEventList {
     title: string;
+    noEventsPlaceholder?: string;
     filter: "future" | "past" | "all";
     // maxShown: number;
     events: IEventCard[];
@@ -36,22 +37,20 @@ const sortDates = (dateA: Date, dateB: Date, sort: "asc" | "desc") => {
 
 const EventList: React.FC<IEventList> = ({
     title,
+    noEventsPlaceholder,
     events,
     filter,
     // maxShown,
 }) => (
     <>
-        <div
-            style={{
-                marginTop: "10px",
-                borderBottom: "1px solid #f1f1f1",
-                padding: 10,
-            }}
-        >
-            <div>
-                <h2 tw="text-gray-900 text-4xl">What&apos;s coming up?</h2>
-            </div>
+        <div tw="m-4 mb-6">
+            <h2 tw="text-gray-900 text-4xl">{title}</h2>
         </div>
+        {!events.length && noEventsPlaceholder && (
+            <div tw="mx-4">
+                <p>{noEventsPlaceholder}</p>
+            </div>
+        )}
         {events
             .filter((event) => filterDates(event.datetime.toString(), filter))
             .sort((eventA, eventB) =>

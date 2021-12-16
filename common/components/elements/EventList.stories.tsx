@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof EventList> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-    title: "coming up",
+    title: "Coming Up",
     filter: "all",
     events: [
         {
@@ -49,4 +49,14 @@ Default.argTypes = {
         options: ["past", "future", "all"],
         control: { type: "select" },
     },
+};
+
+export const NoEvents = Template.bind({});
+
+NoEvents.args = {
+    title: "Coming Up",
+    noEventsPlaceholder:
+        "We're still planning next year. Check again in a few days!",
+    filter: "all",
+    events: [],
 };
