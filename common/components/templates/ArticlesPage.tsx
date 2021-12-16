@@ -4,11 +4,12 @@ import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
 import { ISeoData } from "../elements/Seo";
 import EventList, { IEventList } from "../elements/EventList";
 import Card from "../elements/Card";
-import GradientContentContainer from "../elements/GradientContentContainer";
+import ContentSection from "../elements/ContentSection";
 import ContactForm from "../elements/ContactForm";
 import ImageCard from "../elements/ImageCard";
 import { IArticleCard } from "../elements/ArticleCard";
 import ArticleList from "../elements/ArticleList";
+import TextHeader, { ITextHeader } from "../elements/TextHeader";
 
 interface IPageData {
     seo: ISeoData;
@@ -17,6 +18,7 @@ interface IPageData {
 type IArticlesPageData = IPageData & {
     // headerData: IHeroHeader;
     // eventData: IEventList;
+    headerData: ITextHeader;
     articleData: IArticleCard[];
 };
 
@@ -27,9 +29,12 @@ interface IArticlesPage {
 
 const ArticlesPage: React.FC<IArticlesPage> = ({ globalData, pageData }) => (
     <DefaultLayout seo={pageData.seo} global={globalData}>
-        <GradientContentContainer>
+        <ContentSection>
+            <TextHeader {...pageData.headerData} />
+        </ContentSection>
+        <ContentSection>
             <ArticleList articles={pageData.articleData} />
-        </GradientContentContainer>
+        </ContentSection>
     </DefaultLayout>
 );
 

@@ -84,6 +84,10 @@ Default.args = {
                 url: "./bible_logo.svg",
             },
         },
+        headerData: {
+            title: "Articles",
+            subtitle: "Subtitle",
+        },
         articleData: [
             {
                 url: "/",
