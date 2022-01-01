@@ -73,7 +73,7 @@ const IndexPage: React.FC<{
                 <h2 tw="text-gray-900 text-4xl">What&apos;s coming up?</h2>
               </div>
             </div>
-            {eventsData
+            {eventsData.length ? eventsData
               .filter((event) => dateAfterYesterday(event.time))
               .map((event, key) => (
                 <Event
@@ -83,7 +83,7 @@ const IndexPage: React.FC<{
                   description={RichText.render(event.description)}
                   datetime={new Date(event.time)}
                 ></Event>
-              ))}
+              )) : <>no events</>}
           </Card>
         )}
       </div>
