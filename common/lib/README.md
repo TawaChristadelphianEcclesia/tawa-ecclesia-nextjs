@@ -1,0 +1,1 @@
+Files in this directory acts as an interface between our application and external libraries like google analytics.
