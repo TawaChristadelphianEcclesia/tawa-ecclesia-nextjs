@@ -22,7 +22,7 @@ const Seo = ({
     structuredData,
     metaImage,
 }: ISeoData) => (
-    <>
+    <div>
         <Head>
             <title>{metaTitle}</title>
             <meta
@@ -57,7 +57,7 @@ const Seo = ({
             )}
             <script type="application/ld+json">{structuredData}</script>
         </Head>
-    </>
+    </div>
 );
 
 export default Seo;
