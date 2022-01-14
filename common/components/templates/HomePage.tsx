@@ -8,12 +8,9 @@ import Gradient from "../elements/Gradient";
 import ContentSection from "../elements/ContentSection";
 import ContactForm from "../elements/ContactForm";
 import ImageCard from "../elements/ImageCard";
+import { IPageData } from "./types";
 
-interface IPageData {
-    seo: ISeoData;
-}
-
-type IHomePageData = IPageData & {
+export type IHomePageData = IPageData & {
     headerData: IHeroHeader;
     eventData: IEventList;
 };
@@ -34,7 +31,7 @@ const HomePage: React.FC<IHomePage> = ({ globalData, pageData }) => (
                 </Card>
                 <Card animate>
                     <ImageCard
-                        src="undraw_podcast.svg"
+                        src="/undraw_podcast.svg"
                         alt="podcast illustration"
                     >
                         <h2 tw="text-gray-900 font-bold text-2xl">Podcast</h2>

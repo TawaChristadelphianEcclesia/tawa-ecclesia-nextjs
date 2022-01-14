@@ -10,10 +10,7 @@ import ImageCard from "../elements/ImageCard";
 import { IArticleCard } from "../elements/ArticleCard";
 import ArticleList from "../elements/ArticleList";
 import TextHeader, { ITextHeader } from "../elements/TextHeader";
-
-interface IPageData {
-    seo: ISeoData;
-}
+import { IPageData } from "./types";
 
 type IArticlesPageData = IPageData & {
     // headerData: IHeroHeader;
