@@ -1,9 +1,9 @@
 import { getGlobalData, getHomePageData } from "../api/pageQueries";
 import { ISeoData } from "../components/elements/Seo";
 import { IGlobalData } from "../components/layouts/DefaultLayout";
-import { IHomePage } from "../components/templates/HomePage";
+import { IHomePageTemplate } from "../components/templates/HomePage";
 
-export const getHomePageProps = async (): Promise<IHomePage> => {
+export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
     const pageAPIData = await (await getHomePageData()).home?.data?.attributes;
     const globalAPIData = await (
         await getGlobalData()
