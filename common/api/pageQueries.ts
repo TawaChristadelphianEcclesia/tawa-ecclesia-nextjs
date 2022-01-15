@@ -101,6 +101,11 @@ export const getHomePageData = async () => {
                                     noEventsPlaceholder
                                     id
                                 }
+                                ... on ComponentBlocksContactForm {
+                                    __typename
+                                    title
+                                    endpoint
+                                }
                             }
                         }
                     }

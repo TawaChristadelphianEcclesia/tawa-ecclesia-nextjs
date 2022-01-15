@@ -1,6 +1,7 @@
 import { getGlobalData, getHomePageData } from "../api/pageQueries";
 import {
     HomePageData_home_data_attributes_Blocks,
+    HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm,
     HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList,
     HomePageData_home_data_attributes_Blocks_ComponentBlocksHero,
 } from "../api/__generated__/HomePageData";
@@ -43,6 +44,16 @@ const mapAPIToBlock = async (
                         apiEventComponentData.noEventsPlaceholder ?? "",
                     filter: apiEventComponentData.filter ?? "all",
                     events: await getEventsData(),
+                },
+            } as IBlock;
+        case "ComponentBlocksContactForm":
+            const apiData =
+                apiBlock as HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm;
+            return {
+                component: "contact" as IBlock["component"],
+                data: {
+                    title: apiData.title,
+                    endpoint: apiData.endpoint,
                 },
             } as IBlock;
     }

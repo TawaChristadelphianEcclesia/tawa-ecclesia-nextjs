@@ -95,7 +95,7 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksHero {
   __typename: "ComponentBlocksHero";
   image: HomePageData_home_data_attributes_Blocks_ComponentBlocksHero_image | null;
   text: string | null;
-  title: string | null;
+  title: string;
   id: string;
   color: string | null;
 }
@@ -103,13 +103,19 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksHero {
 export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList {
   __typename: "ComponentBlocksEventList";
   maxShown: number | null;
-  title: string | null;
+  title: string;
   filter: ENUM_COMPONENTBLOCKSEVENTLIST_FILTER | null;
   noEventsPlaceholder: string | null;
   id: string;
 }
 
-export type HomePageData_home_data_attributes_Blocks = HomePageData_home_data_attributes_Blocks_Error | HomePageData_home_data_attributes_Blocks_ComponentBlocksHero | HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList;
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm {
+  __typename: "ComponentBlocksContactForm";
+  title: string;
+  endpoint: string;
+}
+
+export type HomePageData_home_data_attributes_Blocks = HomePageData_home_data_attributes_Blocks_Error | HomePageData_home_data_attributes_Blocks_ComponentBlocksHero | HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList | HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm;
 
 export interface HomePageData_home_data_attributes {
   __typename: "Home";
