@@ -8,10 +8,11 @@ import { ISeoData } from "../components/elements/Seo";
 import { IGlobalData } from "../components/layouts/DefaultLayout";
 import { IBlock } from "../components/modules/blocks/BlockManager";
 import { IHomePageTemplate } from "../components/templates/HomePage";
+import { getEventsData } from "./EventData";
 
-const mapAPIToBlock = (
+const mapAPIToBlock = async (
     apiBlock: HomePageData_home_data_attributes_Blocks
-): IBlock | undefined => {
+): Promise<IBlock | undefined> => {
     switch (apiBlock.__typename) {
         case "ComponentBlocksHero":
             const apiHeroData =
@@ -31,6 +32,19 @@ const mapAPIToBlock = (
                     textColor: apiHeroData.color || undefined,
                 },
             };
+        case "ComponentBlocksEventList":
+            const apiEventComponentData =
+                apiBlock as HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList;
+            return {
+                component: "events" as IBlock["component"],
+                data: {
+                    title: apiEventComponentData.title ?? "",
+                    noEventsPlaceholder:
+                        apiEventComponentData.noEventsPlaceholder ?? "",
+                    filter: apiEventComponentData.filter ?? "all",
+                    events: await getEventsData(),
+                },
+            } as IBlock;
     }
 };
 
@@ -58,9 +72,14 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
                 pageAPIData?.seo?.metaImage?.data?.attributes?.previewUrl || "",
         },
     };
-    const blocks: IBlock[] = pageAPIData?.Blocks?.map((block) =>
-        mapAPIToBlock(block as HomePageData_home_data_attributes_Blocks)
-    ).filter((block) => block !== undefined) as IBlock[];
+    const blocks = await Promise.all(
+        pageAPIData?.Blocks?.map(
+            async (block) =>
+                await mapAPIToBlock(
+                    block as HomePageData_home_data_attributes_Blocks
+                )
+        ).filter((block) => block !== undefined) as Promise<IBlock>[]
+    );
     const globalData: IGlobalData = {
         headerData: {
             siteTitle: globalAPIData?.SiteTitle || "",

@@ -105,6 +105,7 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksEventLi
   maxShown: number | null;
   title: string | null;
   filter: ENUM_COMPONENTBLOCKSEVENTLIST_FILTER | null;
+  noEventsPlaceholder: string | null;
   id: string;
 }
 

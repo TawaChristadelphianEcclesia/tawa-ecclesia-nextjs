@@ -98,6 +98,7 @@ export const getHomePageData = async () => {
                                     maxShown
                                     title
                                     filter
+                                    noEventsPlaceholder
                                     id
                                 }
                             }
