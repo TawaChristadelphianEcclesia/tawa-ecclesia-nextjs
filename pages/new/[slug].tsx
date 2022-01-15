@@ -10,7 +10,7 @@ export interface IGeneralPage {
 const GeneralPage: React.FC<IGeneralPage> = ({ slug, id }) => {
     return (
         <div>
-            slug is {slug.join("/")} id is {id}
+            slug is {slug} id is {id}
         </div>
     );
 };

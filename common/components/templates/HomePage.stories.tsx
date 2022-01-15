@@ -16,7 +16,7 @@ export const Default = Template.bind({});
 Default.args = {
     globalData: {
         headerData: {
-            siteTagLine: "Tawa Christadelphians",
+            siteTitle: "Tawa Christadelphians",
             siteLogo: {
                 url: "/bible_logo.svg",
                 alt: "logo",
@@ -84,45 +84,46 @@ Default.args = {
                 url: "./bible_logo.svg",
             },
         },
-        headerData: {
-            title: "Tawa Christadelphians",
-            subtitle:
-                "The fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance: against such there is no law.",
-            textPosition: "topcenter",
-            image: "bible_photo.jpg",
-            imageBlurDataURL: "bible_photo.jpg",
-            alt: "alt text",
-            textColor: "white",
-        },
-        eventData: {
-            title: "coming up",
-            filter: "all",
-            events: [
-                {
-                    title: "Past Event Title",
-                    presenter: "Event Presenter",
-                    datetime: new Date("2020-12-09T04:48:09.745Z"),
-                    description: "come to this event!",
-                    location: "Tawa Christadelphian Ecclesia",
-                    url: "/",
-                },
-                {
-                    title: "Event Today",
-                    presenter: "Event Presenter",
-                    datetime: new Date(),
-                    description: "come to this event!",
-                    location: "Tawa Christadelphian Ecclesia",
-                    url: "/",
-                },
-                {
-                    title: "Future Event",
-                    presenter: "Event Presenter",
-                    datetime: new Date("2100-12-09T04:48:09.745Z"),
-                    description: "come to this event!",
-                    location: "Tawa Christadelphian Ecclesia",
-                    url: "/",
-                },
-            ],
-        },
+        blocks: [],
+        // headerData: {
+        //     title: "Tawa Christadelphians",
+        //     subtitle:
+        //         "The fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance: against such there is no law.",
+        //     textPosition: "topcenter",
+        //     image: "bible_photo.jpg",
+        //     imageBlurDataURL: "bible_photo.jpg",
+        //     alt: "alt text",
+        //     textColor: "white",
+        // },
+        // eventData: {
+        //     title: "coming up",
+        //     filter: "all",
+        //     events: [
+        //         {
+        //             title: "Past Event Title",
+        //             presenter: "Event Presenter",
+        //             datetime: new Date("2020-12-09T04:48:09.745Z"),
+        //             description: "come to this event!",
+        //             location: "Tawa Christadelphian Ecclesia",
+        //             url: "/",
+        //         },
+        //         {
+        //             title: "Event Today",
+        //             presenter: "Event Presenter",
+        //             datetime: new Date(),
+        //             description: "come to this event!",
+        //             location: "Tawa Christadelphian Ecclesia",
+        //             url: "/",
+        //         },
+        //         {
+        //             title: "Future Event",
+        //             presenter: "Event Presenter",
+        //             datetime: new Date("2100-12-09T04:48:09.745Z"),
+        //             description: "come to this event!",
+        //             location: "Tawa Christadelphian Ecclesia",
+        //             url: "/",
+        //         },
+        //     ],
+        // },
     },
 };
