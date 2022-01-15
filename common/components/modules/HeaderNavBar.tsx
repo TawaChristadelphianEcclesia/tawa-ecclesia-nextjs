@@ -12,7 +12,7 @@ interface ILinkData {
 }
 export interface IHeaderData {
     siteTitle: string;
-    siteLogo: IImageData;
+    siteLogo?: IImageData;
     headerLinks: ILinkData[];
 }
 
@@ -26,7 +26,7 @@ const HeaderNavBar: React.FC<IHeaderData> = ({
         <header tw="sm:flex sm:justify-between sm:px-4 sm:py-3 sm:items-center shadow">
             <div tw="flex items-center justify-between px-4 py-2 sm:p-0">
                 <div tw="flex items-center">
-                    <NavBarLogo logo={siteLogo} href="/" />
+                    {siteLogo && <NavBarLogo logo={siteLogo} href="/" />}
                     <div tw="hidden md:block">
                         <Button href="/" navBarBrand>
                             {siteTitle}

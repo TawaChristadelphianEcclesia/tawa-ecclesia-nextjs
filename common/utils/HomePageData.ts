@@ -73,21 +73,23 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
         },
     };
     const blocks = await Promise.all(
-        pageAPIData?.Blocks?.map(
+        (pageAPIData?.Blocks?.map(
             async (block) =>
                 await mapAPIToBlock(
                     block as HomePageData_home_data_attributes_Blocks
                 )
-        ).filter((block) => block !== undefined) as Promise<IBlock>[]
+        ).filter((block) => block !== undefined) as Promise<IBlock>[]) || []
     );
     const globalData: IGlobalData = {
         headerData: {
             siteTitle: globalAPIData?.SiteTitle || "",
-            siteLogo: {
-                url:
-                    globalAPIData?.navigation?.logo?.data?.attributes?.url ||
-                    "",
-            },
+            siteLogo: globalAPIData?.navigation?.logo
+                ? {
+                      url:
+                          globalAPIData?.navigation?.logo?.data?.attributes
+                              ?.url || "",
+                  }
+                : undefined,
             // todo - link resolver for if no href
             headerLinks:
                 globalAPIData?.navigation?.links?.map((link) => ({
@@ -109,11 +111,13 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
                                 url: link?.href || "",
                             })) || [],
                 })) || [],
-            footerIcon: {
-                url:
-                    globalAPIData?.footer?.footerImage?.data?.attributes?.url ||
-                    "",
-            },
+            footerIcon: globalAPIData?.footer?.footerImage
+                ? {
+                      url:
+                          globalAPIData?.footer?.footerImage?.data?.attributes
+                              ?.url || "",
+                  }
+                : undefined,
         },
     };
     return {

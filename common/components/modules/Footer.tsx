@@ -8,7 +8,7 @@ import { IFooterLinkColumn } from "../elements/FooterLinkColumn";
 export interface IFooterData {
     footerText: string;
     footerColumns: IFooterLinkColumn[];
-    footerIcon: IImageData;
+    footerIcon?: IImageData;
 }
 
 const Footer: React.FC<IFooterData> = ({
