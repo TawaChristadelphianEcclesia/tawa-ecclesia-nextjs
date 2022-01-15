@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof HeaderNavBar> = (args) => <HeaderNavBar {.
 export const Default = Template.bind({})
 
 Default.args = {
-    siteTagLine: 'Tawa Christadelphians',
+    siteTitle: 'Tawa Christadelphians',
     siteLogo: {
         url: '/bible_logo.svg',
         alt: 'logo'
