@@ -13,8 +13,6 @@ const ConditionalLinkWrapper: React.FC<IConditionalLinkWrapper> = ({
     passHref,
     children,
 }) => {
-    console.log(href);
-    console.log("conditional link wrapper");
     return href ? (
         <Link href={href} passHref={passHref}>
             {!passHref ? <a>{children}</a> : <>{children}</>}
