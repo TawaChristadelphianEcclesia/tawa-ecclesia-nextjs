@@ -21,6 +21,7 @@
     "@emotion/styled": "^11.3.0",
     "@prismicio/client": "^5.1.0",
     "@prismicio/types": "^0.1.13",
+    "@sendgrid/mail": "^7.6.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/typography": "^0.4.1",
