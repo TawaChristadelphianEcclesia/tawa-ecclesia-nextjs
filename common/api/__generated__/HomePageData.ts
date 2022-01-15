@@ -96,6 +96,8 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksHero {
   image: HomePageData_home_data_attributes_Blocks_ComponentBlocksHero_image | null;
   text: string | null;
   title: string | null;
+  id: string;
+  color: string | null;
 }
 
 export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList {
@@ -103,6 +105,7 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksEventLi
   maxShown: number | null;
   title: string | null;
   filter: ENUM_COMPONENTBLOCKSEVENTLIST_FILTER | null;
+  id: string;
 }
 
 export type HomePageData_home_data_attributes_Blocks = HomePageData_home_data_attributes_Blocks_Error | HomePageData_home_data_attributes_Blocks_ComponentBlocksHero | HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList;

@@ -64,6 +64,7 @@ export const getHomePageData = async () => {
                             Title
                             Blocks {
                                 ... on ComponentBlocksHero {
+                                    __typename
                                     image {
                                         data {
                                             id
@@ -89,11 +90,15 @@ export const getHomePageData = async () => {
                                     }
                                     text
                                     title
+                                    id
+                                    color
                                 }
                                 ... on ComponentBlocksEventList {
+                                    __typename
                                     maxShown
                                     title
                                     filter
+                                    id
                                 }
                             }
                         }
