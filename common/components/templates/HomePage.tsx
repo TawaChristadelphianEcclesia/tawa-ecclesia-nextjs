@@ -10,20 +10,21 @@ import ContactForm from "../elements/ContactForm";
 import ImageCard from "../elements/ImageCard";
 import { IPageData } from "./types";
 
-export type IHomePageData = IPageData & {
-    headerData: IHeroHeader;
-    eventData: IEventList;
-};
+export type IHomePageData = IPageData;
+// export type IHomePageData = IPageData & {
+//     headerData: IHeroHeader;
+//     eventData: IEventList;
+// };
 
-interface IHomePage {
+export interface IHomePageTemplate {
     globalData: IGlobalData;
     pageData: IHomePageData;
 }
 
-const HomePage: React.FC<IHomePage> = ({ globalData, pageData }) => (
+const HomePageTemplate: React.FC<IHomePageTemplate> = ({ globalData, pageData }) => (
     <DefaultLayout seo={pageData.seo} global={globalData}>
-        <HeroHeader {...pageData.headerData} />
-        <Gradient>
+        {/* <HeroHeader {...pageData.headerData} /> */}
+        {/* <Gradient>
             <ContentSection padTop padBottom>
                 <Card animate>Latest Article</Card>
                 <Card animate>
@@ -45,8 +46,8 @@ const HomePage: React.FC<IHomePage> = ({ globalData, pageData }) => (
                     <ContactForm />
                 </Card>
             </ContentSection>
-        </Gradient>
+        </Gradient> */}
     </DefaultLayout>
 );
 
-export default HomePage;
+export default HomePageTemplate;

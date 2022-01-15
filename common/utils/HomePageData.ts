@@ -1,108 +1,72 @@
-import { IHomePageData } from "../components/templates/HomePage";
+import { getGlobalData, getHomePageData } from "../api/pageQueries";
+import { ISeoData } from "../components/elements/Seo";
+import { IGlobalData } from "../components/layouts/DefaultLayout";
+import { IHomePage } from "../components/templates/HomePage";
 
-// type IHomePageDataSerializable = IHomePageData & {
-//     eventData: {
-//         events: {
-//             datetime: string;
-//         }[];
-//     };
-//     headerData: {
-//         textPosition: string;
-//     };
-// };
-
-const getHomePageData = (): IHomePageData => {
-    const dummyPageData = {
-        seo: {
-            metaTitle: "Test",
-            metaDescription: "Test default layout story",
-            metaTags: [],
-            preventIndexing: false,
-            structuredData: "{}",
-            metaImage: {
-                url: "./bible_logo.svg",
+export const getHomePageProps = async (): Promise<IHomePage> => {
+    const pageAPIData = await (await getHomePageData()).home?.data?.attributes;
+    const globalAPIData = await (
+        await getGlobalData()
+    ).global?.data?.attributes;
+    const seo: ISeoData = {
+        metaTitle: pageAPIData?.seo?.metaTitle || "",
+        metaDescription: pageAPIData?.seo?.metaDescription || "",
+        metaTags:
+            pageAPIData?.seo?.meta?.map((meta) => ({
+                name: meta?.name || "",
+                content: meta?.content || "",
+            })) || [],
+        preventIndexing: pageAPIData?.seo?.preventIndexing || false,
+        structuredData: pageAPIData?.seo?.structuredData,
+        metaImage: {
+            url: pageAPIData?.seo?.metaImage?.data?.attributes?.url || "",
+            alt:
+                pageAPIData?.seo?.metaImage?.data?.attributes
+                    ?.alternativeText || "",
+            blurDataURL:
+                pageAPIData?.seo?.metaImage?.data?.attributes?.previewUrl || "",
+        },
+    };
+    const globalData: IGlobalData = {
+        headerData: {
+            siteTitle: globalAPIData?.SiteTitle || "",
+            siteLogo: {
+                url:
+                    globalAPIData?.navigation?.logo?.data?.attributes?.url ||
+                    "",
+            },
+            // todo - link resolver for if no href
+            headerLinks:
+                globalAPIData?.navigation?.links?.map((link) => ({
+                    label: link?.label || "",
+                    url: link?.href || "",
+                })) || [],
+        },
+        footerData: {
+            footerText: globalAPIData?.footer?.footerText || "",
+            footerColumns:
+                globalAPIData?.footer?.footerColumns?.map((column) => ({
+                    title: column?.title || "",
+                    links:
+                        column?.links
+                            ?.filter((link) => link !== null)
+                            // todo - link resolver for if no href
+                            .map((link) => ({
+                                label: link?.label || "",
+                                url: link?.href || "",
+                            })) || [],
+                })) || [],
+            footerIcon: {
+                url:
+                    globalAPIData?.footer?.footerImage?.data?.attributes?.url ||
+                    "",
             },
         },
-        headerData: {
-            title: "Tawa Christadelphians",
-            subtitle:
-                "The fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance: against such there is no law.",
-            textPosition: "topcenter",
-            image: "/bible_photo.jpg",
-            imageBlurDataURL: "/bible_photo.jpg",
-            alt: "alt text",
-            textColor: "white",
-        },
-        eventData: {
-            title: "coming up",
-            filter: "all",
-            events: [
-                {
-                    title: "Past Event Title",
-                    presenter: "Event Presenter",
-                    datetime: "2020-12-09T04:48:09.745Z",
-                    description: "come to this event!",
-                    location: "Tawa Christadelphian Ecclesia",
-                    url: "/",
-                },
-                {
-                    title: "Event Today",
-                    presenter: "Event Presenter",
-                    datetime: "2022-01-01T19:39:57.082Z",
-                    description: "come to this event!",
-                    location: "Tawa Christadelphian Ecclesia",
-                    url: "/",
-                },
-                {
-                    title: "Future Event",
-                    presenter: "Event Presenter",
-                    datetime: "2100-12-09T04:48:09.745Z",
-                    description: "come to this event!",
-                    location: "Tawa Christadelphian Ecclesia",
-                    url: "/",
-                },
-            ],
+    };
+    return {
+        globalData,
+        pageData: {
+            seo,
         },
     };
-    const dummyPageDataConverted: IHomePageData = {
-        ...dummyPageData,
-        headerData: {
-            ...dummyPageData.headerData,
-            textPosition: dummyPageData.headerData
-                .textPosition as IHomePageData["headerData"]["textPosition"],
-        },
-        eventData: {
-            ...dummyPageData.eventData,
-            filter: dummyPageData.eventData
-                .filter as IHomePageData["eventData"]["filter"],
-            events: dummyPageData.eventData.events.map((event) => ({
-                ...event,
-                datetime: new Date(event.datetime),
-            })),
-        },
-    };
-    return dummyPageDataConverted;
 };
-
-// export const convertHomePageData = (): IHomePageData => {
-//     const dummyPageDataConverted: IHomePageData = {
-//         ...dummyPageData,
-//         headerData: {
-//             ...dummyPageData.headerData,
-//             textPosition: dummyPageData.headerData
-//                 .textPosition as IHomePageData["headerData"]["textPosition"],
-//         },
-//         eventData: {
-//             ...dummyPageData.eventData,
-//             filter: dummyPageData.eventData
-//                 .filter as IHomePageData["eventData"]["filter"],
-//             events: dummyPageData.eventData.events.map((event) => ({
-//                 ...event,
-//                 datetime: new Date(event.datetime),
-//             })),
-//         },
-//     };
-//     return dummyPageDataConverted;
-// };
-
-export default getHomePageData;

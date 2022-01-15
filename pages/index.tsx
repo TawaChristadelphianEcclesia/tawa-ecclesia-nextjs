@@ -1,29 +1,16 @@
 import React from "react";
 import { GetStaticProps } from "next";
-import HomePage, {
-    IHomePageData,
+import { getHomePageProps } from "../common/utils/HomePageData";
+import HomePageTemplate, {
+    IHomePageTemplate,
 } from "../common/components/templates/HomePage";
-import { IGlobalData } from "../common/components/layouts/DefaultLayout";
-import getGlobalData from "../common/utils/GlobalData";
-import getHomePageData from "../common/utils/HomePageData";
 
-interface IIndexPage {
-    globalData: IGlobalData;
-    pageData: IHomePageData;
-}
-
-const IndexPage: React.FC<IIndexPage> = ({ globalData, pageData }) => (
-    <HomePage globalData={globalData} pageData={pageData} />
+const HomePage: React.FC<IHomePageTemplate> = (templateData) => (
+    <HomePageTemplate {...templateData} />
 );
-export default IndexPage;
 
-export const getStaticProps: GetStaticProps<IIndexPage> = async () => {
-    const globalData = getGlobalData();
-    const pageData = getHomePageData();
-    return {
-        props: {
-            globalData,
-            pageData,
-        },
-    };
-};
+export default HomePage;
+
+export const getStaticProps: GetStaticProps<IHomePageTemplate> = async () => ({
+    props: await getHomePageProps(),
+});

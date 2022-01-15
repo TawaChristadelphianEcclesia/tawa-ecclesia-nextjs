@@ -11,14 +11,14 @@ interface ILinkData {
     url: string;
 }
 export interface IHeaderData {
-    siteTagLine: string;
+    siteTitle: string;
     siteLogo: IImageData;
     headerLinks: ILinkData[];
 }
 
 const HeaderNavBar: React.FC<IHeaderData> = ({
     siteLogo,
-    siteTagLine,
+    siteTitle,
     headerLinks,
 }) => {
     const [open, setOpen] = useState(false);
@@ -29,7 +29,7 @@ const HeaderNavBar: React.FC<IHeaderData> = ({
                     <NavBarLogo logo={siteLogo} href="/" />
                     <div tw="hidden md:block">
                         <Button href="/" navBarBrand>
-                            {siteTagLine}
+                            {siteTitle}
                         </Button>
                     </div>
                 </div>

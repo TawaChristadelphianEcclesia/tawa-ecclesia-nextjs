@@ -11,7 +11,7 @@ export interface ISeoData {
     metaTags: IMeta[];
     preventIndexing: boolean;
     structuredData: any;
-    metaImage: IImageData;
+    metaImage?: IImageData;
 }
 
 const Seo = ({
@@ -42,7 +42,14 @@ const Seo = ({
                 content={metaDescription}
                 key="og:description"
             />
-            <meta property="og:image" content={metaImage.url} key="og:image" />
+            {metaImage && (
+                <meta
+                    property="og:image"
+                    content={metaImage.url}
+                    key="og:image"
+                />
+            )}
+
             <meta property="og:type" content="website" />
             <link rel="canonical" href={"url"} />
             {metaTags &&
