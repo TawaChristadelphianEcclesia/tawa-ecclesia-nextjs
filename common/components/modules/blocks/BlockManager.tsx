@@ -1,12 +1,12 @@
 import react from "react";
-import EventList, { IEventList } from "../../elements/EventList";
+import EventsBlock, { IEventsBlock } from "./EventsBlock";
 import HeroHeader, { IHeroHeader } from "../../elements/HeroHeader";
 
 type ComponentType = "hero" | "events";
 
 export interface IBlock {
     component: ComponentType;
-    data: IHeroHeader | IEventList;
+    data: IHeroHeader | IEventsBlock;
 }
 
 interface IBlockManager {
@@ -17,8 +17,10 @@ const getBlockComponent = (block: IBlock, index: number) => {
     switch (block.component) {
         case "hero":
             return <HeroHeader {...(block.data as IHeroHeader)} key={index} />;
-        case "events": 
-            return <EventList {...(block.data as IEventList)} key={index} />;
+        case "events":
+            return (
+                <EventsBlock {...(block.data as IEventsBlock)} key={index} />
+            );
     }
 };
 

@@ -10,6 +10,7 @@ import ContactForm from "../elements/ContactForm";
 import ImageCard from "../elements/ImageCard";
 import { IPageData } from "./types";
 import BlockManager, { IBlock } from "../modules/blocks/BlockManager";
+import tw from "twin.macro";
 
 // export type IHomePageData = IPageData;
 export type IHomePageData = IPageData & {
@@ -30,7 +31,9 @@ const HomePageTemplate: React.FC<IHomePageTemplate> = ({
     pageData: { seo, blocks },
 }) => (
     <DefaultLayout seo={seo} global={globalData}>
-        <BlockManager blocks={blocks}></BlockManager>
+        <div tw="bg-gray-100">
+            <BlockManager blocks={blocks}></BlockManager>
+        </div>
         {/* <HeroHeader {...pageData.headerData} />
         <Gradient>
             <ContentSection padTop padBottom>
