@@ -6,7 +6,7 @@ interface ICard {
 }
 const Card: React.FC<ICard> = ({ animate, children }) => (
     <div
-        tw="bg-white rounded-2xl border-gray-100 border shadow-xl px-5 py-5 mb-5 sm:mb-10"
+        tw="bg-white rounded-2xl border-gray-100 border shadow-xl px-5 py-5"
         css={[animate && tw`transform transition duration-300 hover:scale-105`]}
     >
         {children}
