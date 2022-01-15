@@ -16,7 +16,7 @@ export const Default = Template.bind({});
 Default.args = {
     globalData: {
         headerData: {
-            siteTagLine: "Tawa Christadelphians",
+            siteTitle: "Tawa Christadelphians",
             siteLogo: {
                 url: "/bible_logo.svg",
                 alt: "logo",

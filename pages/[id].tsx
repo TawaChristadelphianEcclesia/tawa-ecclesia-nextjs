@@ -2,11 +2,11 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { RichText } from "prismic-reactjs";
 import React from "react";
-import Footer from "../../components/footer";
-import HeaderNavBar from "../../components/headerNavBar";
-import Heading from "../../components/heading";
-import Layout from "../../components/layout";
-import SliceZone from "../../components/sliceZone";
+import Footer from "../components/footer";
+import HeaderNavBar from "../components/headerNavBar";
+import Heading from "../components/heading";
+import Layout from "../components/layout";
+import SliceZone from "../components/sliceZone";
 import {
   getAllEvents,
   getAllPageIds,
@@ -18,7 +18,7 @@ import {
   IHeaderData,
   IHomePageData,
   IPageData,
-} from "../../lib/api";
+} from "../lib/api";
 
 const GeneralPage: React.FC<{
   pageData: IPageData;

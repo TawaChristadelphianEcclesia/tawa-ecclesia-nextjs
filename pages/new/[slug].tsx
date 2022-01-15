@@ -1,6 +1,6 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { getAllPageSlugs } from "../common/utils/PageData";
+import { getAllPageSlugs } from "../../common/utils/PageData";
 
 export interface IGeneralPage {
     slug: string[];
