@@ -14,7 +14,7 @@ const FooterLink: React.FC<ILinkData> = ({
   }) => {
     return (
       <li>
-        <Link href={url}>
+        <Link href={url} passHref>
           <a tw="text-gray-400 cursor-pointer hover:text-gray-500">{label}</a>
         </Link>
       </li>

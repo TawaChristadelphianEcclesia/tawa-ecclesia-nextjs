@@ -20,7 +20,7 @@ const Button: React.FC<IButton> = ({
     paginationButton,
     children,
 }) => (
-    <ConditionalLinkWrapper href={href} passHref>
+    <ConditionalLinkWrapper href={href}>
         <div
             onClick={onClick}
             css={[
@@ -33,7 +33,7 @@ const Button: React.FC<IButton> = ({
                     tw`hover:bg-blue-300 focus:bg-blue-300 active:bg-blue-500 hover:text-white focus:text-white active:text-white hover:shadow-md focus:shadow-md px-4 py-2 uppercase text-sm text-gray-700 rounded-lg transition-all`,
             ]}
         >
-            <a>{children}</a>
+            {children}
         </div>
     </ConditionalLinkWrapper>
 );
