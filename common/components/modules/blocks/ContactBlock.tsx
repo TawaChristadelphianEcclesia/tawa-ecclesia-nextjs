@@ -7,7 +7,7 @@ import ContactForm, { IContactForm } from "../../elements/ContactForm";
 export type IContactBlock = IContactForm;
 
 const ContactBlock: React.FC<IContactBlock> = (props) => (
-    <ContentSection padTop padBottom>
+    <ContentSection>
         <Card animate>
             <ContactForm {...props} />
         </Card>

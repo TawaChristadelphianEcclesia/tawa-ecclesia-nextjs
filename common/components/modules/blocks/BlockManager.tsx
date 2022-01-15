@@ -1,13 +1,14 @@
 import react from "react";
+import tw, { css, styled } from "twin.macro";
 import EventsBlock, { IEventsBlock } from "./EventsBlock";
-import HeroHeader, { IHeroHeader } from "../../elements/HeroHeader";
+import HeroHeaderBlock, { IHeroHeaderBlock } from "./HeroHeaderBlock";
 import ContactBlock, { IContactBlock } from "./ContactBlock";
 
 type ComponentType = "hero" | "events" | "contact";
 
 export interface IBlock {
     component: ComponentType;
-    data: IHeroHeader | IEventsBlock | IContactBlock;
+    data: IHeroHeaderBlock | IEventsBlock | IContactBlock;
 }
 
 interface IBlockManager {
@@ -17,7 +18,12 @@ interface IBlockManager {
 const getBlockComponent = (block: IBlock, index: number) => {
     switch (block.component) {
         case "hero":
-            return <HeroHeader {...(block.data as IHeroHeader)} key={index} />;
+            return (
+                <HeroHeaderBlock
+                    {...(block.data as IHeroHeaderBlock)}
+                    key={index}
+                />
+            );
         case "events":
             return (
                 <EventsBlock {...(block.data as IEventsBlock)} key={index} />
@@ -30,7 +36,9 @@ const getBlockComponent = (block: IBlock, index: number) => {
 };
 
 const BlockManager: React.FC<IBlockManager> = ({ blocks }) => (
-    <>{blocks.map((block, index) => getBlockComponent(block, index))}</>
+    <div tw="space-y-10 pb-10">
+        {blocks.map((block, index) => getBlockComponent(block, index))}
+    </div>
 );
 
 export default BlockManager;

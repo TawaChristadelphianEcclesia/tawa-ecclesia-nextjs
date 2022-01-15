@@ -6,7 +6,7 @@ import EventList, { IEventList } from "../../elements/EventList";
 export type IEventsBlock = IEventList
 
 const EventsBlock: React.FC<IEventsBlock> = (props) => (
-    <ContentSection padTop padBottom>
+    <ContentSection>
         <Card animate>
             <EventList {...props} />
         </Card>
