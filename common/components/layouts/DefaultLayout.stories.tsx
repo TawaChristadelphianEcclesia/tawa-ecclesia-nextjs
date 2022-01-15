@@ -25,7 +25,7 @@ Default.args = {
     },
     global: {
         headerData: {
-            siteTagLine: "Tawa Christadelphians",
+            siteTitle: "Tawa Christadelphians",
             siteLogo: {
                 url: "/bible_logo.svg",
                 alt: "logo",

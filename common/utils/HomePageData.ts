@@ -1,7 +1,38 @@
 import { getGlobalData, getHomePageData } from "../api/pageQueries";
+import {
+    HomePageData_home_data_attributes_Blocks,
+    HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList,
+    HomePageData_home_data_attributes_Blocks_ComponentBlocksHero,
+} from "../api/__generated__/HomePageData";
 import { ISeoData } from "../components/elements/Seo";
 import { IGlobalData } from "../components/layouts/DefaultLayout";
+import { IBlock } from "../components/modules/blocks/BlockManager";
 import { IHomePageTemplate } from "../components/templates/HomePage";
+
+const mapAPIToBlock = (
+    apiBlock: HomePageData_home_data_attributes_Blocks
+): IBlock | undefined => {
+    switch (apiBlock.__typename) {
+        case "ComponentBlocksHero":
+            const apiHeroData =
+                apiBlock as HomePageData_home_data_attributes_Blocks_ComponentBlocksHero;
+            return {
+                component: "hero",
+                data: {
+                    alt:
+                        apiHeroData.image?.data?.attributes?.alternativeText ||
+                        "",
+                    image: apiHeroData.image?.data?.attributes?.url || "",
+                    imageBlurDataURL:
+                        apiHeroData.image?.data?.attributes?.formats?.thumbnail
+                            ?.url || "",
+                    title: apiHeroData.title,
+                    subtitle: apiHeroData.text,
+                    textColor: apiHeroData.color || undefined,
+                },
+            };
+    }
+};
 
 export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
     const pageAPIData = await (await getHomePageData()).home?.data?.attributes;
@@ -27,6 +58,9 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
                 pageAPIData?.seo?.metaImage?.data?.attributes?.previewUrl || "",
         },
     };
+    const blocks: IBlock[] = pageAPIData?.Blocks?.map((block) =>
+        mapAPIToBlock(block as HomePageData_home_data_attributes_Blocks)
+    ).filter((block) => block !== undefined) as IBlock[];
     const globalData: IGlobalData = {
         headerData: {
             siteTitle: globalAPIData?.SiteTitle || "",
@@ -67,6 +101,7 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
         globalData,
         pageData: {
             seo,
+            blocks,
         },
     };
 };

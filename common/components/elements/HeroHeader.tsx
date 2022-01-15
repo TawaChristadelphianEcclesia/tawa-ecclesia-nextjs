@@ -7,7 +7,7 @@ export interface IHeroHeader {
     title: string | ReactNode;
     subtitle: string | ReactNode;
     image: string;
-    imageBlurDataURL?: string;
+    imageBlurDataURL: string;
     alt?: string;
     textColor?: string;
     textPosition?:

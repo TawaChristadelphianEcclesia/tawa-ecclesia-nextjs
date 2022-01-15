@@ -9,8 +9,12 @@ import ContentSection from "../elements/ContentSection";
 import ContactForm from "../elements/ContactForm";
 import ImageCard from "../elements/ImageCard";
 import { IPageData } from "./types";
+import BlockManager, { IBlock } from "../modules/blocks/BlockManager";
 
-export type IHomePageData = IPageData;
+// export type IHomePageData = IPageData;
+export type IHomePageData = IPageData & {
+    blocks: IBlock[];
+};
 // export type IHomePageData = IPageData & {
 //     headerData: IHeroHeader;
 //     eventData: IEventList;
@@ -21,10 +25,14 @@ export interface IHomePageTemplate {
     pageData: IHomePageData;
 }
 
-const HomePageTemplate: React.FC<IHomePageTemplate> = ({ globalData, pageData }) => (
-    <DefaultLayout seo={pageData.seo} global={globalData}>
-        {/* <HeroHeader {...pageData.headerData} /> */}
-        {/* <Gradient>
+const HomePageTemplate: React.FC<IHomePageTemplate> = ({
+    globalData,
+    pageData: { seo, blocks },
+}) => (
+    <DefaultLayout seo={seo} global={globalData}>
+        <BlockManager blocks={blocks}></BlockManager>
+        {/* <HeroHeader {...pageData.headerData} />
+        <Gradient>
             <ContentSection padTop padBottom>
                 <Card animate>Latest Article</Card>
                 <Card animate>
