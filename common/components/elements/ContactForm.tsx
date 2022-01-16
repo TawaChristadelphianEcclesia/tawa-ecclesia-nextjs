@@ -11,16 +11,24 @@ export interface IContactForm {
 }
 
 const ContactForm: React.FC<IContactForm> = ({ endpoint, title }) => {
-    const handleSubmit = () => {
-        fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, message }),
-        });
+    const handleSubmit = async () => {
+        if (status !== "sent") {
+            setStatus("sending");
+            const response = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, message }),
+            });
+            response.status == 200 ? setStatus("sent") : setStatus("error");
+        }
     };
     const [email, setEmail] = useState<string>();
     const [name, setName] = useState<string>();
     const [message, setMessage] = useState<string>();
+    // const [statusMessage, setStatusMessage] = useState<string>("send");
+    const [status, setStatus] = useState<
+        "ready" | "sending" | "sent" | "error"
+    >("ready");
     return (
         <>
             <h2 tw="text-gray-900 text-4xl mb-5">{title}</h2>
@@ -42,7 +50,27 @@ const ContactForm: React.FC<IContactForm> = ({ endpoint, title }) => {
                     value={message}
                     setValue={setMessage}
                 />
-                <Button onClick={handleSubmit}>Send</Button>
+                <div tw="w-full grid justify-items-end">
+                    <Button
+                        onClick={handleSubmit}
+                        color={
+                            status == "error"
+                                ? "error"
+                                : status == "sent"
+                                ? "success"
+                                : undefined
+                        }
+                        variant="contained"
+                    >
+                        {status == "ready"
+                            ? "Send"
+                            : status == "sending"
+                            ? "Sending..."
+                            : status == "sent"
+                            ? "Sent!"
+                            : "Error :("}
+                    </Button>
+                </div>
             </form>
         </>
     );

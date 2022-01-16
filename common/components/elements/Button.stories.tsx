@@ -34,3 +34,21 @@ Pagination.args = {
     ...Default.args,
     paginationButton: true,
 };
+
+export const ContainedPrimary = Template.bind({});
+ContainedPrimary.args = {
+    ...Default.args,
+    variant: "contained",
+};
+export const ContainedSuccess = Template.bind({});
+ContainedSuccess.args = {
+    ...Default.args,
+    variant: "contained",
+    color: "success",
+};
+export const ContainedError = Template.bind({});
+ContainedError.args = {
+    ...Default.args,
+    variant: "contained",
+    color: "error",
+};
