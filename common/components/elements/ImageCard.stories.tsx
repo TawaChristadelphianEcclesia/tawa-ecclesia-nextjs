@@ -21,6 +21,8 @@ export const Default = Template.bind({});
 Default.args = {
     src: "undraw_podcast.svg",
     alt: "postcast illustration",
+    title: "Podcast",
+    body: "Interested in the truth of the bible? Join us as we discuss a range of biblical topics.",
     children: (
         <>
             <h2 tw="text-gray-900 font-bold text-2xl">Podcast</h2>

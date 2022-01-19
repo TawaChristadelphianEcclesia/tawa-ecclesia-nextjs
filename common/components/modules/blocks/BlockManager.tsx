@@ -3,12 +3,13 @@ import tw, { css, styled } from "twin.macro";
 import EventsBlock, { IEventsBlock } from "./EventsBlock";
 import HeroHeaderBlock, { IHeroHeaderBlock } from "./HeroHeaderBlock";
 import ContactBlock, { IContactBlock } from "./ContactBlock";
+import ImageCardBlock, { IImageCardBlock } from "./ImageCardBlock";
 
-type ComponentType = "hero" | "events" | "contact";
+type ComponentType = "hero" | "events" | "contact" | "imagecard";
 
 export interface IBlock {
     component: ComponentType;
-    data: IHeroHeaderBlock | IEventsBlock | IContactBlock;
+    data: IHeroHeaderBlock | IEventsBlock | IContactBlock | IImageCardBlock;
 }
 
 interface IBlockManager {
@@ -31,6 +32,13 @@ const getBlockComponent = (block: IBlock, index: number) => {
         case "contact":
             return (
                 <ContactBlock {...(block.data as IContactBlock)} key={index} />
+            );
+        case "imagecard":
+            return (
+                <ImageCardBlock
+                    {...(block.data as IImageCardBlock)}
+                    key={index}
+                />
             );
     }
 };

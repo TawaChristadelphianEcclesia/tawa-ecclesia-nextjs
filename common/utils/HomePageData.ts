@@ -4,6 +4,7 @@ import {
     HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm,
     HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList,
     HomePageData_home_data_attributes_Blocks_ComponentBlocksHero,
+    HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard,
 } from "../api/__generated__/HomePageData";
 import { ISeoData } from "../components/elements/Seo";
 import { IGlobalData } from "../components/layouts/DefaultLayout";
@@ -47,14 +48,47 @@ const mapAPIToBlock = async (
                 },
             } as IBlock;
         case "ComponentBlocksContactForm":
-            const apiData =
+            const apiContactFormData =
                 apiBlock as HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm;
             return {
                 component: "contact" as IBlock["component"],
                 data: {
-                    title: apiData.title,
-                    endpoint: apiData.endpoint,
+                    title: apiContactFormData.title,
+                    endpoint: apiContactFormData.endpoint,
                 },
+            } as IBlock;
+        case "ComponentBlocksImageCard":
+            const apiImageBlockData =
+                apiBlock as HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard;
+            return {
+                component: "imagecard" as IBlock["component"],
+                data: {
+                    title: apiImageBlockData.title,
+                    body: apiImageBlockData.body,
+                    alt:
+                        apiImageBlockData.image?.data?.attributes
+                            ?.alternativeText || "",
+                    src: apiImageBlockData.image?.data?.attributes?.url || "",
+                    imageBlurDataURL:
+                        apiImageBlockData.image?.data?.attributes?.formats
+                            ?.thumbnail?.url || "",
+                    leftLink: apiImageBlockData.leftLink
+                        ? {
+                              url: apiImageBlockData.leftLink?.href,
+                              label: apiImageBlockData.leftLink?.label,
+                          }
+                        : undefined,
+                    rightLink: apiImageBlockData.rightLink
+                        ? {
+                              url: apiImageBlockData.rightLink?.href,
+                              label: apiImageBlockData.rightLink?.label,
+                          }
+                        : undefined,
+                },
+                // data: {
+                //     title: apiData.title,
+                //     endpoint: apiData.endpoint,
+                // },
             } as IBlock;
     }
 };

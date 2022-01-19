@@ -106,6 +106,46 @@ export const getHomePageData = async () => {
                                     title
                                     endpoint
                                 }
+                                ... on ComponentBlocksImageCard {
+                                    __typename
+                                    title
+                                    body
+                                    image {
+                                        data {
+                                            id
+                                            attributes {
+                                                name
+                                                alternativeText
+                                                caption
+                                                width
+                                                height
+                                                formats
+                                                ext
+                                                hash
+                                                mime
+                                                size
+                                                url
+                                                previewUrl
+                                                provider
+                                                provider_metadata
+                                                createdAt
+                                                updatedAt
+                                            }
+                                        }
+                                    }
+                                    leftLink {
+                                        href
+                                        label
+                                        target
+                                        isExternal
+                                    }
+                                    rightLink {
+                                        href
+                                        label
+                                        target
+                                        isExternal
+                                    }
+                                }
                             }
                         }
                     }

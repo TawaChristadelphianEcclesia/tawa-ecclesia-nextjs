@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { ENUM_COMPONENTBLOCKSEVENTLIST_FILTER } from "./../../../__generated__/globalTypes";
+import { ENUM_COMPONENTBLOCKSEVENTLIST_FILTER, ENUM_COMPONENTSHAREDLINK_TARGET } from "./../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: HomePageData
@@ -93,7 +93,7 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksHero_im
 
 export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksHero {
   __typename: "ComponentBlocksHero";
-  image: HomePageData_home_data_attributes_Blocks_ComponentBlocksHero_image | null;
+  image: HomePageData_home_data_attributes_Blocks_ComponentBlocksHero_image;
   text: string | null;
   title: string;
   id: string;
@@ -115,7 +115,63 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksContact
   endpoint: string;
 }
 
-export type HomePageData_home_data_attributes_Blocks = HomePageData_home_data_attributes_Blocks_Error | HomePageData_home_data_attributes_Blocks_ComponentBlocksHero | HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList | HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm;
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_image_data_attributes {
+  __typename: "UploadFile";
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  width: number | null;
+  height: number | null;
+  formats: any | null;
+  ext: string | null;
+  hash: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: string | null;
+  provider: string;
+  provider_metadata: any | null;
+  createdAt: any | null;
+  updatedAt: any | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_image_data {
+  __typename: "UploadFileEntity";
+  id: string | null;
+  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_image_data_attributes | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_image {
+  __typename: "UploadFileEntityResponse";
+  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_image_data | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_leftLink {
+  __typename: "ComponentSharedLink";
+  href: string;
+  label: string;
+  target: ENUM_COMPONENTSHAREDLINK_TARGET | null;
+  isExternal: boolean;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_rightLink {
+  __typename: "ComponentSharedLink";
+  href: string;
+  label: string;
+  target: ENUM_COMPONENTSHAREDLINK_TARGET | null;
+  isExternal: boolean;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard {
+  __typename: "ComponentBlocksImageCard";
+  title: string;
+  body: string;
+  image: HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_image;
+  leftLink: HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_leftLink | null;
+  rightLink: HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard_rightLink | null;
+}
+
+export type HomePageData_home_data_attributes_Blocks = HomePageData_home_data_attributes_Blocks_Error | HomePageData_home_data_attributes_Blocks_ComponentBlocksHero | HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList | HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm | HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard;
 
 export interface HomePageData_home_data_attributes {
   __typename: "Home";
