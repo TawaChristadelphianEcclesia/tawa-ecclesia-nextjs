@@ -1,4 +1,5 @@
-import { getGlobalData, getHomePageData } from "../api/pageQueries";
+import { getHomePageData } from "../api/pageQueries";
+import { getGlobalData } from "../api/globalQueries";
 import {
     HomePageData_home_data_attributes_Blocks,
     HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm,

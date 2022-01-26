@@ -8,62 +8,62 @@ import Heading from "../components/heading";
 import Layout from "../components/layout";
 import SliceZone from "../components/sliceZone";
 import {
-  getAllEvents,
-  getAllPageIds,
-  getFooterData,
-  getHeaderData,
-  getHomePageData,
-  getPageData,
-  IFooterData,
-  IHeaderData,
-  IHomePageData,
-  IPageData,
+    getAllEvents,
+    getAllPageIds,
+    getFooterData,
+    getHeaderData,
+    getHomePageData,
+    getPageData,
+    IFooterData,
+    IHeaderData,
+    IHomePageData,
+    IPageData,
 } from "../lib/api";
 
 const GeneralPage: React.FC<{
-  pageData: IPageData;
-  headerData: IHeaderData;
-  footerData: IFooterData;
+    pageData: IPageData;
+    headerData: IHeaderData;
+    footerData: IFooterData;
 }> = ({ headerData, footerData, pageData }) => {
-  return (
-    <Layout>
-      <Head>
-        <title>{RichText.asText(pageData.title)}</title>
-      </Head>
-      <HeaderNavBar headerData={headerData} />
-      <Heading
-        type={pageData.headingType}
-        title={RichText.render(pageData.title)}
-        subtitle={RichText.render(pageData.subtitle)}
-        imageSrc={pageData.heroImage.url}
-        imageBlurDataURL={pageData.heroImage.blurDataURL}
-        textColor={pageData.textColor}
-      />
-      <SliceZone slices={pageData.body} />
-      <Footer footerData={footerData} />
-    </Layout>
-  );
+    return (
+        <Layout>
+            <Head>
+                <title>{RichText.asText(pageData.title)}</title>
+            </Head>
+            <HeaderNavBar headerData={headerData} />
+            <Heading
+                type={pageData.headingType}
+                title={RichText.render(pageData.title)}
+                subtitle={RichText.render(pageData.subtitle)}
+                imageSrc={pageData.heroImage.url}
+                imageBlurDataURL={pageData.heroImage.blurDataURL}
+                textColor={pageData.textColor}
+            />
+            <SliceZone slices={pageData.body} />
+            <Footer footerData={footerData} />
+        </Layout>
+    );
 };
 
 export default GeneralPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPageIds();
-  return {
-    paths,
-    fallback: false,
-  };
+    const paths = await getAllPageIds();
+    return {
+        paths,
+        fallback: false,
+    };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const pageData = await getPageData(params!.id as string);
-  const headerData = await getHeaderData();
-  const footerData = await getFooterData();
-  return {
-    props: {
-      pageData,
-      headerData,
-      footerData,
-    },
-  };
+    const pageData = await getPageData(params!.id as string);
+    const headerData = await getHeaderData();
+    const footerData = await getFooterData();
+    return {
+        props: {
+            pageData,
+            headerData,
+            footerData,
+        },
+    };
 };

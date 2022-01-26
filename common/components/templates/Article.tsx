@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { IPageData } from "./types";
 import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
 
-export type IArticleData = IPageData & {
+type IArticlePageData = IPageData & {
     title: string;
     summary: string;
     content: string;
@@ -13,14 +13,17 @@ export type IArticleData = IPageData & {
     // articleData: IArticleCard[];
 };
 
-interface IArticle {
+export interface IArticleData {
     globalData: IGlobalData;
-    pageData: IArticleData;
+    pageData: IArticlePageData;
 }
 
-const Article: React.FC<IArticle> = ({ globalData, pageData }) => (
+const Article: React.FC<IArticleData> = ({ globalData, pageData }) => (
     <DefaultLayout seo={pageData.seo} global={globalData}>
-        <h1></h1>
+        <h1>{pageData.title}</h1>
+        <p>
+            <i>{pageData.summary}</i>
+        </p>
     </DefaultLayout>
 );
 
