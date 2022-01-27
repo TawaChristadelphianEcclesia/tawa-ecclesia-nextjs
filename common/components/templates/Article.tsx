@@ -2,15 +2,17 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { IPageData } from "./types";
 import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
+import ReactMarkdown from "react-markdown";
+import ArticleContent from "../elements/ArticleContent";
+import StandardHeader from "../elements/StandardHeader";
 
 type IArticlePageData = IPageData & {
     title: string;
     summary: string;
     content: string;
-    // headerData: IHeroHeader;
-    // eventData: IEventList;
-    // headerData: ITextHeader;
-    // articleData: IArticleCard[];
+    image: string;
+    imageBlurDataURL: string;
+    alt?: string;
 };
 
 export interface IArticleData {
@@ -20,10 +22,14 @@ export interface IArticleData {
 
 const Article: React.FC<IArticleData> = ({ globalData, pageData }) => (
     <DefaultLayout seo={pageData.seo} global={globalData}>
-        <h1>{pageData.title}</h1>
-        <p>
-            <i>{pageData.summary}</i>
-        </p>
+        <StandardHeader
+            title={pageData.title}
+            summary={pageData.summary}
+            image={pageData.image}
+            imageBlurDataURL={pageData.imageBlurDataURL}
+            alt={pageData.alt}
+        />
+        <ArticleContent content={pageData.content} />
     </DefaultLayout>
 );
 

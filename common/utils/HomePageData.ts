@@ -115,7 +115,8 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
                 pageAPIData?.seo?.metaImage?.data?.attributes
                     ?.alternativeText || "",
             blurDataURL:
-                pageAPIData?.seo?.metaImage?.data?.attributes?.previewUrl || "",
+                pageAPIData?.seo?.metaImage?.data?.attributes?.formats
+                    ?.thumbnail?.url || "",
         },
     };
     const blocks = await Promise.all(

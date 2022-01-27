@@ -63,6 +63,29 @@ export const getArticleData = async (slug: string) => {
                             slug
                             title
                             summary
+                            image {
+                                data {
+                                    id
+                                    attributes {
+                                        name
+                                        alternativeText
+                                        caption
+                                        width
+                                        height
+                                        formats
+                                        ext
+                                        hash
+                                        mime
+                                        size
+                                        url
+                                        previewUrl
+                                        provider
+                                        provider_metadata
+                                        createdAt
+                                        updatedAt
+                                    }
+                                }
+                            }
                             content
                         }
                     }

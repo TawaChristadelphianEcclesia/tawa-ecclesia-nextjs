@@ -3,21 +3,11 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import {
     getAllArticleSlugs,
     getArticleData,
-} from "../../../common/utils/ArticleData";
+} from "../../common/utils/ArticleData";
 import Article, {
     IArticleData,
-} from "../../../common/components/templates/Article";
-import { IHeaderData } from "../../../common/components/modules/HeaderNavBar";
-import { IFooterData } from "../../../common/components/modules/Footer";
-import { getFooterData, getHeaderData } from "../../../lib/api";
+} from "../../common/components/templates/Article";
 
-// interface IArticlePage {
-//     pageData: IArticleData;
-//     globalData: {
-//         headerData: IHeaderData;
-//         footerData: IFooterData;
-//     };
-// }
 const ArticlePage: React.FC<IArticleData> = ({ pageData, globalData }) => {
     return <Article pageData={pageData} globalData={globalData} />;
 };

@@ -54,12 +54,44 @@ export interface Article_articles_data_attributes_seo {
   metaImage: Article_articles_data_attributes_seo_metaImage | null;
 }
 
+export interface Article_articles_data_attributes_image_data_attributes {
+  __typename: "UploadFile";
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  width: number | null;
+  height: number | null;
+  formats: any | null;
+  ext: string | null;
+  hash: string;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: string | null;
+  provider: string;
+  provider_metadata: any | null;
+  createdAt: any | null;
+  updatedAt: any | null;
+}
+
+export interface Article_articles_data_attributes_image_data {
+  __typename: "UploadFileEntity";
+  id: string | null;
+  attributes: Article_articles_data_attributes_image_data_attributes | null;
+}
+
+export interface Article_articles_data_attributes_image {
+  __typename: "UploadFileEntityResponse";
+  data: Article_articles_data_attributes_image_data | null;
+}
+
 export interface Article_articles_data_attributes {
   __typename: "Article";
   seo: Article_articles_data_attributes_seo | null;
   slug: string;
   title: string;
   summary: string | null;
+  image: Article_articles_data_attributes_image | null;
   content: string | null;
 }
 

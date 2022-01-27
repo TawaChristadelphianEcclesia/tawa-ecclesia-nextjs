@@ -35,7 +35,8 @@ export const getArticleData = async (slug: string): Promise<IArticleData> => {
                 pageAPIData?.seo?.metaImage?.data?.attributes
                     ?.alternativeText || "",
             blurDataURL:
-                pageAPIData?.seo?.metaImage?.data?.attributes?.previewUrl || "",
+                pageAPIData?.seo?.metaImage?.data?.attributes?.formats
+                    ?.thumbnail?.url || "",
         },
     };
     const pageData: IArticleData["pageData"] = {
@@ -43,6 +44,10 @@ export const getArticleData = async (slug: string): Promise<IArticleData> => {
         title: pageAPIData?.title || "",
         summary: pageAPIData?.summary || "",
         content: pageAPIData?.content || "",
+        image: pageAPIData?.image?.data?.attributes?.url || "",
+        imageBlurDataURL:
+            pageAPIData?.image?.data?.attributes?.formats?.thumbnail?.url || "",
+        alt: pageAPIData?.image?.data?.attributes?.alternativeText || undefined,
     };
     const globalData = await getGlobalData();
     return { pageData, globalData };
