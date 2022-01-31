@@ -62,7 +62,11 @@ const Seo = ({
                     <meta name="googlebot" content="noindex"></meta>
                 </>
             )}
-            <script type="application/ld+json">{structuredData}</script>
+            <script type="application/ld+json">
+                {typeof structuredData === "string"
+                    ? structuredData
+                    : JSON.stringify(structuredData)}
+            </script>
         </Head>
     </div>
 );

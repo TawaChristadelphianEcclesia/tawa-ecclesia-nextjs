@@ -19,7 +19,7 @@ type IArticlesPageData = IPageData & {
     articleData: IArticleCard[];
 };
 
-interface IArticlesPage {
+export interface IArticlesPage {
     globalData: IGlobalData;
     pageData: IArticlesPageData;
 }
