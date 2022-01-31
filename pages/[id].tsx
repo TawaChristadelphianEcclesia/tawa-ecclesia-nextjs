@@ -8,7 +8,6 @@ import Heading from "../components/heading";
 import Layout from "../components/layout";
 import SliceZone from "../components/sliceZone";
 import {
-    getAllEvents,
     getAllPageIds,
     getFooterData,
     getHeaderData,
