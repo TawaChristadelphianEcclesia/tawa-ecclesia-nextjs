@@ -48,7 +48,7 @@ const ArticleCard: React.FC<IArticleCard> = ({
                         <div tw="aspect-w-3 aspect-h-2">
                             <Image
                                 src={titleImage.url}
-                                alt={titleImage.url || ""}
+                                alt={titleImage.alt || ""}
                                 layout="fill"
                                 objectFit="cover"
                                 placeholder="blur"

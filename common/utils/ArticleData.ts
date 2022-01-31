@@ -9,6 +9,7 @@ import { IArticleData } from "../components/templates/Article";
 import { IArticlesPage } from "../components/templates/ArticlesPage";
 import { getGlobalData } from "./GlobalData";
 import { getTextReadingTime } from "./ReadingTimeCalculator";
+import { getPathFromSlug } from "./SlugCalculator";
 
 export const getAllArticleSlugs = async () => {
     const data = await getArticleSlugs();
@@ -82,7 +83,7 @@ export const getArticleHomePageData = async (): Promise<IArticlesPage> => {
     const articles: IArticlesPage["pageData"]["articleData"] = await (
         await getArticleList()
     ).map((articleData) => ({
-        url: articleData.attributes?.slug || "",
+        url: getPathFromSlug(articleData.attributes?.slug || "", "article"),
         title: articleData.attributes?.title || "",
         titleImage: {
             url: articleData?.attributes?.image?.data?.attributes?.url || "",
