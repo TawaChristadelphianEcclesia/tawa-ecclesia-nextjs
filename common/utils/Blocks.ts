@@ -1,6 +1,7 @@
 import {
     GeneralPage_pages_data_attributes_blocks,
     GeneralPage_pages_data_attributes_blocks_ComponentBlocksHero,
+    GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader,
     GeneralPage_pages_data_attributes_blocks_ComponentBlocksTextContent,
 } from "../api/__generated__/GeneralPage";
 import {
@@ -100,6 +101,24 @@ export const mapAPIToBlock = async (
                 component: "textcontent" as IBlock["component"],
                 data: {
                     content: apiContentBlockData.content || "",
+                },
+            } as IBlock;
+        case "ComponentBlocksStandardHeader":
+            const apiStandardHeaderBlockData =
+                apiBlock as GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader;
+            return {
+                component: "standardheader" as IBlock["component"],
+                data: {
+                    title: apiStandardHeaderBlockData.title,
+                    summary: apiStandardHeaderBlockData.summary ?? undefined,
+                    alt:
+                        apiStandardHeaderBlockData.headerImage?.data?.attributes
+                            ?.alternativeText || "",
+                    image: apiStandardHeaderBlockData.headerImage?.data
+                        ?.attributes?.url,
+                    imageBlurDataURL:
+                        apiStandardHeaderBlockData.headerImage?.data?.attributes
+                            ?.formats?.thumbnail?.url,
                 },
             };
     }

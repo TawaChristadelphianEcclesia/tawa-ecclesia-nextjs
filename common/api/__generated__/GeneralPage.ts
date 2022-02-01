@@ -102,7 +102,45 @@ export interface GeneralPage_pages_data_attributes_blocks_ComponentBlocksHero {
   image: GeneralPage_pages_data_attributes_blocks_ComponentBlocksHero_image;
 }
 
-export type GeneralPage_pages_data_attributes_blocks = GeneralPage_pages_data_attributes_blocks_Error | GeneralPage_pages_data_attributes_blocks_ComponentBlocksTextContent | GeneralPage_pages_data_attributes_blocks_ComponentBlocksHero;
+export interface GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader_headerImage_data_attributes {
+  __typename: "UploadFile";
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  width: number | null;
+  height: number | null;
+  formats: any | null;
+  hash: string;
+  ext: string | null;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: string | null;
+  provider: string;
+  provider_metadata: any | null;
+  createdAt: any | null;
+  updatedAt: any | null;
+}
+
+export interface GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader_headerImage_data {
+  __typename: "UploadFileEntity";
+  id: string | null;
+  attributes: GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader_headerImage_data_attributes | null;
+}
+
+export interface GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader_headerImage {
+  __typename: "UploadFileEntityResponse";
+  data: GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader_headerImage_data | null;
+}
+
+export interface GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader {
+  __typename: "ComponentBlocksStandardHeader";
+  title: string;
+  summary: string | null;
+  headerImage: GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader_headerImage | null;
+}
+
+export type GeneralPage_pages_data_attributes_blocks = GeneralPage_pages_data_attributes_blocks_Error | GeneralPage_pages_data_attributes_blocks_ComponentBlocksTextContent | GeneralPage_pages_data_attributes_blocks_ComponentBlocksHero | GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader;
 
 export interface GeneralPage_pages_data_attributes {
   __typename: "Page";

@@ -1,13 +1,17 @@
-import react from "react";
+import React from "react";
 import tw, { css, styled } from "twin.macro";
 import EventsBlock, { IEventsBlock } from "./EventsBlock";
 import HeroHeaderBlock, { IHeroHeaderBlock } from "./HeroHeaderBlock";
 import ContactBlock, { IContactBlock } from "./ContactBlock";
 import ImageCardBlock, { IImageCardBlock } from "./ImageCardBlock";
 import TextContentBlock, { ITextContentBlock } from "./TextContentBlock";
+import StandardHeaderBlock, {
+    IStandardHeaderBlock,
+} from "./StandardHeaderBlock";
 
 type ComponentType =
     | "hero"
+    | "standardheader"
     | "events"
     | "contact"
     | "imagecard"
@@ -17,6 +21,7 @@ export interface IBlock {
     component: ComponentType;
     data:
         | IHeroHeaderBlock
+        | IStandardHeaderBlock
         | IEventsBlock
         | IContactBlock
         | IImageCardBlock
@@ -33,6 +38,13 @@ const getBlockComponent = (block: IBlock, index: number) => {
             return (
                 <HeroHeaderBlock
                     {...(block.data as IHeroHeaderBlock)}
+                    key={index}
+                />
+            );
+        case "standardheader":
+            return (
+                <StandardHeaderBlock
+                    {...(block.data as IStandardHeaderBlock)}
                     key={index}
                 />
             );

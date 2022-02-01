@@ -4,7 +4,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 
 const TextContent: React.FC<{ content: string }> = ({ content }) => (
-    <div tw="prose">
+    <div tw="mx-auto prose">
         <ReactMarkdown>{content}</ReactMarkdown>
     </div>
 );

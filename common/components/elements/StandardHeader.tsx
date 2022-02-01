@@ -7,8 +7,8 @@ import ReactMarkdown from "react-markdown";
 export interface IStandardHeader {
     title: string;
     summary?: string;
-    image: string;
-    imageBlurDataURL: string;
+    image?: string;
+    imageBlurDataURL?: string;
     alt?: string;
 }
 
@@ -24,7 +24,7 @@ const StandardHeader: React.FC<IStandardHeader> = ({
         <p tw="sm:text-xl text-gray-600 italic pb-6">
             {summary && <ReactMarkdown>{summary}</ReactMarkdown>}
         </p>
-        {image && (
+        {image && imageBlurDataURL && (
             <div
                 tw="aspect-w-16 aspect-h-9 mb-6"
                 style={{
