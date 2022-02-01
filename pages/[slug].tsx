@@ -3,10 +3,10 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import {
     getAllPageSlugs,
     getGeneralPageProps,
-} from "../../common/utils/GeneralPageData";
+} from "../common/utils/GeneralPageData";
 import GeneralPageTemplate, {
     IGeneralPageTemplate,
-} from "../../common/components/templates/GeneralPage";
+} from "../common/components/templates/GeneralPage";
 
 const GeneralPage: React.FC<IGeneralPageTemplate> = (props) => {
     return <GeneralPageTemplate {...props} />;
