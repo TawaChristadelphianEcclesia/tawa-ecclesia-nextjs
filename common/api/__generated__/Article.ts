@@ -91,7 +91,7 @@ export interface Article_articles_data_attributes {
   slug: string;
   title: string;
   summary: string | null;
-  image: Article_articles_data_attributes_image | null;
+  image: Article_articles_data_attributes_image;
   content: string | null;
 }
 

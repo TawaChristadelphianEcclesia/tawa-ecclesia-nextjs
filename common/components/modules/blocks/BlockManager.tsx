@@ -4,12 +4,23 @@ import EventsBlock, { IEventsBlock } from "./EventsBlock";
 import HeroHeaderBlock, { IHeroHeaderBlock } from "./HeroHeaderBlock";
 import ContactBlock, { IContactBlock } from "./ContactBlock";
 import ImageCardBlock, { IImageCardBlock } from "./ImageCardBlock";
+import TextContentBlock, { ITextContentBlock } from "./TextContentBlock";
 
-type ComponentType = "hero" | "events" | "contact" | "imagecard";
+type ComponentType =
+    | "hero"
+    | "events"
+    | "contact"
+    | "imagecard"
+    | "textcontent";
 
 export interface IBlock {
     component: ComponentType;
-    data: IHeroHeaderBlock | IEventsBlock | IContactBlock | IImageCardBlock;
+    data:
+        | IHeroHeaderBlock
+        | IEventsBlock
+        | IContactBlock
+        | IImageCardBlock
+        | ITextContentBlock;
 }
 
 interface IBlockManager {
@@ -37,6 +48,13 @@ const getBlockComponent = (block: IBlock, index: number) => {
             return (
                 <ImageCardBlock
                     {...(block.data as IImageCardBlock)}
+                    key={index}
+                />
+            );
+        case "textcontent":
+            return (
+                <TextContentBlock
+                    {...(block.data as ITextContentBlock)}
                     key={index}
                 />
             );

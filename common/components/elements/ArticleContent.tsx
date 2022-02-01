@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import tw from "twin.macro";
 import React from "react";
-import ReactMarkdown from "react-markdown";
+import TextContent from "./TextContent";
 
 const ArticleContent: React.FC<{ content: string }> = ({ content }) => (
-    <article tw="prose mx-auto font-serif p-5">
-        <ReactMarkdown>{content}</ReactMarkdown>
+    <article tw="mb-5">
+        <TextContent content={content} />
     </article>
 );
 

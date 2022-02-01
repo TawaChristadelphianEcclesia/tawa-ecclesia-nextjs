@@ -59,7 +59,7 @@ export interface ArticleList_articles_data_attributes {
   title: string;
   summary: string | null;
   publishedAt: any | null;
-  image: ArticleList_articles_data_attributes_image | null;
+  image: ArticleList_articles_data_attributes_image;
   categories: ArticleList_articles_data_attributes_categories | null;
   content: string | null;
 }
