@@ -11,6 +11,9 @@ import StandardHeaderBlock, {
 import RelatedArticlesBlock, {
     IRelatedArticlesBlock,
 } from "./RelatedArticlesBlock";
+import ArticleHighlightBlock, {
+    IArticleHighlightBlock,
+} from "./ArticleHighlightBlock";
 
 type ComponentType =
     | "hero"
@@ -19,7 +22,8 @@ type ComponentType =
     | "contact"
     | "imagecard"
     | "textcontent"
-    | "relatedarticles";
+    | "relatedarticles"
+    | "articlehighlight";
 
 export interface IBlock {
     component: ComponentType;
@@ -30,7 +34,8 @@ export interface IBlock {
         | IContactBlock
         | IImageCardBlock
         | ITextContentBlock
-        | IRelatedArticlesBlock;
+        | IRelatedArticlesBlock
+        | IArticleHighlightBlock;
 }
 
 interface IBlockManager {
@@ -80,6 +85,13 @@ const getBlockComponent = (block: IBlock, index: number) => {
             return (
                 <RelatedArticlesBlock
                     {...(block.data as IRelatedArticlesBlock)}
+                    key={index}
+                />
+            );
+        case "articlehighlight":
+            return (
+                <ArticleHighlightBlock
+                    {...(block.data as IArticleHighlightBlock)}
                     key={index}
                 />
             );

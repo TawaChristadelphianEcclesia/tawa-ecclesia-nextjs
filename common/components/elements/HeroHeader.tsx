@@ -51,6 +51,7 @@ const HeroHeader: React.FC<IHeroHeader> = ({
                 objectFit="cover"
                 placeholder="blur"
                 blurDataURL={imageBlurDataURL}
+                priority
             />
             <div
                 style={{

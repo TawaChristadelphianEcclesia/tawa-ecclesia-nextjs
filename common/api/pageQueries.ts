@@ -96,9 +96,9 @@ export const getHomePageData = async () => {
                                 ... on ComponentBlocksEventList {
                                     __typename
                                     maxShown
+                                    noEventsPlaceholder
                                     title
                                     filter
-                                    noEventsPlaceholder
                                     id
                                 }
                                 ... on ComponentBlocksContactForm {
@@ -144,6 +144,65 @@ export const getHomePageData = async () => {
                                         label
                                         target
                                         isExternal
+                                    }
+                                }
+                                ... on ComponentBlocksArticleHighlight {
+                                    __typename
+                                    title
+                                    replaceimage {
+                                        data {
+                                            id
+                                            attributes {
+                                                name
+                                                alternativeText
+                                                caption
+                                                width
+                                                height
+                                                formats
+                                                hash
+                                                ext
+                                                mime
+                                                size
+                                                url
+                                                previewUrl
+                                                provider
+                                                provider_metadata
+                                                createdAt
+                                                updatedAt
+                                            }
+                                        }
+                                    }
+                                    article {
+                                        data {
+                                            attributes {
+                                                slug
+                                                image {
+                                                    data {
+                                                        id
+                                                        attributes {
+                                                            name
+                                                            alternativeText
+                                                            caption
+                                                            width
+                                                            height
+                                                            formats
+                                                            hash
+                                                            ext
+                                                            mime
+                                                            size
+                                                            url
+                                                            previewUrl
+                                                            provider
+                                                            provider_metadata
+                                                            createdAt
+                                                            updatedAt
+                                                        }
+                                                    }
+                                                }
+                                                title
+                                                summary
+                                            }
+                                        }
                                     }
                                 }
                             }

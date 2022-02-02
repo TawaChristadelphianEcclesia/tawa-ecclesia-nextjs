@@ -15,6 +15,7 @@ export interface IImageCard {
     blurDataUrl?: string;
     alt: string;
     title: string;
+    subtitle?: string;
     body: string;
     leftLink?: ILinkData;
     rightLink?: ILinkData;
@@ -25,6 +26,7 @@ const ImageCard: React.FC<IImageCard> = ({
     alt,
     blurDataUrl,
     title,
+    subtitle,
     body,
     leftLink,
     rightLink,
@@ -37,20 +39,34 @@ const ImageCard: React.FC<IImageCard> = ({
                     src={src}
                     alt={alt}
                     layout="fill"
-                    // objectFit="fill"
+                    objectFit="contain"
+                    sizes="100%"
                     placeholder={blurDataUrl ? "blur" : "empty"}
                     blurDataURL={blurDataUrl}
                 />
             </div>
-            <div tw="flex-1">
-                <h2 tw="text-gray-900 font-bold text-2xl">{title}</h2>
+            <div tw="flex-1 md:pl-5 flex flex-col">
+                <div tw="mb-2">
+                    <h2 tw="text-gray-900 font-bold text-2xl">{title}</h2>
+                    {subtitle && <i>{subtitle}</i>}
+                </div>
                 <p>{body}</p>
-                {leftLink && (
-                    <Button href={leftLink.url}>{leftLink.label}</Button>
-                )}
-                {rightLink && (
-                    <Button href={rightLink.url}>{rightLink.label}</Button>
-                )}
+                <div tw="mt-auto flex justify-center gap-5">
+                    {leftLink && (
+                        <div>
+                            <Button href={leftLink.url} variant="contained">
+                                {leftLink.label}
+                            </Button>
+                        </div>
+                    )}
+                    {rightLink && (
+                        <div>
+                            <Button href={rightLink.url} variant="contained">
+                                {rightLink.label}
+                            </Button>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     </Card>

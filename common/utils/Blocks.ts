@@ -16,6 +16,7 @@ import {
     HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList,
     HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm,
     HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard,
+    HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight,
 } from "../api/__generated__/HomePageData";
 import { IBlock } from "../components/modules/blocks/BlockManager";
 import { getEventsData } from "./EventData";
@@ -177,13 +178,48 @@ export const mapAPIToBlock = async (
                         : [],
                 },
             };
+        case "ComponentBlocksArticleHighlight":
+            const apiArticleHighlightBlockData =
+                apiBlock as HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight;
+            return {
+                component: "articlehighlight" as IBlock["component"],
+                data: {
+                    title: apiArticleHighlightBlockData.title,
+                    subtitle:
+                        apiArticleHighlightBlockData.article?.data?.attributes
+                            ?.title,
+                    alt: apiArticleHighlightBlockData.replaceimage
+                        ? apiArticleHighlightBlockData.replaceimage.data
+                              ?.attributes?.alternativeText || ""
+                        : apiArticleHighlightBlockData.article?.data?.attributes
+                              ?.image?.data?.attributes!.alternativeText || "",
+                    src: apiArticleHighlightBlockData.replaceimage
+                        ? apiArticleHighlightBlockData.replaceimage.data
+                              ?.attributes?.url || ""
+                        : apiArticleHighlightBlockData.article?.data?.attributes
+                              ?.image?.data?.attributes!.url || "",
+                    blurDataUrl: apiArticleHighlightBlockData.replaceimage
+                        ? apiArticleHighlightBlockData.replaceimage.data
+                              ?.attributes?.formats?.thumbnail?.url || ""
+                        : apiArticleHighlightBlockData.article?.data?.attributes
+                              ?.image?.data?.attributes!.formats?.thumbnail
+                              ?.url || "",
+                    body:
+                        apiArticleHighlightBlockData.article?.data?.attributes
+                            ?.summary || "",
+                    leftLink: {
+                        label: "Read",
+                        url: getPathFromSlug(
+                            apiArticleHighlightBlockData.article?.data
+                                ?.attributes?.slug || "",
+                            "article"
+                        ),
+                    },
+                    rightLink: {
+                        label: "More",
+                        url: getPathFromSlug("", "article"),
+                    },
+                },
+            };
     }
 };
-
-// url: string;
-// title: string;
-// titleImage: IImageData;
-// summary: string;
-// tags: string[];
-// datePublished: Date;
-// readingTime: number;

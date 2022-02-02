@@ -38,7 +38,7 @@ const Button: React.FC<IButton> = ({
                 variant == "contained" && [
                     tw`px-4 py-2 uppercase text-sm text-white rounded-lg transition-all hover:shadow-md focus:shadow-md`,
                     color == undefined &&
-                        tw`bg-blue-400 hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-600`,
+                        tw`bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 active:bg-indigo-700`,
                     color == "success" &&
                         tw`bg-green-400 hover:bg-green-500 focus:bg-green-500 active:bg-green-600`,
                     color == "error" &&
