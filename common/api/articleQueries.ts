@@ -22,15 +22,6 @@ export const getArticleSlugs = async () => {
     return data;
 };
 
-// url: string;
-// title: string;
-// summary: string;
-// datePublished: Date;
-// readingTime: number;
-// titleImage: IImageData;
-
-// tags: string[];
-
 export const getArticleList = async () => {
     const { data } = await client.query<ArticleList>({
         query: gql`
