@@ -45,12 +45,12 @@ const ImageCard: React.FC<IImageCard> = ({
                     blurDataURL={blurDataUrl}
                 />
             </div>
-            <div tw="flex-1 md:pl-5 flex flex-col">
+            <div tw="flex-1 mt-5 md:mt-0 md:pl-5 flex flex-col">
                 <div tw="mb-2">
-                    <h2 tw="text-gray-900 font-bold text-2xl">{title}</h2>
-                    {subtitle && <i>{subtitle}</i>}
+                    <h2 tw="text-gray-900 text-3xl">{title}</h2>
+                    {subtitle && <i tw="text-gray-700">{subtitle}</i>}
                 </div>
-                <p>{body}</p>
+                <p tw="text-gray-900">{body}</p>
                 <div tw="mt-auto flex justify-center gap-5">
                     {leftLink && (
                         <div>
