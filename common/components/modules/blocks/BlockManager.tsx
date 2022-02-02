@@ -8,6 +8,9 @@ import TextContentBlock, { ITextContentBlock } from "./TextContentBlock";
 import StandardHeaderBlock, {
     IStandardHeaderBlock,
 } from "./StandardHeaderBlock";
+import RelatedArticlesBlock, {
+    IRelatedArticlesBlock,
+} from "./RelatedArticlesBlock";
 
 type ComponentType =
     | "hero"
@@ -15,7 +18,8 @@ type ComponentType =
     | "events"
     | "contact"
     | "imagecard"
-    | "textcontent";
+    | "textcontent"
+    | "relatedarticles";
 
 export interface IBlock {
     component: ComponentType;
@@ -25,11 +29,13 @@ export interface IBlock {
         | IEventsBlock
         | IContactBlock
         | IImageCardBlock
-        | ITextContentBlock;
+        | ITextContentBlock
+        | IRelatedArticlesBlock;
 }
 
 interface IBlockManager {
     blocks: IBlock[];
+    space?: boolean;
 }
 
 const getBlockComponent = (block: IBlock, index: number) => {
@@ -70,11 +76,18 @@ const getBlockComponent = (block: IBlock, index: number) => {
                     key={index}
                 />
             );
+        case "relatedarticles":
+            return (
+                <RelatedArticlesBlock
+                    {...(block.data as IRelatedArticlesBlock)}
+                    key={index}
+                />
+            );
     }
 };
 
-const BlockManager: React.FC<IBlockManager> = ({ blocks }) => (
-    <div tw="space-y-10 pb-10">
+const BlockManager: React.FC<IBlockManager> = ({ blocks, space = true }) => (
+    <div css={[space && tw`space-y-10 pb-10`]}>
         {blocks.map((block, index) => getBlockComponent(block, index))}
     </div>
 );

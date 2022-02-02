@@ -1,20 +1,12 @@
 import React from "react";
-import HeroHeader, { IHeroHeader } from "../elements/HeroHeader";
 import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
-import { ISeoData } from "../elements/Seo";
-import EventList, { IEventList } from "../elements/EventList";
-import Card from "../elements/Card";
 import ContentSection from "../elements/ContentSection";
-import ContactForm from "../elements/ContactForm";
-import ImageCard from "../elements/ImageCard";
 import { IArticleCard } from "../elements/ArticleCard";
 import ArticleList from "../elements/ArticleList";
 import TextHeader, { ITextHeader } from "../elements/TextHeader";
 import { IPageData } from "./types";
 
 type IArticlesPageData = IPageData & {
-    // headerData: IHeroHeader;
-    // eventData: IEventList;
     headerData: ITextHeader;
     articleData: IArticleCard[];
 };

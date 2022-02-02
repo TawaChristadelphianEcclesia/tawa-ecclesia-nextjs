@@ -4,9 +4,12 @@ import {
     getArticleHomePageData as getAPIArticleHomePageData,
     getArticleList,
 } from "../api/articleQueries";
+import { Article_articles_data_attributes_blocks } from "../api/__generated__/Article";
 import { ISeoData } from "../components/elements/Seo";
+import { IBlock } from "../components/modules/blocks/BlockManager";
 import { IArticleData } from "../components/templates/Article";
 import { IArticlesPage } from "../components/templates/ArticlesPage";
+import { mapAPIToBlock } from "./Blocks";
 import { getGlobalData } from "./GlobalData";
 import { getTextReadingTime } from "./ReadingTimeCalculator";
 import { getPathFromSlug } from "./SlugCalculator";
@@ -44,6 +47,16 @@ export const getArticleData = async (slug: string): Promise<IArticleData> => {
                     ?.thumbnail?.url || "",
         },
     };
+    const blocks = await Promise.all(
+        (pageAPIData?.blocks
+            ?.map(
+                async (block) =>
+                    await mapAPIToBlock(
+                        block as Article_articles_data_attributes_blocks
+                    )
+            )
+            .filter((block) => block !== undefined) as Promise<IBlock>[]) || []
+    );
     const pageData: IArticleData["pageData"] = {
         seo,
         title: pageAPIData?.title || "",
@@ -53,6 +66,7 @@ export const getArticleData = async (slug: string): Promise<IArticleData> => {
         imageBlurDataURL:
             pageAPIData?.image?.data?.attributes?.formats?.thumbnail?.url || "",
         alt: pageAPIData?.image?.data?.attributes?.alternativeText || undefined,
+        blocks,
     };
     const globalData = await getGlobalData();
     return { pageData, globalData };

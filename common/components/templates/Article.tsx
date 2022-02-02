@@ -5,6 +5,7 @@ import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
 import ReactMarkdown from "react-markdown";
 import ArticleContent from "../elements/ArticleContent";
 import StandardHeader from "../elements/StandardHeader";
+import BlockManager, { IBlock } from "../modules/blocks/BlockManager";
 
 type IArticlePageData = IPageData & {
     title: string;
@@ -13,6 +14,7 @@ type IArticlePageData = IPageData & {
     image: string;
     imageBlurDataURL: string;
     alt?: string;
+    blocks?: IBlock[];
 };
 
 export interface IArticleData {
@@ -30,6 +32,7 @@ const Article: React.FC<IArticleData> = ({ globalData, pageData }) => (
             alt={pageData.alt}
         />
         <ArticleContent content={pageData.content} />
+        {pageData.blocks && <BlockManager blocks={pageData.blocks} space={false} />}
     </DefaultLayout>
 );
 

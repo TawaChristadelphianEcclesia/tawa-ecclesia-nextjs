@@ -140,6 +140,53 @@ export const getArticleData = async (slug: string) => {
                                 }
                             }
                             content
+                            blocks {
+                                ... on ComponentBlocksRelatedArticles {
+                                    __typename
+                                    Title
+                                    articles {
+                                        data {
+                                            attributes {
+                                                title
+                                                slug
+                                                image {
+                                                    data {
+                                                        id
+                                                        attributes {
+                                                            name
+                                                            alternativeText
+                                                            caption
+                                                            width
+                                                            height
+                                                            formats
+                                                            ext
+                                                            hash
+                                                            mime
+                                                            size
+                                                            url
+                                                            previewUrl
+                                                            provider
+                                                            provider_metadata
+                                                            createdAt
+                                                            updatedAt
+                                                        }
+                                                    }
+                                                }
+                                                summary
+                                                content
+                                                categories {
+                                                    data {
+                                                        attributes {
+                                                            name
+                                                        }
+                                                    }
+                                                }
+                                                publishedAt
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

@@ -1,4 +1,10 @@
 import {
+    Article_articles_data,
+    Article_articles_data_attributes,
+    Article_articles_data_attributes_blocks,
+    Article_articles_data_attributes_blocks_ComponentBlocksRelatedArticles,
+} from "../api/__generated__/Article";
+import {
     GeneralPage_pages_data_attributes_blocks,
     GeneralPage_pages_data_attributes_blocks_ComponentBlocksHero,
     GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader,
@@ -13,11 +19,14 @@ import {
 } from "../api/__generated__/HomePageData";
 import { IBlock } from "../components/modules/blocks/BlockManager";
 import { getEventsData } from "./EventData";
+import { getTextReadingTime } from "./ReadingTimeCalculator";
+import { getPathFromSlug } from "./SlugCalculator";
 
 export const mapAPIToBlock = async (
     apiBlock:
         | HomePageData_home_data_attributes_Blocks
         | GeneralPage_pages_data_attributes_blocks
+        | Article_articles_data_attributes_blocks
 ): Promise<IBlock | undefined> => {
     switch (apiBlock.__typename) {
         case "ComponentBlocksHero":
@@ -121,5 +130,60 @@ export const mapAPIToBlock = async (
                             ?.formats?.thumbnail?.url,
                 },
             };
+        case "ComponentBlocksRelatedArticles":
+            const apiRelatedArticlesBlockData =
+                apiBlock as Article_articles_data_attributes_blocks_ComponentBlocksRelatedArticles;
+            return {
+                component: "relatedarticles" as IBlock["component"],
+                data: {
+                    title: apiRelatedArticlesBlockData.Title,
+                    articles: apiRelatedArticlesBlockData.articles
+                        ? apiRelatedArticlesBlockData.articles?.data.map(
+                              ({ attributes }) => ({
+                                  url: getPathFromSlug(
+                                      attributes?.slug as string,
+                                      "article"
+                                  ),
+                                  title: attributes!.title,
+                                  titleImage: {
+                                      alt:
+                                          attributes?.image?.data?.attributes!
+                                              .alternativeText || "",
+                                      url:
+                                          attributes?.image?.data?.attributes!
+                                              .url || "",
+                                      blurDataURL:
+                                          attributes?.image?.data?.attributes!
+                                              .formats?.thumbnail?.url || "",
+                                  },
+                                  summary: attributes!.summary ?? "",
+                                  tags: attributes!.categories?.data
+                                      .filter(
+                                          (category) =>
+                                              category.attributes?.name
+                                      )
+                                      .map(
+                                          (category) =>
+                                              category.attributes?.name || ""
+                                      ) as string[],
+                                  datePublished: new Date(
+                                      attributes!.publishedAt
+                                  ),
+                                  readingTime: getTextReadingTime(
+                                      attributes!.content || ""
+                                  ),
+                              })
+                          )
+                        : [],
+                },
+            };
     }
 };
+
+// url: string;
+// title: string;
+// titleImage: IImageData;
+// summary: string;
+// tags: string[];
+// datePublished: Date;
+// readingTime: number;
