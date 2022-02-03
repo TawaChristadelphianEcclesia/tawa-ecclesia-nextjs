@@ -20,6 +20,7 @@
     "@emotion/react": "^11.7.1",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.6.0",
+    "@heroicons/react": "^1.0.5",
     "@prismicio/client": "^5.1.0",
     "@prismicio/types": "^0.1.13",
     "@sendgrid/mail": "^7.6.0",

@@ -8,8 +8,9 @@ interface IButton {
     navBarLink?: boolean;
     navBarBrand?: boolean;
     paginationButton?: boolean;
+    iconButton?: boolean;
     color?: "success" | "error";
-    variant?: "contained";
+    variant?: "contained" | "transparent";
     href?: string;
     onClick?: React.MouseEventHandler<HTMLElement>;
 }
@@ -20,6 +21,7 @@ const Button: React.FC<IButton> = ({
     navBarLink,
     navBarBrand,
     paginationButton,
+    iconButton,
     variant,
     color,
     children,
@@ -35,6 +37,7 @@ const Button: React.FC<IButton> = ({
                     tw`hover:bg-gray-100 focus:bg-gray-100 hover:text-gray-900 focus:text-gray-900 px-4 py-2 text-gray-900 rounded sm:text-2xl font-semibold transition-all`,
                 paginationButton &&
                     tw`hover:bg-blue-300 focus:bg-blue-300 active:bg-blue-500 hover:text-white focus:text-white active:text-white hover:shadow-md focus:shadow-md px-4 py-2 uppercase text-sm text-gray-700 rounded-lg transition-all`,
+                iconButton && tw`px-2 py-2 rounded-full`,
                 variant == "contained" && [
                     tw`px-4 py-2 uppercase text-sm text-white rounded-lg transition-all hover:shadow-md focus:shadow-md`,
                     color == undefined &&
@@ -44,6 +47,8 @@ const Button: React.FC<IButton> = ({
                     color == "error" &&
                         tw`bg-red-400 hover:bg-red-500 focus:bg-red-500 active:bg-red-600`,
                 ],
+                variant == "transparent" &&
+                    tw`hover:bg-indigo-600 focus:bg-indigo-600 active:bg-indigo-700 hover:bg-opacity-50 focus:bg-opacity-50 active:bg-opacity-50 transition-all`,
                 // primary &&
                 //     tw`bg-blue-500 shadow-md hover:shadow-lg focus:shadow-lg active:shadow-lg active:bg-blue-700 text-white px-4 py-2 uppercase text-sm rounded-lg transition-all`,
             ]}
