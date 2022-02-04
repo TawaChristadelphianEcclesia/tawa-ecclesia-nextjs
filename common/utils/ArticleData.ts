@@ -12,6 +12,7 @@ import { IArticlesPage } from "../components/templates/ArticlesPage";
 import { mapAPIToBlock } from "./Blocks";
 import { getGlobalData } from "./GlobalData";
 import { getTextReadingTime } from "./ReadingTimeCalculator";
+import { getSeoData } from "./SeoData";
 import { getPathFromSlug } from "./SlugCalculator";
 
 export const getAllArticleSlugs = async () => {
@@ -27,26 +28,7 @@ export const getAllArticleSlugs = async () => {
 
 export const getArticleData = async (slug: string): Promise<IArticleData> => {
     const pageAPIData = await (await getAPIArticleData(slug))?.attributes;
-    const seo: ISeoData = {
-        metaTitle: pageAPIData?.seo?.metaTitle || "",
-        metaDescription: pageAPIData?.seo?.metaDescription || "",
-        metaTags:
-            pageAPIData?.seo?.meta?.map((meta) => ({
-                name: meta?.name || "",
-                content: meta?.content || "",
-            })) || [],
-        preventIndexing: pageAPIData?.seo?.preventIndexing || false,
-        structuredData: pageAPIData?.seo?.structuredData,
-        metaImage: {
-            url: pageAPIData?.seo?.metaImage?.data?.attributes?.url || "",
-            alt:
-                pageAPIData?.seo?.metaImage?.data?.attributes
-                    ?.alternativeText || "",
-            blurDataUrl:
-                pageAPIData?.seo?.metaImage?.data?.attributes?.formats
-                    ?.thumbnail?.url || "",
-        },
-    };
+    const seo = getSeoData(pageAPIData?.seo);
     const blocks = await Promise.all(
         (pageAPIData?.blocks
             ?.map(

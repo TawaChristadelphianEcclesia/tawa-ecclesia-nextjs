@@ -6,9 +6,7 @@ import Image from "next/image";
 export interface IHeroHeader {
     title: string | ReactNode;
     subtitle: string | ReactNode;
-    image: string;
-    imageBlurDataURL: string;
-    alt?: string;
+    image: IImageData;
     textColor?: string;
     textPosition?:
         | "topleft"
@@ -26,8 +24,6 @@ const HeroHeader: React.FC<IHeroHeader> = ({
     title,
     subtitle,
     image,
-    imageBlurDataURL,
-    alt,
     textColor,
     textPosition,
 }) => {
@@ -44,13 +40,13 @@ const HeroHeader: React.FC<IHeroHeader> = ({
             }}
         >
             <Image
-                src={image}
-                alt={alt || ""}
+                src={image.url}
+                alt={image.alt}
                 layout="fill"
                 sizes="100%"
                 objectFit="cover"
                 placeholder="blur"
-                blurDataURL={imageBlurDataURL}
+                blurDataURL={image.blurDataUrl}
                 priority
             />
             <div

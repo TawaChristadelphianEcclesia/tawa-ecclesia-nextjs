@@ -19,6 +19,7 @@ import {
     HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight,
     HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight,
 } from "../api/__generated__/HomePageData";
+import { IArticleHighlightBlock } from "../components/modules/blocks/ArticleHighlightBlock";
 import { IBlock } from "../components/modules/blocks/BlockManager";
 import { IVideoHighlightBlock } from "../components/modules/blocks/VideoHighlightBlock";
 import { getEventsData } from "./EventData";
@@ -39,13 +40,9 @@ export const mapAPIToBlock = async (
             return {
                 component: "hero",
                 data: {
-                    alt:
-                        apiHeroData.image?.data?.attributes?.alternativeText ||
-                        "",
-                    image: apiHeroData.image?.data?.attributes?.url || "",
-                    imageBlurDataURL:
-                        apiHeroData.image?.data?.attributes?.formats?.thumbnail
-                            ?.url || "",
+                    image: getImageData(
+                        apiHeroData.image?.data?.attributes ?? undefined
+                    ),
                     title: apiHeroData.title,
                     subtitle: apiHeroData.text,
                     textColor: apiHeroData.color || undefined,
@@ -82,17 +79,9 @@ export const mapAPIToBlock = async (
                 data: {
                     title: apiImageBlockData.title,
                     body: apiImageBlockData.body,
-                    image: {
-                        alt:
-                            apiImageBlockData.image?.data?.attributes
-                                ?.alternativeText || "",
-                        url:
-                            apiImageBlockData.image?.data?.attributes?.url ||
-                            "",
-                        blurDataUrl:
-                            apiImageBlockData.image?.data?.attributes?.formats
-                                ?.thumbnail?.url || "",
-                    },
+                    image: getImageData(
+                        apiImageBlockData.image?.data?.attributes ?? undefined
+                    ),
                     leftLink: apiImageBlockData.leftLink
                         ? {
                               url: apiImageBlockData.leftLink?.href,
@@ -128,17 +117,10 @@ export const mapAPIToBlock = async (
                 data: {
                     title: apiStandardHeaderBlockData.title,
                     summary: apiStandardHeaderBlockData.summary ?? undefined,
-                    image: {
-                        alt:
-                            apiStandardHeaderBlockData.headerImage?.data
-                                ?.attributes?.alternativeText || "",
-                        url:
-                            apiStandardHeaderBlockData.headerImage?.data
-                                ?.attributes?.url || "",
-                        blurDataUrl:
-                            apiStandardHeaderBlockData.headerImage?.data
-                                ?.attributes?.formats?.thumbnail?.url,
-                    },
+                    image: getImageData(
+                        apiStandardHeaderBlockData.headerImage?.data
+                            ?.attributes ?? undefined
+                    ),
                 },
             };
         case "ComponentBlocksRelatedArticles":
@@ -156,17 +138,11 @@ export const mapAPIToBlock = async (
                                       "article"
                                   ),
                                   title: attributes!.title,
-                                  titleImage: {
-                                      alt:
-                                          attributes?.image?.data?.attributes!
-                                              .alternativeText || "",
-                                      url:
-                                          attributes?.image?.data?.attributes!
-                                              .url || "",
-                                      blurDataURL:
-                                          attributes?.image?.data?.attributes!
-                                              .formats?.thumbnail?.url || "",
-                                  },
+                                  titleImage: getImageData(
+                                      attributes?.image?.data?.attributes ??
+                                          undefined,
+                                      "small"
+                                  ),
                                   summary: attributes!.summary ?? "",
                                   tags: attributes!.categories?.data
                                       .filter(
@@ -198,26 +174,10 @@ export const mapAPIToBlock = async (
                     subtitle:
                         apiArticleHighlightBlockData.article?.data?.attributes
                             ?.title,
-                    image: {
-                        alt: apiArticleHighlightBlockData.replaceimage
-                            ? apiArticleHighlightBlockData.replaceimage.data
-                                  ?.attributes?.alternativeText || ""
-                            : apiArticleHighlightBlockData.article?.data
-                                  ?.attributes?.image?.data?.attributes!
-                                  .alternativeText || "",
-                        url: apiArticleHighlightBlockData.replaceimage
-                            ? apiArticleHighlightBlockData.replaceimage.data
-                                  ?.attributes?.url || ""
-                            : apiArticleHighlightBlockData.article?.data
-                                  ?.attributes?.image?.data?.attributes!.url ||
-                              "",
-                        blurDataUrl: apiArticleHighlightBlockData.replaceimage
-                            ? apiArticleHighlightBlockData.replaceimage.data
-                                  ?.attributes?.formats?.thumbnail?.url || ""
-                            : apiArticleHighlightBlockData.article?.data
-                                  ?.attributes?.image?.data?.attributes!.formats
-                                  ?.thumbnail?.url || "",
-                    },
+                    image: getImageData(
+                        apiArticleHighlightBlockData?.replaceimage?.data
+                            ?.attributes ?? undefined
+                    ),
                     body:
                         apiArticleHighlightBlockData.article?.data?.attributes
                             ?.summary || "",
@@ -233,7 +193,7 @@ export const mapAPIToBlock = async (
                         label: "More",
                         url: getPathFromSlug("", "article"),
                     },
-                },
+                } as IArticleHighlightBlock,
             };
         case "ComponentBlocksVideoHighlight":
             const apiVideoHighlightBlockData =
@@ -265,9 +225,3 @@ export const mapAPIToBlock = async (
             };
     }
 };
-
-// url: string;
-// image: IImageData;
-// title: string;
-// subtitle?: string;
-// body: string;
