@@ -17,7 +17,7 @@ const Footer: React.FC<IFooterData> = ({
     footerIcon,
 }) => {
     return (
-        <div tw="w-full bg-gray-800">
+        <div tw="w-full bg-gray-800 mt-auto">
             <div tw="max-w-screen-sm mx-auto divide-y divide-gray-400">
                 <FooterLinkColumnGroup footerColumns={footerColumns} />
                 <FooterText text={footerText} icon={footerIcon} />

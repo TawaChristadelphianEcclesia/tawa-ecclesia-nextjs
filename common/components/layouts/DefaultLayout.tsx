@@ -24,7 +24,7 @@ const DefaultLayout: React.FC<IDefaultLayout> = ({
     children,
     ...rest
 }) => (
-    <div {...rest}>
+    <div {...rest} tw="min-h-screen flex flex-col">
         <GlobalStyles />
         <Seo {...seo} />
         <HeaderNavBar {...headerData} />
