@@ -23,7 +23,7 @@ const VideoHighlightBlock: React.FC<IVideoHighlightBlock> = ({
     body,
     url,
 }) => {
-    const [overlayShowing, setOverlayShowing] = React.useState(true);
+    const [overlayShowing, setOverlayShowing] = React.useState(false);
 
     return (
         <ContentSection>
