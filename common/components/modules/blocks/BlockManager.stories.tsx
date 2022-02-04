@@ -18,8 +18,10 @@ Default.args = {
         {
             component: "hero",
             data: {
-                image: "bible_photo.jpg",
-                imageBlurDataURL: "bible_photo.jpg",
+                image: {
+                    url: "bible_photo.jpg",
+                    blurDataUrl: "bible_photo.jpg",
+                },
                 title: "Tawa Christadelphians",
                 subtitle:
                     "The fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance: against such there is no law.",

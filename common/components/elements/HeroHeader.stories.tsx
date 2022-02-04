@@ -17,9 +17,11 @@ Default.args = {
     title: "Tawa Christadelphians",
     subtitle:
         "The fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance: against such there is no law.",
-    image: "bible_photo.jpg",
-    imageBlurDataURL: "bible_photo.jpg",
-    alt: "alt text",
+    image: {
+        url: "bible_photo.jpg",
+        blurDataUrl: "bible_photo.jpg",
+        alt: "alt text",
+    },
     textColor: "white",
 };
 
