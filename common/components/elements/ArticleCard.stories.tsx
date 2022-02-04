@@ -19,7 +19,7 @@ Default.args = {
     titleImage: {
         url: "bible_photo.jpg",
         alt: "bible photo",
-        blurDataURL: "bible_photo.jpg",
+        blurDataUrl: "bible_photo.jpg",
     },
     summary: "Who is God, and what is His purpose with the earth?",
     tags: [],

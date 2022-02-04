@@ -258,7 +258,95 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticle
   article: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article | null;
 }
 
-export type HomePageData_home_data_attributes_Blocks = HomePageData_home_data_attributes_Blocks_Error | HomePageData_home_data_attributes_Blocks_ComponentBlocksHero | HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList | HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm | HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard | HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight;
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image_data_attributes {
+  __typename: "UploadFile";
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  width: number | null;
+  height: number | null;
+  formats: any | null;
+  hash: string;
+  ext: string | null;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: string | null;
+  provider: string;
+  provider_metadata: any | null;
+  createdAt: any | null;
+  updatedAt: any | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image_data {
+  __typename: "UploadFileEntity";
+  id: string | null;
+  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image_data_attributes | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image {
+  __typename: "UploadFileEntityResponse";
+  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image_data | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes {
+  __typename: "Video";
+  title: string;
+  subtitle: string | null;
+  description: string | null;
+  url: string | null;
+  image: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data {
+  __typename: "VideoEntity";
+  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video {
+  __typename: "VideoEntityResponse";
+  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_replaceImage_data_attributes {
+  __typename: "UploadFile";
+  name: string;
+  alternativeText: string | null;
+  caption: string | null;
+  width: number | null;
+  height: number | null;
+  formats: any | null;
+  hash: string;
+  ext: string | null;
+  mime: string;
+  size: number;
+  url: string;
+  previewUrl: string | null;
+  provider: string;
+  provider_metadata: any | null;
+  createdAt: any | null;
+  updatedAt: any | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_replaceImage_data {
+  __typename: "UploadFileEntity";
+  id: string | null;
+  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_replaceImage_data_attributes | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_replaceImage {
+  __typename: "UploadFileEntityResponse";
+  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_replaceImage_data | null;
+}
+
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight {
+  __typename: "ComponentBlocksVideoHighlight";
+  title: string;
+  video: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video | null;
+  replaceImage: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_replaceImage | null;
+}
+
+export type HomePageData_home_data_attributes_Blocks = HomePageData_home_data_attributes_Blocks_Error | HomePageData_home_data_attributes_Blocks_ComponentBlocksHero | HomePageData_home_data_attributes_Blocks_ComponentBlocksEventList | HomePageData_home_data_attributes_Blocks_ComponentBlocksContactForm | HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard | HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight | HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight;
 
 export interface HomePageData_home_data_attributes {
   __typename: "Home";

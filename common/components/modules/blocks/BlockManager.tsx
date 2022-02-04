@@ -14,6 +14,7 @@ import RelatedArticlesBlock, {
 import ArticleHighlightBlock, {
     IArticleHighlightBlock,
 } from "./ArticleHighlightBlock";
+import VideoHighlightBlock, { IVideoHighlightBlock } from "./VideoHighlightBlock";
 
 type ComponentType =
     | "hero"
@@ -23,7 +24,8 @@ type ComponentType =
     | "imagecard"
     | "textcontent"
     | "relatedarticles"
-    | "articlehighlight";
+    | "articlehighlight"
+    | "videohighlight";
 
 export interface IBlock {
     component: ComponentType;
@@ -35,7 +37,8 @@ export interface IBlock {
         | IImageCardBlock
         | ITextContentBlock
         | IRelatedArticlesBlock
-        | IArticleHighlightBlock;
+        | IArticleHighlightBlock
+        | IVideoHighlightBlock;
 }
 
 interface IBlockManager {
@@ -92,6 +95,13 @@ const getBlockComponent = (block: IBlock, index: number) => {
             return (
                 <ArticleHighlightBlock
                     {...(block.data as IArticleHighlightBlock)}
+                    key={index}
+                />
+            );
+        case "videohighlight":
+            return (
+                <VideoHighlightBlock
+                    {...(block.data as IVideoHighlightBlock)}
                     key={index}
                 />
             );

@@ -42,7 +42,7 @@ export const getArticleData = async (slug: string): Promise<IArticleData> => {
             alt:
                 pageAPIData?.seo?.metaImage?.data?.attributes
                     ?.alternativeText || "",
-            blurDataURL:
+            blurDataUrl:
                 pageAPIData?.seo?.metaImage?.data?.attributes?.formats
                     ?.thumbnail?.url || "",
         },
@@ -62,10 +62,15 @@ export const getArticleData = async (slug: string): Promise<IArticleData> => {
         title: pageAPIData?.title || "",
         summary: pageAPIData?.summary || "",
         content: pageAPIData?.content || "",
-        image: pageAPIData?.image?.data?.attributes?.url || "",
-        imageBlurDataURL:
-            pageAPIData?.image?.data?.attributes?.formats?.thumbnail?.url || "",
-        alt: pageAPIData?.image?.data?.attributes?.alternativeText || undefined,
+        image: {
+            url: pageAPIData?.image?.data?.attributes?.url || "",
+            blurDataUrl:
+                pageAPIData?.image?.data?.attributes?.formats?.thumbnail?.url ||
+                "",
+            alt:
+                pageAPIData?.image?.data?.attributes?.alternativeText ||
+                undefined,
+        },
         blocks,
     };
     const globalData = await getGlobalData();
@@ -89,7 +94,7 @@ export const getArticleHomePageData = async (): Promise<IArticlesPage> => {
         metaImage: {
             url: data?.seo?.metaImage?.data?.attributes?.url || "",
             alt: data?.seo?.metaImage?.data?.attributes?.alternativeText || "",
-            blurDataURL:
+            blurDataUrl:
                 data?.seo?.metaImage?.data?.attributes?.formats?.thumbnail
                     ?.url || "",
         },
@@ -104,7 +109,7 @@ export const getArticleHomePageData = async (): Promise<IArticlesPage> => {
             alt:
                 articleData?.attributes?.image?.data?.attributes
                     ?.alternativeText || "",
-            blurDataURL:
+            blurDataUrl:
                 articleData?.attributes?.image?.data?.attributes?.formats
                     ?.thumbnail?.url || "",
         },

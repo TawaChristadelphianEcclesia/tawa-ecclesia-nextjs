@@ -19,8 +19,11 @@ const Template: ComponentStory<typeof ImageCard> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-    src: "undraw_podcast.svg",
-    alt: "postcast illustration",
+    image: {
+        url: "undraw_podcast.svg",
+        blurDataUrl: "undraw_podcast.svg",
+        alt: "postcast illustration",
+    },
     title: "Podcast",
     body: "Interested in the truth of the bible? Join us as we discuss a range of biblical topics.",
     children: (

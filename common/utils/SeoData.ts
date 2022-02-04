@@ -16,7 +16,7 @@ export const getSeoData = (
     metaImage: {
         url: apiSeoData?.metaImage?.data?.attributes?.url || "",
         alt: apiSeoData?.metaImage?.data?.attributes?.alternativeText || "",
-        blurDataURL:
+        blurDataUrl:
             apiSeoData?.metaImage?.data?.attributes?.formats?.thumbnail?.url ||
             "",
     },

@@ -125,7 +125,7 @@ export async function getHomePageData(): Promise<IHomePageData> {
         image: {
             url: (homepage.data as any).hero_image.url,
             alt: (homepage.data as any).hero_image.alt,
-            blurDataURL: plaiceholderData.base64,
+            blurDataUrl: plaiceholderData.base64,
         },
         textColor: (homepage.data as any).title_color,
         showEvents: (homepage.data as any).show_events,
@@ -178,7 +178,7 @@ export async function getPageData(uid: string): Promise<IPageData> {
         heroImage: {
             url: (pageData.data as any).hero_image.url,
             alt: (pageData.data as any).hero_image.alt,
-            blurDataURL: plaiceholderData.base64,
+            blurDataUrl: plaiceholderData.base64,
         },
         headingType: (pageData.data as any).hero_display,
         textColor: (pageData.data as any).title_color,

@@ -205,6 +205,66 @@ export const getHomePageData = async () => {
                                         }
                                     }
                                 }
+                                ... on ComponentBlocksVideoHighlight {
+                                    __typename
+                                    title
+                                    video {
+                                        data {
+                                            attributes {
+                                                title
+                                                subtitle
+                                                description
+                                                url
+                                                image {
+                                                    data {
+                                                        id
+                                                        attributes {
+                                                            name
+                                                            alternativeText
+                                                            caption
+                                                            width
+                                                            height
+                                                            formats
+                                                            hash
+                                                            ext
+                                                            mime
+                                                            size
+                                                            url
+                                                            previewUrl
+                                                            provider
+                                                            provider_metadata
+                                                            createdAt
+                                                            updatedAt
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    replaceImage {
+                                        data {
+                                            id
+                                            attributes {
+                                                name
+                                                alternativeText
+                                                caption
+                                                width
+                                                height
+                                                formats
+                                                hash
+                                                ext
+                                                mime
+                                                size
+                                                url
+                                                previewUrl
+                                                provider
+                                                provider_metadata
+                                                createdAt
+                                                updatedAt
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

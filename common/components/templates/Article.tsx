@@ -11,9 +11,7 @@ type IArticlePageData = IPageData & {
     title: string;
     summary: string;
     content: string;
-    image: string;
-    imageBlurDataURL: string;
-    alt?: string;
+    image: IImageData;
     blocks?: IBlock[];
 };
 
@@ -28,11 +26,11 @@ const Article: React.FC<IArticleData> = ({ globalData, pageData }) => (
             title={pageData.title}
             summary={pageData.summary}
             image={pageData.image}
-            imageBlurDataURL={pageData.imageBlurDataURL}
-            alt={pageData.alt}
         />
         <ArticleContent content={pageData.content} />
-        {pageData.blocks && <BlockManager blocks={pageData.blocks} space={false} />}
+        {pageData.blocks && (
+            <BlockManager blocks={pageData.blocks} space={false} />
+        )}
     </DefaultLayout>
 );
 

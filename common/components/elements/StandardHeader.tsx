@@ -7,24 +7,20 @@ import ReactMarkdown from "react-markdown";
 export interface IStandardHeader {
     title: string;
     summary?: string;
-    image?: string;
-    imageBlurDataURL?: string;
-    alt?: string;
+    image: IImageData;
 }
 
 const StandardHeader: React.FC<IStandardHeader> = ({
     title,
     summary,
     image,
-    imageBlurDataURL,
-    alt,
 }) => (
     <div tw="pt-8 max-w-screen-sm mx-auto px-5">
         <h1 tw="text-4xl font-medium font-serif pb-6">{title}</h1>
         <p tw="sm:text-xl text-gray-600 italic pb-6">
             {summary && <ReactMarkdown>{summary}</ReactMarkdown>}
         </p>
-        {image && imageBlurDataURL && (
+        {image && (
             <div
                 tw="aspect-w-16 aspect-h-9 mb-6"
                 style={{
@@ -32,12 +28,12 @@ const StandardHeader: React.FC<IStandardHeader> = ({
                 }}
             >
                 <Image
-                    src={image}
-                    alt={alt || ""}
+                    src={image.url}
+                    alt={image.alt || ""}
                     layout="fill"
                     objectFit="cover"
                     placeholder="blur"
-                    blurDataURL={imageBlurDataURL}
+                    blurDataURL={image.blurDataUrl}
                 />
             </div>
         )}

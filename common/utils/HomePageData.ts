@@ -36,7 +36,7 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
             alt:
                 pageAPIData?.seo?.metaImage?.data?.attributes
                     ?.alternativeText || "",
-            blurDataURL:
+            blurDataUrl:
                 pageAPIData?.seo?.metaImage?.data?.attributes?.formats
                     ?.thumbnail?.url || "",
         },
