@@ -74,7 +74,6 @@ export const mapAPIToBlock = async (
         case "ComponentBlocksImageCard":
             const apiImageBlockData =
                 apiBlock as HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCard;
-            console.log(apiImageBlockData);
             return {
                 component: "imagecard" as IBlock["component"],
                 data: {
