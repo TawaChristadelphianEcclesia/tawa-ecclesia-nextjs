@@ -16,8 +16,8 @@ const StandardHeader: React.FC<IStandardHeader> = ({
     image,
 }) => (
     <div tw="pt-8 max-w-screen-sm mx-auto px-5">
-        <h1 tw="text-4xl font-medium font-serif pb-6">{title}</h1>
-        <p tw="sm:text-xl text-gray-600 italic pb-6">
+        <h1 tw="text-3xl sm:text-4xl font-medium font-serif pb-6">{title}</h1>
+        <p tw="text-lg sm:text-xl text-gray-600 italic pb-6">
             {summary && <ReactMarkdown>{summary}</ReactMarkdown>}
         </p>
         {image && (

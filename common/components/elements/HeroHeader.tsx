@@ -62,8 +62,8 @@ const HeroHeader: React.FC<IHeroHeader> = ({
                         : { bottom: 0 }),
                 }}
             >
-                <h1 tw="text-5xl sm:text-7xl font-bold font-serif">{title}</h1>
-                <p tw="sm:text-2xl">{subtitle}</p>
+                <h1 tw="text-3xl sm:text-5xl lg:text-7xl font-bold font-serif">{title}</h1>
+                <p tw="text-lg sm:text-2xl lg:text-4xl">{subtitle}</p>
             </div>
         </div>
     );

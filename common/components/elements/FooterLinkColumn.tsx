@@ -12,18 +12,14 @@ export interface IFooterLinkColumn {
 const FooterLinkColumn: React.FC<IFooterLinkColumn> = ({ title, links }) => {
     return (
         <li tw="space-y-2 py-4">
-                <h2 tw="uppercase text-gray-200 tracking-wide font-semibold">
-                    {title}
-                </h2>
-                <ul tw="space-y-2">
-                    {links.map((link, index) => (
-                        <FooterLink
-                            url={link.url}
-                            label={link.label}
-                            key={index}
-                        />
-                    ))}
-                </ul>
+            <h2 tw="uppercase text-gray-200 tracking-wide font-semibold">
+                {title}
+            </h2>
+            <ul tw="space-y-2 grid justify-items-center sm:justify-items-start">
+                {links.map((link, index) => (
+                    <FooterLink url={link.url} label={link.label} key={index} />
+                ))}
+            </ul>
         </li>
     );
 };
