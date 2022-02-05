@@ -46,12 +46,12 @@ const ArticleCard: React.FC<IArticleCard> = ({
                 <div tw="flex-initial w-48 justify-self-end hidden sm:block">
                     <div tw="aspect-w-3 aspect-h-2">
                         <Image
-                            src={titleImage.url}
+                            src={titleImage.src}
                             alt={titleImage.alt || ""}
                             layout="fill"
                             objectFit="cover"
                             placeholder="blur"
-                            blurDataURL={titleImage.blurDataUrl}
+                            blurDataURL={titleImage.blurDataURL}
                         />
                     </div>
                 </div>

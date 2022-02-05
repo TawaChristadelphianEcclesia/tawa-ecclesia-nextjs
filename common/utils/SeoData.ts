@@ -14,9 +14,9 @@ export const getSeoData = (
     preventIndexing: apiSeoData?.preventIndexing || false,
     structuredData: apiSeoData?.structuredData || "string",
     metaImage: {
-        url: apiSeoData?.metaImage?.data?.attributes?.url || "",
+        src: apiSeoData?.metaImage?.data?.attributes?.url || "",
         alt: apiSeoData?.metaImage?.data?.attributes?.alternativeText || "",
-        blurDataUrl:
+        blurDataURL:
             apiSeoData?.metaImage?.data?.attributes?.formats?.thumbnail?.url ||
             "",
     },

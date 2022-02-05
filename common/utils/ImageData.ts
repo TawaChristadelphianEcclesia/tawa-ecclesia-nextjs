@@ -13,9 +13,9 @@ export const getImageData = (
     const data = attributes
         ? {
               alt: attributes?.alternativeText || "",
-              url: imageUrl,
-              blurDataUrl: attributes?.formats?.thumbnail?.url || "",
+              src: imageUrl,
+              blurDataURL: attributes?.formats?.thumbnail?.url || "",
           }
-        : { alt: "", url: "", blurDataUrl: "" };
+        : { src: "", url: "", blurDataURL: "" };
     return data;
 };

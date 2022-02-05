@@ -32,11 +32,11 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
         preventIndexing: pageAPIData?.seo?.preventIndexing || false,
         structuredData: pageAPIData?.seo?.structuredData,
         metaImage: {
-            url: pageAPIData?.seo?.metaImage?.data?.attributes?.url || "",
+            src: pageAPIData?.seo?.metaImage?.data?.attributes?.url || "",
             alt:
                 pageAPIData?.seo?.metaImage?.data?.attributes
                     ?.alternativeText || "",
-            blurDataUrl:
+            blurDataURL:
                 pageAPIData?.seo?.metaImage?.data?.attributes?.formats
                     ?.thumbnail?.url || "",
         },
@@ -54,7 +54,7 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
             siteTitle: globalAPIData?.SiteTitle || "",
             siteLogo: globalAPIData?.navigation?.logo
                 ? {
-                      url:
+                      src:
                           globalAPIData?.navigation?.logo?.data?.attributes
                               ?.url || "",
                   }
@@ -82,7 +82,7 @@ export const getHomePageProps = async (): Promise<IHomePageTemplate> => {
                 })) || [],
             footerIcon: globalAPIData?.footer?.footerImage
                 ? {
-                      url:
+                      src:
                           globalAPIData?.footer?.footerImage?.data?.attributes
                               ?.url || "",
                   }

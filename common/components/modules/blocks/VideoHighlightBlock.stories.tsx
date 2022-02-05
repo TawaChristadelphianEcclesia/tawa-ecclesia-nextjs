@@ -17,8 +17,8 @@ Default.args = {
     url: "https://www.youtube.com/watch?time_continue=1&v=vDJzR6TIu9M",
     image: {
         alt: "test",
-        url: "undraw_podcast.svg",
-        blurDataUrl: "undraw_podcast.svg"
+        src: "undraw_podcast.svg",
+        blurDataURL: "undraw_podcast.svg"
     },
     title: "Test Title",
     subtitle: "Test Subtitle",
@@ -26,7 +26,7 @@ Default.args = {
 };
 // src,
 // alt,
-// blurDataUrl,
+// blurDataURL,
 // title,
 // subtitle,
 // body,

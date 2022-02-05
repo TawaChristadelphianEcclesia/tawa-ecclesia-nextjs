@@ -14,7 +14,7 @@ export const Default = Template.bind({})
 Default.args = {
     siteTitle: 'Tawa Christadelphians',
     siteLogo: {
-        url: '/bible_logo.svg',
+        src: '/bible_logo.svg',
         alt: 'logo'
     },
     headerLinks: [

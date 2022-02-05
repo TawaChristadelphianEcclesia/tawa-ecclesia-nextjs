@@ -45,8 +45,8 @@ export const getArticleData = async (slug: string): Promise<IArticleData> => {
         summary: pageAPIData?.summary || "",
         content: pageAPIData?.content || "",
         image: {
-            url: pageAPIData?.image?.data?.attributes?.url || "",
-            blurDataUrl:
+            src: pageAPIData?.image?.data?.attributes?.url || "",
+            blurDataURL:
                 pageAPIData?.image?.data?.attributes?.formats?.thumbnail?.url ||
                 "",
             alt:
@@ -74,9 +74,9 @@ export const getArticleHomePageData = async (): Promise<IArticlesPage> => {
         preventIndexing: data?.seo?.preventIndexing || false,
         structuredData: data?.seo?.structuredData || "string",
         metaImage: {
-            url: data?.seo?.metaImage?.data?.attributes?.url || "",
+            src: data?.seo?.metaImage?.data?.attributes?.url || "",
             alt: data?.seo?.metaImage?.data?.attributes?.alternativeText || "",
-            blurDataUrl:
+            blurDataURL:
                 data?.seo?.metaImage?.data?.attributes?.formats?.thumbnail
                     ?.url || "",
         },
@@ -91,7 +91,7 @@ export const getArticleHomePageData = async (): Promise<IArticlesPage> => {
             alt:
                 articleData?.attributes?.image?.data?.attributes
                     ?.alternativeText || "",
-            blurDataUrl:
+            blurDataURL:
                 articleData?.attributes?.image?.data?.attributes?.formats
                     ?.thumbnail?.url || "",
         },

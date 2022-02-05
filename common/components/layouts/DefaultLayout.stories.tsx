@@ -20,14 +20,14 @@ Default.args = {
         preventIndexing: false,
         structuredData: {},
         metaImage: {
-            url: "./bible_logo.svg",
+            src: "./bible_logo.svg",
         },
     },
     global: {
         headerData: {
             siteTitle: "Tawa Christadelphians",
             siteLogo: {
-                url: "/bible_logo.svg",
+                src: "/bible_logo.svg",
                 alt: "logo",
             },
             headerLinks: [
@@ -48,7 +48,7 @@ Default.args = {
         footerData: {
             footerText: "Footer Text",
             footerIcon: {
-                url: "./bible_logo.svg",
+                src: "./bible_logo.svg",
                 alt: "bible logo",
             },
             footerColumns: [

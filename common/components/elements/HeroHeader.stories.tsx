@@ -18,8 +18,8 @@ Default.args = {
     subtitle:
         "The fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance: against such there is no law.",
     image: {
-        url: "bible_photo.jpg",
-        blurDataUrl: "bible_photo.jpg",
+        src: "bible_photo.jpg",
+        blurDataURL: "bible_photo.jpg",
         alt: "alt text",
     },
     textColor: "white",

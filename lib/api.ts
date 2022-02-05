@@ -72,7 +72,7 @@ export async function getFooterData(): Promise<IFooterData> {
         ),
         footerText: (layoutDocument.data as any).footer_text,
         footerIcon: {
-            url: (layoutDocument.data as any).footer_icon.url,
+            src: (layoutDocument.data as any).footer_icon.url,
             alt: (layoutDocument.data as any).footer_icon.alt,
         },
     };
@@ -94,7 +94,7 @@ export async function getHeaderData(): Promise<IHeaderData> {
     return {
         siteTagLine: (layoutDocument.data as any).site_tagline,
         siteLogo: {
-            url: (layoutDocument.data as any).site_logo.url,
+            src: (layoutDocument.data as any).site_logo.url,
             alt: (layoutDocument.data as any).site_logo.alt,
         },
         headerLinks: (layoutDocument.data as any).header_links.map(
@@ -123,9 +123,9 @@ export async function getHomePageData(): Promise<IHomePageData> {
         title: (homepage.data as any).title,
         subtitle: (homepage.data as any).subtitle,
         image: {
-            url: (homepage.data as any).hero_image.url,
+            src: (homepage.data as any).hero_image.url,
             alt: (homepage.data as any).hero_image.alt,
-            blurDataUrl: plaiceholderData.base64,
+            blurDataURL: plaiceholderData.base64,
         },
         textColor: (homepage.data as any).title_color,
         showEvents: (homepage.data as any).show_events,
@@ -176,9 +176,9 @@ export async function getPageData(uid: string): Promise<IPageData> {
         title: (pageData.data as any).title,
         subtitle: (pageData.data as any).subtitle,
         heroImage: {
-            url: (pageData.data as any).hero_image.url,
+            src: (pageData.data as any).hero_image.url,
             alt: (pageData.data as any).hero_image.alt,
-            blurDataUrl: plaiceholderData.base64,
+            blurDataURL: plaiceholderData.base64,
         },
         headingType: (pageData.data as any).hero_display,
         textColor: (pageData.data as any).title_color,

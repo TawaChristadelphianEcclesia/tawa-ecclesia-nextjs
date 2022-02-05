@@ -40,13 +40,13 @@ const HeroHeader: React.FC<IHeroHeader> = ({
             }}
         >
             <Image
-                src={image.url}
+                src={image.src}
                 alt={image.alt}
                 layout="fill"
                 sizes="100%"
                 objectFit="cover"
                 placeholder="blur"
-                blurDataURL={image.blurDataUrl}
+                blurDataURL={image.blurDataURL}
                 priority
             />
             <div
@@ -62,7 +62,9 @@ const HeroHeader: React.FC<IHeroHeader> = ({
                         : { bottom: 0 }),
                 }}
             >
-                <h1 tw="text-3xl sm:text-5xl lg:text-7xl font-bold font-serif">{title}</h1>
+                <h1 tw="text-3xl sm:text-5xl lg:text-7xl font-bold font-serif">
+                    {title}
+                </h1>
                 <p tw="text-lg sm:text-2xl lg:text-4xl">{subtitle}</p>
             </div>
         </div>

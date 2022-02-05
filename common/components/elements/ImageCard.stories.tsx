@@ -20,8 +20,8 @@ export const Default = Template.bind({});
 
 Default.args = {
     image: {
-        url: "undraw_podcast.svg",
-        blurDataUrl: "undraw_podcast.svg",
+        src: "undraw_podcast.svg",
+        blurDataURL: "undraw_podcast.svg",
         alt: "postcast illustration",
     },
     title: "Podcast",

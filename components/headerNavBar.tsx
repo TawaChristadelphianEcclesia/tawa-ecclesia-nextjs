@@ -21,7 +21,7 @@ const HeaderNavBar = ({ headerData }: { headerData: IHeaderData }) => {
           {/* <img src={LogoBible} tw="h-12 m-0 p-0 px-2" alt="bible logo" /> */}
           <div tw="h-12 w-12 m-0 p-0 mx-2 relative">
             <Image
-              src={headerData.siteLogo.url}
+              src={headerData.siteLogo.src}
               alt={headerData.siteLogo.alt}
               sizes="100%"
               layout="fill"

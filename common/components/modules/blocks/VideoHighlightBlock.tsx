@@ -31,13 +31,13 @@ const VideoHighlightBlock: React.FC<IVideoHighlightBlock> = ({
                 <div tw="flex flex-col md:flex-row">
                     <div tw="relative h-52 md:h-80 md:flex-1">
                         <Image
-                            src={image.url}
+                            src={image.src}
                             alt={image.alt}
                             layout="fill"
                             objectFit="contain"
                             sizes="100%"
-                            placeholder={image.blurDataUrl ? "blur" : "empty"}
-                            blurDataURL={image.blurDataUrl}
+                            placeholder={image.blurDataURL ? "blur" : "empty"}
+                            blurDataURL={image.blurDataURL}
                         />
                     </div>
                     <div tw="flex-1 mt-5 md:mt-0 md:pl-5 flex flex-col">

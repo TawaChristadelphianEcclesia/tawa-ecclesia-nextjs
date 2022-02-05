@@ -14,7 +14,7 @@ const FooterText: React.FC<IFooterText> = ({ icon, text }) => {
             <div tw="h-12 w-12 m-0 p-0 mr-8 relative">
                 {icon && (
                     <Image
-                        src={icon.url}
+                        src={icon.src}
                         alt={icon.alt}
                         sizes="100%"
                         layout="fill"

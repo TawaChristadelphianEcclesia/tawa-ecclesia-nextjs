@@ -17,9 +17,9 @@ Default.args = {
     url: "/",
     title: "God's Purpose and Character",
     titleImage: {
-        url: "bible_photo.jpg",
+        src: "bible_photo.jpg",
         alt: "bible photo",
-        blurDataUrl: "bible_photo.jpg",
+        blurDataURL: "bible_photo.jpg",
     },
     summary: "Who is God, and what is His purpose with the earth?",
     tags: [],

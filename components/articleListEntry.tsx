@@ -49,12 +49,12 @@ const ArticleListEntry: React.FC<IArticleListEntry> = ({
                     <div tw="flex-initial w-48 justify-self-end pl-4 hidden sm:block">
                         <div tw="aspect-w-3 aspect-h-2">
                             <Image
-                                src={titleImage.url}
-                                alt={titleImage.url || ""}
+                                src={titleImage.src}
+                                alt={titleImage.src || ""}
                                 layout="fill"
                                 objectFit="cover"
                                 placeholder="blur"
-                                blurDataURL={titleImage.blurDataUrl}
+                                blurDataURL={titleImage.blurDataURL}
                             />
                         </div>
                     </div>

@@ -19,8 +19,8 @@ Default.args = {
             component: "hero",
             data: {
                 image: {
-                    url: "bible_photo.jpg",
-                    blurDataUrl: "bible_photo.jpg",
+                    src: "bible_photo.jpg",
+                    blurDataURL: "bible_photo.jpg",
                 },
                 title: "Tawa Christadelphians",
                 subtitle:

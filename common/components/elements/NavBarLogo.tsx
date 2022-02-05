@@ -15,7 +15,7 @@ const NavBarLogo: React.FC<INavBarLogo> = ({ logo, href }) => {
         <ConditionalLinkWrapper href={href}>
             <div tw="h-12 w-12 m-0 p-0 mx-2 relative">
                 <Image
-                    src={logo.url}
+                    src={logo.src}
                     alt={logo.alt}
                     sizes="100%"
                     layout="fill"

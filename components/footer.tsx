@@ -34,7 +34,7 @@ const Footer: React.FC<{ footerData: IFooterData }> = ({ footerData }) => {
         <div tw="text-gray-400 flex items-center py-8 px-4">
           <div tw="h-12 w-12 m-0 p-0 mr-8 relative">
             <Image
-              src={footerData.footerIcon.url}
+              src={footerData.footerIcon.src}
               alt={footerData.footerIcon.alt}
               sizes="100%"
               layout="fill"

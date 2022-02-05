@@ -45,7 +45,7 @@ const Seo = ({
             {metaImage && (
                 <meta
                     property="og:image"
-                    content={metaImage.url}
+                    content={metaImage.src}
                     key="og:image"
                 />
             )}

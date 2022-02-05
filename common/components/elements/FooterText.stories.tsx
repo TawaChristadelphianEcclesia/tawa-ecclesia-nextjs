@@ -13,7 +13,7 @@ export const Default = Template.bind({})
 Default.args = {
     text: "Footer Text",
     icon: {
-        url: "./bible_logo.svg",
+        src: "./bible_logo.svg",
         alt: "bible logo",
     }
 }

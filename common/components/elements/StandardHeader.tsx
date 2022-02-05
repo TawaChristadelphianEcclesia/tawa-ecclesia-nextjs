@@ -28,12 +28,12 @@ const StandardHeader: React.FC<IStandardHeader> = ({
                 }}
             >
                 <Image
-                    src={image.url}
+                    src={image.src}
                     alt={image.alt || ""}
                     layout="fill"
                     objectFit="cover"
                     placeholder="blur"
-                    blurDataURL={image.blurDataUrl}
+                    blurDataURL={image.blurDataURL}
                 />
             </div>
         )}

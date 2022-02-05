@@ -10,7 +10,7 @@ export const getGlobalData = async (): Promise<IGlobalData> => {
             siteTitle: globalAPIData?.SiteTitle || "",
             siteLogo: globalAPIData?.navigation?.logo
                 ? {
-                      url:
+                      src:
                           globalAPIData?.navigation?.logo?.data?.attributes
                               ?.url || "",
                   }
@@ -38,7 +38,7 @@ export const getGlobalData = async (): Promise<IGlobalData> => {
                 })) || [],
             footerIcon: globalAPIData?.footer?.footerImage
                 ? {
-                      url:
+                      src:
                           globalAPIData?.footer?.footerImage?.data?.attributes
                               ?.url || "",
                   }
