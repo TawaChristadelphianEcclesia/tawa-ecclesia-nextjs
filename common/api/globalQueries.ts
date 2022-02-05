@@ -1,10 +1,12 @@
 import { gql } from "@apollo/client";
 import client from "./apolloClient";
+import { UPLOAD_FILE_FRAGMENT } from "./fragments";
 import { GlobalData } from "./__generated__/GlobalData";
 
 export const getGlobalData = async () => {
-    const { data } = await client.query<GlobalData>({
+    const { data, error } = await client.query<GlobalData>({
         query: gql`
+            ${UPLOAD_FILE_FRAGMENT}
             query GlobalData {
                 global {
                     data {
@@ -23,47 +25,13 @@ export const getGlobalData = async () => {
                                     }
                                 }
                                 footerImage {
-                                    data {
-                                        attributes {
-                                            name
-                                            alternativeText
-                                            caption
-                                            width
-                                            height
-                                            formats
-                                            hash
-                                            ext
-                                            mime
-                                            size
-                                            url
-                                            previewUrl
-                                            provider
-                                            provider_metadata
-                                        }
-                                    }
+                                    ...UploadFileEntityResponseFragment
                                 }
                                 footerText
                             }
                             navigation {
                                 logo {
-                                    data {
-                                        attributes {
-                                            name
-                                            alternativeText
-                                            caption
-                                            width
-                                            height
-                                            formats
-                                            hash
-                                            ext
-                                            mime
-                                            size
-                                            url
-                                            previewUrl
-                                            provider
-                                            provider_metadata
-                                        }
-                                    }
+                                    ...UploadFileEntityResponseFragment
                                 }
                                 leftButton {
                                     link {
@@ -86,5 +54,9 @@ export const getGlobalData = async () => {
             }
         `,
     });
+    if (error) {
+        console.error("error in global data query");
+        console.log(error);
+    }
     return data;
 };

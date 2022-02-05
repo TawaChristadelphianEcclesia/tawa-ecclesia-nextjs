@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 import client from "./apolloClient";
+import { SEO_FIELDS, UPLOAD_FILE_FRAGMENT } from "./fragments";
 import { GeneralPage } from "./__generated__/GeneralPage";
 import { HomePageData } from "./__generated__/HomePageData";
 import { PageSlugs } from "./__generated__/PageSlugs";
@@ -24,69 +25,21 @@ export const getPageSlugs = async () => {
 export const getHomePageData = async () => {
     const { data } = await client.query<HomePageData>({
         query: gql`
+            ${UPLOAD_FILE_FRAGMENT}
+            ${SEO_FIELDS}
             query HomePageData {
                 home {
                     data {
                         attributes {
                             seo {
-                                metaTitle
-                                metaDescription
-                                meta {
-                                    name
-                                    content
-                                }
-                                preventIndexing
-                                structuredData
-                                metaImage {
-                                    data {
-                                        id
-                                        attributes {
-                                            name
-                                            alternativeText
-                                            caption
-                                            width
-                                            height
-                                            formats
-                                            hash
-                                            ext
-                                            mime
-                                            size
-                                            url
-                                            previewUrl
-                                            provider
-                                            provider_metadata
-                                            createdAt
-                                            updatedAt
-                                        }
-                                    }
-                                }
+                                ...SeoFieldsFragment
                             }
                             Title
                             Blocks {
                                 ... on ComponentBlocksHero {
                                     __typename
                                     image {
-                                        data {
-                                            id
-                                            attributes {
-                                                name
-                                                alternativeText
-                                                caption
-                                                width
-                                                height
-                                                formats
-                                                ext
-                                                hash
-                                                mime
-                                                size
-                                                url
-                                                previewUrl
-                                                provider
-                                                provider_metadata
-                                                createdAt
-                                                updatedAt
-                                            }
-                                        }
+                                        ...UploadFileEntityResponseFragment
                                     }
                                     text
                                     title
@@ -111,27 +64,7 @@ export const getHomePageData = async () => {
                                     title
                                     body
                                     image {
-                                        data {
-                                            id
-                                            attributes {
-                                                name
-                                                alternativeText
-                                                caption
-                                                width
-                                                height
-                                                formats
-                                                ext
-                                                hash
-                                                mime
-                                                size
-                                                url
-                                                previewUrl
-                                                provider
-                                                provider_metadata
-                                                createdAt
-                                                updatedAt
-                                            }
-                                        }
+                                        ...UploadFileEntityResponseFragment
                                     }
                                     leftLink {
                                         href
@@ -150,54 +83,14 @@ export const getHomePageData = async () => {
                                     __typename
                                     title
                                     replaceimage {
-                                        data {
-                                            id
-                                            attributes {
-                                                name
-                                                alternativeText
-                                                caption
-                                                width
-                                                height
-                                                formats
-                                                hash
-                                                ext
-                                                mime
-                                                size
-                                                url
-                                                previewUrl
-                                                provider
-                                                provider_metadata
-                                                createdAt
-                                                updatedAt
-                                            }
-                                        }
+                                        ...UploadFileEntityResponseFragment
                                     }
                                     article {
                                         data {
                                             attributes {
                                                 slug
                                                 image {
-                                                    data {
-                                                        id
-                                                        attributes {
-                                                            name
-                                                            alternativeText
-                                                            caption
-                                                            width
-                                                            height
-                                                            formats
-                                                            hash
-                                                            ext
-                                                            mime
-                                                            size
-                                                            url
-                                                            previewUrl
-                                                            provider
-                                                            provider_metadata
-                                                            createdAt
-                                                            updatedAt
-                                                        }
-                                                    }
+                                                    ...UploadFileEntityResponseFragment
                                                 }
                                                 title
                                                 summary
@@ -216,53 +109,13 @@ export const getHomePageData = async () => {
                                                 description
                                                 url
                                                 image {
-                                                    data {
-                                                        id
-                                                        attributes {
-                                                            name
-                                                            alternativeText
-                                                            caption
-                                                            width
-                                                            height
-                                                            formats
-                                                            hash
-                                                            ext
-                                                            mime
-                                                            size
-                                                            url
-                                                            previewUrl
-                                                            provider
-                                                            provider_metadata
-                                                            createdAt
-                                                            updatedAt
-                                                        }
-                                                    }
+                                                    ...UploadFileEntityResponseFragment
                                                 }
                                             }
                                         }
                                     }
                                     replaceImage {
-                                        data {
-                                            id
-                                            attributes {
-                                                name
-                                                alternativeText
-                                                caption
-                                                width
-                                                height
-                                                formats
-                                                hash
-                                                ext
-                                                mime
-                                                size
-                                                url
-                                                previewUrl
-                                                provider
-                                                provider_metadata
-                                                createdAt
-                                                updatedAt
-                                            }
-                                        }
+                                        ...UploadFileEntityResponseFragment
                                     }
                                 }
                             }
@@ -278,6 +131,8 @@ export const getHomePageData = async () => {
 export const getGeneralPageData = async (slug: string) => {
     const { data } = await client.query<GeneralPage>({
         query: gql`
+            ${UPLOAD_FILE_FRAGMENT}
+            ${SEO_FIELDS}
             query GeneralPage($slug: String) {
                 pages(filters: { slug: { eq: $slug } }) {
                     data {
@@ -285,37 +140,7 @@ export const getGeneralPageData = async (slug: string) => {
                             title
                             slug
                             seo {
-                                metaTitle
-                                metaDescription
-                                meta {
-                                    name
-                                    content
-                                }
-                                preventIndexing
-                                structuredData
-                                metaImage {
-                                    data {
-                                        id
-                                        attributes {
-                                            name
-                                            alternativeText
-                                            caption
-                                            width
-                                            height
-                                            formats
-                                            hash
-                                            ext
-                                            mime
-                                            size
-                                            url
-                                            previewUrl
-                                            provider
-                                            provider_metadata
-                                            createdAt
-                                            updatedAt
-                                        }
-                                    }
-                                }
+                                ...SeoFieldsFragment
                             }
                             blocks {
                                 ... on ComponentBlocksTextContent {
@@ -328,27 +153,7 @@ export const getGeneralPageData = async (slug: string) => {
                                     text
                                     title
                                     image {
-                                        data {
-                                            id
-                                            attributes {
-                                                name
-                                                alternativeText
-                                                caption
-                                                width
-                                                height
-                                                formats
-                                                hash
-                                                ext
-                                                mime
-                                                size
-                                                url
-                                                previewUrl
-                                                provider
-                                                provider_metadata
-                                                createdAt
-                                                updatedAt
-                                            }
-                                        }
+                                        ...UploadFileEntityResponseFragment
                                     }
                                 }
                                 ... on ComponentBlocksStandardHeader {
@@ -356,27 +161,7 @@ export const getGeneralPageData = async (slug: string) => {
                                     title
                                     summary
                                     headerImage {
-                                        data {
-                                            id
-                                            attributes {
-                                                name
-                                                alternativeText
-                                                caption
-                                                width
-                                                height
-                                                formats
-                                                hash
-                                                ext
-                                                mime
-                                                size
-                                                url
-                                                previewUrl
-                                                provider
-                                                provider_metadata
-                                                createdAt
-                                                updatedAt
-                                            }
-                                        }
+                                        ...UploadFileEntityResponseFragment
                                     }
                                 }
                             }

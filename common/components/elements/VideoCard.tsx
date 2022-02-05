@@ -27,8 +27,8 @@ const VideoCard: React.FC<IVideoCard> = ({
                 placeholder="blur"
                 {...image}
             />
-            <div tw="w-full h-full opacity-40 text-gray-300 hover:backdrop-blur-sm focus:backdrop-blur-sm active:backdrop-blur-md hover:opacity-75 focus:opacity-75 active:opacity-90 transition-all rounded-t-lg">
-                <PlaySvg tw="w-full h-full" />
+            <div tw="w-full h-full opacity-50 text-gray-300 hover:backdrop-blur-sm focus:backdrop-blur-sm active:backdrop-blur-md hover:opacity-75 focus:opacity-75 active:opacity-90 transition-all rounded-t-lg">
+                <PlaySvg tw="w-full h-full filter drop-shadow-lg" />
             </div>
         </div>
         <div tw="p-3 text-center overflow-ellipsis">

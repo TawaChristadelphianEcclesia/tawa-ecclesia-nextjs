@@ -5,12 +5,12 @@ import {
     getArticleList,
 } from "../api/articleQueries";
 import { Article_articles_data_attributes_blocks } from "../api/__generated__/Article";
-import { ISeoData } from "../components/elements/Seo";
 import { IBlock } from "../components/modules/blocks/BlockManager";
 import { IArticleData } from "../components/templates/Article";
 import { IArticlesPage } from "../components/templates/ArticlesPage";
 import { mapAPIToBlock } from "./Blocks";
 import { getGlobalData } from "./GlobalData";
+import { getImageData } from "./ImageData";
 import { getTextReadingTime } from "./ReadingTimeCalculator";
 import { getSeoData } from "./SeoData";
 import { getPathFromSlug } from "./SlugCalculator";
@@ -44,15 +44,7 @@ export const getArticleData = async (slug: string): Promise<IArticleData> => {
         title: pageAPIData?.title || "",
         summary: pageAPIData?.summary || "",
         content: pageAPIData?.content || "",
-        image: {
-            src: pageAPIData?.image?.data?.attributes?.url || "",
-            blurDataURL:
-                pageAPIData?.image?.data?.attributes?.formats?.thumbnail?.url ||
-                "",
-            alt:
-                pageAPIData?.image?.data?.attributes?.alternativeText ||
-                undefined,
-        },
+        image: getImageData(pageAPIData?.image?.data?.attributes ?? undefined),
         blocks,
     };
     const globalData = await getGlobalData();
@@ -63,38 +55,15 @@ export const getArticleHomePageData = async (): Promise<IArticlesPage> => {
     const data = await (
         await getAPIArticleHomePageData()
     ).blogPage?.data?.attributes;
-    const seo: ISeoData = {
-        metaTitle: data?.seo?.metaTitle || "",
-        metaDescription: data?.seo?.metaDescription || "",
-        metaTags:
-            data?.seo?.meta?.map((meta) => ({
-                name: meta?.name || "",
-                content: meta?.content || "",
-            })) || [],
-        preventIndexing: data?.seo?.preventIndexing || false,
-        structuredData: data?.seo?.structuredData || "string",
-        metaImage: {
-            src: data?.seo?.metaImage?.data?.attributes?.url || "",
-            alt: data?.seo?.metaImage?.data?.attributes?.alternativeText || "",
-            blurDataURL:
-                data?.seo?.metaImage?.data?.attributes?.formats?.thumbnail
-                    ?.url || "",
-        },
-    };
+    const seo = getSeoData(data?.seo);
     const articles: IArticlesPage["pageData"]["articleData"] = await (
         await getArticleList()
     ).map((articleData) => ({
         url: getPathFromSlug(articleData.attributes?.slug || "", "article"),
         title: articleData.attributes?.title || "",
-        titleImage: {
-            url: articleData?.attributes?.image?.data?.attributes?.url || "",
-            alt:
-                articleData?.attributes?.image?.data?.attributes
-                    ?.alternativeText || "",
-            blurDataURL:
-                articleData?.attributes?.image?.data?.attributes?.formats
-                    ?.thumbnail?.url || "",
-        },
+        titleImage: getImageData(
+            articleData?.attributes?.image?.data?.attributes ?? undefined
+        ),
         summary: articleData.attributes?.summary || "",
         tags: articleData.attributes?.categories?.data
             .filter((category) => category.attributes?.name)

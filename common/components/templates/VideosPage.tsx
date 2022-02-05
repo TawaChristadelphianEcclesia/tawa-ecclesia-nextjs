@@ -11,12 +11,12 @@ type IArticlesPageData = IPageData & {
     videos: IVideoCard[];
 };
 
-export interface VideosPageProps {
+export interface IVideosPage {
     globalData: IGlobalData;
     pageData: IArticlesPageData;
 }
 
-const VideosPage: React.FC<VideosPageProps> = ({
+const VideosPage: React.FC<IVideosPage> = ({
     globalData,
     pageData: { seo, videos, headerData },
 }) => {

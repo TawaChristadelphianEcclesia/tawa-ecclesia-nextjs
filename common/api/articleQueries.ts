@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 import client from "./apolloClient";
+import { SEO_FIELDS, UPLOAD_FILE_FRAGMENT } from "./fragments";
 import { Article } from "./__generated__/Article";
 import { ArticleHomePage } from "./__generated__/ArticleHomePage";
 import { ArticleList } from "./__generated__/ArticleList";
@@ -25,6 +26,7 @@ export const getArticleSlugs = async () => {
 export const getArticleList = async () => {
     const { data } = await client.query<ArticleList>({
         query: gql`
+            ${UPLOAD_FILE_FRAGMENT}
             query ArticleList {
                 articles {
                     data {
@@ -34,27 +36,7 @@ export const getArticleList = async () => {
                             summary
                             publishedAt
                             image {
-                                data {
-                                    id
-                                    attributes {
-                                        name
-                                        alternativeText
-                                        caption
-                                        width
-                                        height
-                                        formats
-                                        ext
-                                        hash
-                                        mime
-                                        size
-                                        url
-                                        previewUrl
-                                        provider
-                                        provider_metadata
-                                        createdAt
-                                        updatedAt
-                                    }
-                                }
+                                ...UploadFileEntityResponseFragment
                             }
                             categories {
                                 data {
@@ -76,68 +58,20 @@ export const getArticleList = async () => {
 export const getArticleData = async (slug: string) => {
     const { data } = await client.query<Article>({
         query: gql`
+            ${UPLOAD_FILE_FRAGMENT}
+            ${SEO_FIELDS}
             query Article($slug: String) {
                 articles(filters: { slug: { eq: $slug } }) {
                     data {
                         attributes {
                             seo {
-                                metaTitle
-                                metaDescription
-                                meta {
-                                    name
-                                    content
-                                }
-                                preventIndexing
-                                structuredData
-                                metaImage {
-                                    data {
-                                        id
-                                        attributes {
-                                            name
-                                            alternativeText
-                                            caption
-                                            width
-                                            height
-                                            formats
-                                            hash
-                                            ext
-                                            mime
-                                            size
-                                            url
-                                            previewUrl
-                                            provider
-                                            provider_metadata
-                                            createdAt
-                                            updatedAt
-                                        }
-                                    }
-                                }
+                                ...SeoFieldsFragment
                             }
                             slug
                             title
                             summary
                             image {
-                                data {
-                                    id
-                                    attributes {
-                                        name
-                                        alternativeText
-                                        caption
-                                        width
-                                        height
-                                        formats
-                                        ext
-                                        hash
-                                        mime
-                                        size
-                                        url
-                                        previewUrl
-                                        provider
-                                        provider_metadata
-                                        createdAt
-                                        updatedAt
-                                    }
-                                }
+                                ...UploadFileEntityResponseFragment
                             }
                             content
                             blocks {
@@ -150,27 +84,7 @@ export const getArticleData = async (slug: string) => {
                                                 title
                                                 slug
                                                 image {
-                                                    data {
-                                                        id
-                                                        attributes {
-                                                            name
-                                                            alternativeText
-                                                            caption
-                                                            width
-                                                            height
-                                                            formats
-                                                            ext
-                                                            hash
-                                                            mime
-                                                            size
-                                                            url
-                                                            previewUrl
-                                                            provider
-                                                            provider_metadata
-                                                            createdAt
-                                                            updatedAt
-                                                        }
-                                                    }
+                                                    ...UploadFileEntityResponseFragment
                                                 }
                                                 summary
                                                 content
@@ -200,42 +114,13 @@ export const getArticleData = async (slug: string) => {
 export const getArticleHomePageData = async () => {
     const { data } = await client.query<ArticleHomePage>({
         query: gql`
+            ${SEO_FIELDS}
             query ArticleHomePage {
                 blogPage {
                     data {
                         attributes {
                             seo {
-                                metaTitle
-                                metaDescription
-                                meta {
-                                    name
-                                    content
-                                }
-                                preventIndexing
-                                structuredData
-                                metaImage {
-                                    data {
-                                        id
-                                        attributes {
-                                            name
-                                            alternativeText
-                                            caption
-                                            width
-                                            height
-                                            formats
-                                            hash
-                                            ext
-                                            mime
-                                            size
-                                            url
-                                            previewUrl
-                                            provider
-                                            provider_metadata
-                                            createdAt
-                                            updatedAt
-                                        }
-                                    }
-                                }
+                                ...SeoFieldsFragment
                             }
                             articlesPerPage
                             title
