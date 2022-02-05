@@ -25,12 +25,12 @@ const processUrl = (url: string) => {
 };
 
 const transitionProps = {
-    enter: tw`transform transition duration-[400ms]`,
-    enterFrom: tw`opacity-0 rotate-[-120deg] scale-50`,
-    enterTo: tw`opacity-100 rotate-0 scale-100`,
-    leave: tw`transform duration-200 transition ease-in-out`,
-    leaveFrom: tw`opacity-100 rotate-0 scale-100`,
-    leaveTo: tw`opacity-0 scale-95`,
+    enter: tw`transition-opacity duration-300`,
+    enterFrom: tw`opacity-0 `,
+    enterTo: tw`opacity-100 `,
+    leave: tw`transition-opacity duration-500`,
+    leaveFrom: tw`opacity-100`,
+    leaveTo: tw`opacity-0`,
 };
 
 const VideoOverlay: React.FC<IVideoOverlay> = ({
@@ -38,12 +38,11 @@ const VideoOverlay: React.FC<IVideoOverlay> = ({
     onClose,
     visible = true,
 }) => (
-    // <Transition as={Fragment} show={visible} {...transitionProps}>
-    <>
+    <Transition as={Fragment} show={visible} {...transitionProps}>
         <div
             css={[
                 tw`fixed inset-0 overflow-y-auto p-5 h-full w-full z-30 bg-white bg-opacity-80 flex flex-col`,
-                !visible && tw`hidden`,
+                // !visible && tw`hidden`,
             ]}
         >
             <div tw="max-w-screen-lg w-full mx-auto flex-grow">
@@ -59,7 +58,7 @@ const VideoOverlay: React.FC<IVideoOverlay> = ({
                             </Button>
                         </div>
                     </div>
-                    <div tw="bg-blue-500 absolute top-0 left-0 w-full h-full">
+                    <div tw="bg-gray-400 bg-opacity-60 backdrop-blur absolute top-0 left-0 w-full h-full">
                         <iframe
                             height="100%"
                             width="100%"
@@ -72,8 +71,7 @@ const VideoOverlay: React.FC<IVideoOverlay> = ({
                 </div>
             </div>
         </div>
-    </>
-    // </Transition>
+    </Transition>
 );
 
 export default VideoOverlay;

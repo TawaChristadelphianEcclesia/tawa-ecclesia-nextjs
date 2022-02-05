@@ -26,6 +26,7 @@ export const getVideoHomePageData = async (): Promise<IVideosPage> => {
             tags: attributes!.categories?.data
                 .filter((category) => category.attributes?.name)
                 .map((category) => category.attributes?.name || "") as string[],
+            videoUrl: attributes!.url ?? "",
         }))) ?? [];
     const pageData: IVideosPage["pageData"] = {
         seo,
