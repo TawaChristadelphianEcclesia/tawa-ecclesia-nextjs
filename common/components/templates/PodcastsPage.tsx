@@ -34,7 +34,7 @@ const PodcastListEntry: React.FC<IPodcastListEntry> = ({
 }) => (
     <div tw="py-3 px-3 flex gap-3">
         <div>
-            <div tw="w-28 h-28 rounded-xl overflow-hidden relative">
+            <div tw="w-14 h-14 sm:w-28 sm:h-28 rounded-xl overflow-hidden relative">
                 <Image
                     layout="fill"
                     objectFit="cover"
@@ -44,7 +44,7 @@ const PodcastListEntry: React.FC<IPodcastListEntry> = ({
             </div>
         </div>
         <div tw="flex flex-col">
-            <h3 tw="font-bold">{title}</h3>
+            <h3 tw="font-bold line-clamp-2 overflow-ellipsis">{title}</h3>
             <p tw="line-clamp-2 overflow-ellipsis">{description}</p>
             <div tw="mt-auto flex items-center">
                 <button tw="flex items-center px-1 py-1 text-sm tracking-wide text-indigo-600 focus:text-white hover:text-white active:text-white uppercase transition-colors duration-200 rounded-full bg-indigo-200 hover:bg-indigo-500 focus:bg-indigo-500 active:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80">
