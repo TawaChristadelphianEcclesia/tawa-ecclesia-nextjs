@@ -15,8 +15,8 @@ export interface ArticleList_articles_data_attributes_image_data_attributes {
   width: number | null;
   height: number | null;
   formats: any | null;
-  ext: string | null;
   hash: string;
+  ext: string | null;
   mime: string;
   size: number;
   url: string;

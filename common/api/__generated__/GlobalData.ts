@@ -40,10 +40,13 @@ export interface GlobalData_global_data_attributes_footer_footerImage_data_attri
   previewUrl: string | null;
   provider: string;
   provider_metadata: any | null;
+  createdAt: any | null;
+  updatedAt: any | null;
 }
 
 export interface GlobalData_global_data_attributes_footer_footerImage_data {
   __typename: "UploadFileEntity";
+  id: string | null;
   attributes: GlobalData_global_data_attributes_footer_footerImage_data_attributes | null;
 }
 
@@ -75,10 +78,13 @@ export interface GlobalData_global_data_attributes_navigation_logo_data_attribut
   previewUrl: string | null;
   provider: string;
   provider_metadata: any | null;
+  createdAt: any | null;
+  updatedAt: any | null;
 }
 
 export interface GlobalData_global_data_attributes_navigation_logo_data {
   __typename: "UploadFileEntity";
+  id: string | null;
   attributes: GlobalData_global_data_attributes_navigation_logo_data_attributes | null;
 }
 

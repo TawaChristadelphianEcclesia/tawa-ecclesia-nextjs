@@ -32,6 +32,7 @@ const templateVideo = {
     description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit praesentium vero commodi omnis magnam voluptas vel modi accusamus saepe consectetur ratione quidem, enim quaerat, atque dolorem ut assumenda ae odio sint voluptatum debitis. Amet autem recusandae temporibus a, nemo praesentium quia necessitatibus aut, magni perferendis consequuntur placeat nesciunt maxime.",
     tags: ["test tag 1", "test tag 2"],
+    videoUrl: "https://www.youtube.com/watch?time_continue=1&v=vDJzR6TIu9M",
 };
 
 const videos = Array.from({ length: 8 }, (_, i) => ({ ...templateVideo }));

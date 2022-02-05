@@ -68,8 +68,8 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksHero_im
   width: number | null;
   height: number | null;
   formats: any | null;
-  ext: string | null;
   hash: string;
+  ext: string | null;
   mime: string;
   size: number;
   url: string;
@@ -123,8 +123,8 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksImageCa
   width: number | null;
   height: number | null;
   formats: any | null;
-  ext: string | null;
   hash: string;
+  ext: string | null;
   mime: string;
   size: number;
   url: string;

@@ -6,14 +6,14 @@ import TextHeader, { ITextHeader } from "../elements/TextHeader";
 import GridSection from "../elements/GridSection";
 import VideoCard, { IVideoCard } from "../elements/VideoCard";
 
-type IArticlesPageData = IPageData & {
+type IVideosPageData = IPageData & {
     headerData: ITextHeader;
     videos: IVideoCard[];
 };
 
 export interface IVideosPage {
     globalData: IGlobalData;
-    pageData: IArticlesPageData;
+    pageData: IVideosPageData;
 }
 
 const VideosPage: React.FC<IVideosPage> = ({
