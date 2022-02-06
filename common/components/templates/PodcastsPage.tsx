@@ -160,6 +160,27 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
         updateProgress(resultProgress);
     };
 
+    const formatSeconds = (rawSeconds: number) => {
+        const days = Math.floor(rawSeconds / (60 * 60 * 24));
+        const hours = Math.floor(
+            (rawSeconds - days * 60 * 60 * 24) / (60 * 60)
+        );
+        const minutes = Math.floor((rawSeconds - hours * 60 * 60) / 60);
+        const seconds = Math.floor(rawSeconds - minutes * 60);
+
+        const pad = (val: number) => `${val}`.padStart(2, "0");
+
+        return (
+            (days
+                ? `${pad(days)}:`
+                : "" + hours
+                ? `${pad(hours)}:`
+                : "" + minutes
+                ? `${pad(minutes)}:`
+                : "00:") + pad(seconds)
+        );
+    };
+
     return (
         <div tw="fixed h-24 filter ring-2 ring-black ring-opacity-5 bg-gray-50 left-0 right-0 bottom-0 z-50">
             <div tw="absolute w-full -translate-y-1/2">
@@ -169,7 +190,8 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
                         audioRef.current?.duration ?? 0
                     )}
                     onScrub={(ratio) => onScrub(ratio)}
-                    duration={audioRef.current?.duration}
+                    max={audioRef.current?.duration}
+                    formatFunction={formatSeconds}
                 />
             </div>
             <div tw="flex">

@@ -6,14 +6,16 @@ interface IRangeSlider {
     value?: number;
     onUpdate?: (ratio: number) => void;
     onScrub?: (ratio: number) => void;
-    duration?: number;
+    max?: number;
+    formatFunction?: (val: number) => string;
 }
 
 const RangeSlider: React.FC<IRangeSlider> = ({
     value,
     onUpdate,
-    duration,
+    max,
     onScrub,
+    formatFunction = (val) => `${val}`,
 }) => {
     const [ratio, setRatio] = React.useState(0);
     const [dragging, setDragging] = React.useState(false);
@@ -54,32 +56,11 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         }
     }, [dragging]);
     React.useEffect(() => {
-        value !== undefined && setRatio(value);
+        value !== undefined && setRatio(isNaN(value) ? 0 : value);
     }, [value]);
     React.useEffect(() => {
         onUpdate && onUpdate(ratio);
     }, [ratio, onUpdate]);
-
-    const formatSeconds = (rawSeconds: number) => {
-        const days = Math.floor(rawSeconds / (60 * 60 * 24));
-        const hours = Math.floor(
-            (rawSeconds - days * 60 * 60 * 24) / (60 * 60)
-        );
-        const minutes = Math.floor((rawSeconds - hours * 60 * 60) / 60);
-        const seconds = Math.floor(rawSeconds - minutes * 60);
-
-        const pad = (val: number) => `${val}`.padStart(2, "0");
-
-        return (
-            (days
-                ? `${pad(days)}:`
-                : "" + hours
-                ? `${pad(hours)}:`
-                : "" + minutes
-                ? `${pad(minutes)}:`
-                : "00:") + pad(seconds)
-        );
-    };
 
     return (
         <div
@@ -109,13 +90,13 @@ const RangeSlider: React.FC<IRangeSlider> = ({
                     left: ${ratio * 100}%;
                 `}
             />
-            {duration ? (
+            {max ? (
                 <>
                     <div tw="absolute left-0 top-6 pl-1 text-sm text-gray-600">
-                        {formatSeconds(duration * ratio)}
+                        {formatFunction(max * ratio)}
                     </div>
                     <div tw="absolute right-0 top-6 pr-1 text-sm text-gray-600">
-                        {formatSeconds(duration)}
+                        {formatFunction(max)}
                     </div>
                 </>
             ) : (
