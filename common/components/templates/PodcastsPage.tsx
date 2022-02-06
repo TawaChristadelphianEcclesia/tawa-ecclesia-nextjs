@@ -82,20 +82,21 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
     const audioRef = React.useRef<HTMLAudioElement>();
     // const { duration } = audioRef.current;
     const intervalRef = React.useRef<number>();
-    const isReady = React.useRef(false);
+    const durationIntervalRef = React.useRef<number>();
+    // const isReady = React.useRef(false);
 
     // define audio
 
     React.useEffect(() => {
         audioRef.current = new Audio(audioSrc);
-        setDuration(audioRef.current.duration);
+        startDurationTimer();
     }, []);
 
     // play pause
     React.useEffect(() => {
         if (playing) {
             audioRef.current?.play();
-            startTimer();
+            startProgressTimer();
         } else {
             audioRef.current?.pause();
         }
@@ -110,8 +111,22 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
         };
     }, []);
 
+    // timer to set initial duration
+    const startDurationTimer = () => {
+        clearInterval(durationIntervalRef.current);
+        durationIntervalRef.current = window.setInterval(() => {
+            if (
+                audioRef.current?.duration &&
+                !isNaN(audioRef.current?.duration)
+            ) {
+                setDuration(audioRef.current?.duration);
+                clearInterval(durationIntervalRef.current);
+            }
+        }, 100);
+    };
+
     // timer to check on track and set progress
-    const startTimer = () => {
+    const startProgressTimer = () => {
         // Clear any timers already running
         clearInterval(intervalRef.current);
 
@@ -136,7 +151,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
         clearInterval(intervalRef.current);
         audioRef.current.currentTime = value;
         setTrackProgress(audioRef.current.currentTime);
-        startTimer();
+        startProgressTimer();
     };
 
     const onScrub = (ratio: number) => {
@@ -160,7 +175,10 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
         updateProgress(resultProgress);
     };
 
-    const formatSeconds = (rawSeconds: number) => {
+    const formatSeconds = (
+        rawSeconds: number,
+        format: "colon" | "text" = "colon"
+    ) => {
         const days = Math.floor(rawSeconds / (60 * 60 * 24));
         const hours = Math.floor(
             (rawSeconds - days * 60 * 60 * 24) / (60 * 60)
@@ -170,15 +188,21 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
 
         const pad = (val: number) => `${val}`.padStart(2, "0");
 
-        return (
-            (days
-                ? `${pad(days)}:`
-                : "" + hours
-                ? `${pad(hours)}:`
-                : "" + minutes
-                ? `${pad(minutes)}:`
-                : "00:") + pad(seconds)
-        );
+        if (format == "text") {
+            return (
+                (days ? `${days} days, ` : "") +
+                (hours ? `${hours} hrs, ` : "") +
+                (minutes ? `${minutes} mins, ` : "") +
+                `${seconds} secs`
+            );
+        } else {
+            return (
+                (days ? `${pad(days)}:` : "") +
+                (hours ? `${pad(hours)}:` : "") +
+                (minutes ? `${pad(minutes)}:` : "00:") +
+                pad(seconds)
+            );
+        }
     };
 
     return (
@@ -194,7 +218,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
                     formatFunction={formatSeconds}
                 />
             </div>
-            <div tw="flex">
+            <div tw="flex w-full justify-between">
                 <div tw="pt-6 pl-3 flex">
                     <div tw="mr-3">
                         <div tw="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden relative">
@@ -210,21 +234,24 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
                         <h3 tw="font-bold mt-0 pt-0 leading-none">
                             God&apos;s Purpose with the earth
                         </h3>
-                        <p tw="text-sm text-gray-700">2 mins left</p>
+                        <p tw="text-sm text-gray-700">
+                            {formatSeconds(duration - trackProgress, "text")}{" "}
+                            left
+                        </p>
                     </div>
                 </div>
-                <div tw="pt-6 flex text-gray-500">
+                <div tw="pt-4 flex text-gray-500">
                     <button
                         tw="hidden sm:block"
                         onClick={() => updateProgressBy(-10)}
                     >
                         <RewindTenIcon tw="w-8 h-8" />
                     </button>
-                    <button onClick={togglePlaying}>
+                    <button onClick={togglePlaying} tw="mx-5">
                         {playing ? (
-                            <PauseIcon tw="w-8 h-8" />
+                            <PauseIcon tw="w-11 h-11" />
                         ) : (
-                            <PlayIcon tw="w-8 h-8" />
+                            <PlayIcon tw="w-11 h-11" />
                         )}
                     </button>
                     <button
@@ -237,7 +264,11 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
                 {/* <div tw="hidden sm:block">
                     volume slider
                 </div> */}
-                <p tw="hidden sm:block">00:04/02:25</p>
+                <div tw="hidden sm:block pt-9 pr-8 text-gray-700">
+                    <p>
+                        {formatSeconds(trackProgress)}/{formatSeconds(duration)}
+                    </p>
+                </div>
             </div>
         </div>
     );
