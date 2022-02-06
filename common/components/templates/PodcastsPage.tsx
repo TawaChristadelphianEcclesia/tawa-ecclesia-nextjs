@@ -2,7 +2,7 @@
 import tw, { styled } from "twin.macro";
 import * as React from "react";
 import Image from "next/image";
-import { PlayIcon } from "@heroicons/react/outline";
+import { PauseIcon, PlayIcon } from "@heroicons/react/outline";
 
 import ContentSection from "../elements/ContentSection";
 import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
@@ -69,99 +69,6 @@ const dummyImage = {
     alt: "bible photo",
     blurDataURL: "bible_photo.jpg",
 };
-
-const RangeSlider = styled.input`
-    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-    width: 100%; /* Specific width is required for Firefox. */
-    background: transparent; /* Otherwise white in Chrome */
-
-    &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-    }
-
-    &:focus {
-        outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
-    }
-
-    &::-ms-track {
-        width: 100%;
-        cursor: pointer;
-
-        /* Hides the slider so custom styles can be added */
-        background: transparent;
-        border-color: transparent;
-        color: transparent;
-    }
-
-    /* style thumb */
-    /* Special styling for WebKit/Blink */
-    &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        ${tw`bg-indigo-500 w-4 h-4 rounded-full cursor-pointer -m-2`}
-    }
-
-    /* All the same stuff for Firefox */
-    &::-moz-range-thumb {
-        ${tw`bg-indigo-500 w-4 h-4 rounded-full cursor-pointer`}
-    }
-
-    /* All the same stuff for IE */
-    &::-ms-thumb {
-        ${tw`bg-indigo-500 w-4 h-4 rounded-full cursor-pointer`}
-    }
-
-    &::-webkit-slider-runnable-track {
-        ${tw`w-full bg-indigo-500 h-px`}// width: 100%;
-        // height: 8.4px;
-        // cursor: pointer;
-        // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-        // background: #3071a9;
-        // border-radius: 1.3px;
-        // border: 0.2px solid #010101;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    }
-
-    &:focus::-webkit-slider-runnable-track {
-        ${tw`h-0.5`}// background: #367ebd;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    }
-
-    &::-moz-range-track {
-        width: 100%;
-        height: 8.4px;
-        cursor: pointer;
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-        background: #3071a9;
-        border-radius: 1.3px;
-        border: 0.2px solid #010101;
-    }
-
-    &::-ms-track {
-        width: 100%;
-        height: 8.4px;
-        cursor: pointer;
-        background: transparent;
-        border-color: transparent;
-        border-width: 16px 0;
-        color: transparent;
-    }
-    &::-ms-fill-lower {
-        background: #2a6495;
-        border: 0.2px solid #010101;
-        border-radius: 2.6px;
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    }
-    &:focus::-ms-fill-lower {
-        background: #3071a9;
-    }
-    &::-ms-fill-upper {
-        background: #3071a9;
-        border: 0.2px solid #010101;
-        border-radius: 2.6px;
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    }
-    &:focus::-ms-fill-upper {
-        background: #367ebd;
-    }
-`;
 
 interface IVolumeSlider {
     value?: number;
@@ -243,40 +150,46 @@ const VolumeSlider: React.FC<IVolumeSlider> = ({ value, onUpdate }) => {
 };
 
 const MediaPlayer: React.FC<IMediaPlayer> = () => {
+    const [playing, setPlaying] = React.useState(false);
+    const togglePlaying = () => setPlaying(!playing);
     return (
         <div tw="fixed h-24 filter ring-2 ring-black ring-opacity-5 bg-gray-50 left-0 right-0 bottom-0 z-50">
-            <div tw="absolute left-6 right-6 -translate-y-1/2 ">
+            <div tw="absolute w-full -translate-y-1/2">
                 <VolumeSlider />
             </div>
-            {/* <div tw="w-full h-12">
-                <div tw="w-full h-px" />
-            </div> */}
-            {/* <div tw="absolute w-full -translate-y-1/2"> */}
-            {/* <RangeSlider type="range" /> */}
-            {/* </div> */}
             <div tw="flex">
-                <div>
-                    <div tw="w-14 h-14 rounded-xl overflow-hidden relative">
-                        <Image
-                            layout="fill"
-                            objectFit="cover"
-                            placeholder="blur"
-                            {...dummyImage}
-                        />
+                <div tw="pt-6 pl-3 flex">
+                    <div tw="mr-3">
+                        <div tw="w-14 h-14 rounded-xl overflow-hidden relative">
+                            <Image
+                                layout="fill"
+                                objectFit="cover"
+                                placeholder="blur"
+                                {...dummyImage}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <h3 tw="font-bold mt-0 pt-0 leading-none">
+                            God&apos;s Purpose with the earth
+                        </h3>
+                        <p tw="text-sm text-gray-700">2 mins left</p>
                     </div>
                 </div>
-                <div>
-                    <h3>Title</h3>
-                    <p>2 mins left</p>
-                </div>
-                <div>
-                    <button>back button</button>
-                    <button>play button</button>
-                    <button>forward button </button>
+                <div tw="pt-6 flex text-gray-500">
+                    <button>Replay Ten</button>
+                    <button onClick={togglePlaying}>
+                        {playing ? (
+                            <PlayIcon tw="w-8 h-8" />
+                        ) : (
+                            <PauseIcon tw="w-8 h-8" />
+                        )}
+                    </button>
+                    <button>Forward Thirty</button>
                 </div>
                 <div>
                     volume slider
-                    <RangeSlider type="range" step="any" />
+                    {/* <VolumeSlider /> */}
                 </div>
                 <p>00:04/02:25</p>
             </div>
