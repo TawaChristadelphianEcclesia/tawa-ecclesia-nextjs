@@ -56,9 +56,11 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         draggingRef.current = dragging;
         if (draggingRef.current) {
             document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("drag", onMouseMove);
             document.addEventListener("mouseup", onMouseUp);
         } else if (!draggingRef.current) {
             document.removeEventListener("mousemove", onMouseMove);
+            document.addEventListener("drag", onMouseMove);
             document.removeEventListener("mouseup", onMouseUp);
         }
     }, [dragging]);
