@@ -30,9 +30,16 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         e.preventDefault();
     };
     const onMouseUp = (e: any) => {
-        setDragging(false);
         e.stopPropagation();
         e.preventDefault();
+        if (!draggingRef.current) return;
+        let ratio =
+            (e.pageX - parentSliderEl!.current!.getBoundingClientRect().left) /
+            parentSliderEl!.current!.getBoundingClientRect().width;
+        ratio = ratio > 1 ? 1 : ratio < 0 ? 0 : ratio;
+        setRatio(ratio);
+        onScrub && onScrub(ratio);
+        setDragging(false);
     };
     const onMouseMove = (e: any) => {
         if (!draggingRef.current) return;
