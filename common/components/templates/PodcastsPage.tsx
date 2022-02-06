@@ -3,11 +3,14 @@ import tw, { styled } from "twin.macro";
 import * as React from "react";
 import Image from "next/image";
 import { PauseIcon, PlayIcon } from "@heroicons/react/outline";
+import RewindTenIcon from "../assets/replayTen.svg";
+import ForwardThirtyIcon from "../assets/forwardThirty.svg";
 
 import ContentSection from "../elements/ContentSection";
 import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
 import { IPageData } from "./types";
 import TextHeader, { ITextHeader } from "../elements/TextHeader";
+import RangeSlider from "../elements/RangeSlider";
 
 type IArticlesPageData = IPageData & {
     headerData: ITextHeader;
@@ -70,97 +73,109 @@ const dummyImage = {
     blurDataURL: "bible_photo.jpg",
 };
 
-interface IVolumeSlider {
-    value?: number;
-    onUpdate?: (ratio: number) => void;
-}
-
-const VolumeSlider: React.FC<IVolumeSlider> = ({ value, onUpdate }) => {
-    const [ratio, setRatio] = React.useState(0.5);
-    const [dragging, setDragging] = React.useState(false);
-    const draggingRef = React.useRef(false);
-    const parentSliderEl = React.useRef<HTMLDivElement>(null);
-
-    const onMouseDown = (e: any) => {
-        // only left mouse button
-        if (e.button !== 0) return;
-        setDragging(true);
-        e.stopPropagation();
-        e.preventDefault();
-    };
-    const onMouseUp = (e: any) => {
-        setDragging(false);
-        e.stopPropagation();
-        e.preventDefault();
-    };
-    const onMouseMove = (e: any) => {
-        if (!draggingRef.current) return;
-        const ratio =
-            (e.pageX - parentSliderEl!.current!.getBoundingClientRect().left) /
-            parentSliderEl!.current!.getBoundingClientRect().width;
-        setRatio(ratio > 1 ? 1 : ratio < 0 ? 0 : ratio);
-        e.stopPropagation();
-        e.preventDefault();
-    };
-    React.useEffect(() => {
-        draggingRef.current = dragging;
-        if (draggingRef.current) {
-            document.addEventListener("mousemove", onMouseMove);
-            document.addEventListener("mouseup", onMouseUp);
-        } else if (!draggingRef.current) {
-            document.removeEventListener("mousemove", onMouseMove);
-            document.removeEventListener("mouseup", onMouseUp);
-        }
-    }, [dragging]);
-    React.useEffect(() => {
-        value && setRatio(value);
-    }, [value]);
-    React.useEffect(() => {
-        onUpdate && onUpdate(ratio);
-    }, [ratio, onUpdate]);
-
-    return (
-        <div
-            tw="w-full h-12 cursor-pointer"
-            className="group"
-            role="slider"
-            aria-valuemin={0}
-            aria-valuemax={10000}
-            aria-valuenow={10000 * ratio}
-            onMouseDown={onMouseDown}
-            ref={parentSliderEl}
-        >
-            <div tw="h-px bg-indigo-300 absolute top-6 w-full"></div>
-            <div
-                tw="bg-indigo-400 absolute left-0 w-full origin-left"
-                css={`
-                    top: 23px;
-                    height: 3px;
-                    transform: scale(${ratio}, 1);
-                `}
-            />
-            <div
-                tw="absolute w-4 h-4 -ml-2 rounded-full bg-indigo-400 top-4 transform transition duration-300 group-active:scale-150"
-                css={`
-                    left: ${ratio * 100}%;
-                `}
-            />
-        </div>
-    );
-};
+const audioSrc = "/short_music_podcast_placeholder.mp3";
 
 const MediaPlayer: React.FC<IMediaPlayer> = () => {
     const [playing, setPlaying] = React.useState(false);
+    const [trackProgress, setTrackProgress] = React.useState(0);
+    const [duration, setDuration] = React.useState(0);
+    const audioRef = React.useRef<HTMLAudioElement>();
+    // const { duration } = audioRef.current;
+    const intervalRef = React.useRef<number>();
+    const isReady = React.useRef(false);
+
+    // define audio
+
+    React.useEffect(() => {
+        audioRef.current = new Audio(audioSrc);
+        setDuration(audioRef.current.duration);
+    }, []);
+
+    // play pause
+    React.useEffect(() => {
+        if (playing) {
+            audioRef.current?.play();
+            startTimer();
+        } else {
+            audioRef.current?.pause();
+        }
+    }, [playing]);
+
+    // cleanup on unmount
+    React.useEffect(() => {
+        // Pause and clean up on unmount
+        return () => {
+            audioRef.current?.pause();
+            clearInterval(intervalRef.current);
+        };
+    }, []);
+
+    // timer to check on track and set progress
+    const startTimer = () => {
+        // Clear any timers already running
+        clearInterval(intervalRef.current);
+
+        intervalRef.current = window.setInterval(() => {
+            if (audioRef.current?.ended) {
+                // toNextTrack();
+                setPlaying(false);
+            } else {
+                setTrackProgress(audioRef.current?.currentTime ?? 0);
+            }
+        }, 200);
+    };
+
+    const getProgressRatio = (trackProgress: number, duration: number) =>
+        duration == 0 ? 0 : trackProgress / duration;
+
     const togglePlaying = () => setPlaying(!playing);
+
+    const updateProgress = (value: number) => {
+        if (!audioRef.current) return;
+        // Clear any timers already running
+        clearInterval(intervalRef.current);
+        audioRef.current.currentTime = value;
+        setTrackProgress(audioRef.current.currentTime);
+        startTimer();
+    };
+
+    const onScrub = (ratio: number) => {
+        if (!audioRef.current) return;
+        const value =
+            (isNaN(audioRef.current?.duration ?? 0)
+                ? 0
+                : audioRef.current?.duration ?? 0) * ratio;
+        updateProgress(value);
+    };
+
+    const updateProgressBy = (secs: number) => {
+        if (!audioRef.current) return;
+        const resultProgress =
+            audioRef.current.currentTime + secs < 0
+                ? 0
+                : audioRef.current.currentTime + secs >
+                  audioRef.current.duration
+                ? audioRef.current.duration
+                : audioRef.current.currentTime + secs;
+        updateProgress(resultProgress);
+    };
+
     return (
         <div tw="fixed h-24 filter ring-2 ring-black ring-opacity-5 bg-gray-50 left-0 right-0 bottom-0 z-50">
             <div tw="absolute w-full -translate-y-1/2">
-                <VolumeSlider />
+                <RangeSlider
+                    value={getProgressRatio(
+                        trackProgress,
+                        audioRef.current?.duration ?? 0
+                    )}
+                    onScrub={(ratio) => onScrub(ratio)}
+                    duration={audioRef.current?.duration}
+                />
             </div>
             <div tw="flex">
                 <div tw="pt-6 pl-3 flex">
                     <div tw="mr-3">
-                        <div tw="w-14 h-14 rounded-xl overflow-hidden relative">
+                        <div tw="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden relative">
                             <Image
                                 layout="fill"
                                 objectFit="cover"
@@ -177,21 +192,30 @@ const MediaPlayer: React.FC<IMediaPlayer> = () => {
                     </div>
                 </div>
                 <div tw="pt-6 flex text-gray-500">
-                    <button>Replay Ten</button>
+                    <button
+                        tw="hidden sm:block"
+                        onClick={() => updateProgressBy(-10)}
+                    >
+                        <RewindTenIcon tw="w-8 h-8" />
+                    </button>
                     <button onClick={togglePlaying}>
                         {playing ? (
-                            <PlayIcon tw="w-8 h-8" />
-                        ) : (
                             <PauseIcon tw="w-8 h-8" />
+                        ) : (
+                            <PlayIcon tw="w-8 h-8" />
                         )}
                     </button>
-                    <button>Forward Thirty</button>
+                    <button
+                        tw="hidden sm:block"
+                        onClick={() => updateProgressBy(30)}
+                    >
+                        <ForwardThirtyIcon tw="w-8 h-8" />
+                    </button>
                 </div>
-                <div>
+                {/* <div tw="hidden sm:block">
                     volume slider
-                    {/* <VolumeSlider /> */}
-                </div>
-                <p>00:04/02:25</p>
+                </div> */}
+                <p tw="hidden sm:block">00:04/02:25</p>
             </div>
         </div>
     );
