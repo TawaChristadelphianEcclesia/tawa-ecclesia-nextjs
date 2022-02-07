@@ -31,6 +31,7 @@ const templatePodcast: IPodcastsPage["pageData"]["podcasts"][0] = {
     description:
         "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti quos quis architecto nobis, cumque quia recusandae voluptate ipsa eveniet voluptates aperiam laudantium necessitatibus, magnam ab dolorum, quisquam magni amet doloribus. ",
     date: new Date(),
+    fileUrl: "/short_music_podcast_placeholder.mp3",
 };
 
 export const podcasts = Array.from({ length: 8 }, (_, i) => ({
