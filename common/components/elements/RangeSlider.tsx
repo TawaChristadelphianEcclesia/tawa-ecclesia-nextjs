@@ -26,6 +26,15 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         // only left mouse button
         if (e.button !== 0) return;
         setDragging(true);
+        console.log("set dragging true");
+        e.stopPropagation();
+        e.preventDefault();
+    };
+    const onTouchStart = (e: any) => {
+        // only left mouse button
+        // if (e.button !== 0) return;
+        setDragging(true);
+        console.log("set dragging true");
         e.stopPropagation();
         e.preventDefault();
     };
@@ -52,15 +61,27 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         e.stopPropagation();
         e.preventDefault();
     };
+    const onTouchMove = (e: any) => {
+        if (!draggingRef.current) return;
+        const pageX = e.touches[0].pageX;
+        let ratio =
+            (pageX - parentSliderEl!.current!.getBoundingClientRect().left) /
+            parentSliderEl!.current!.getBoundingClientRect().width;
+        ratio = ratio > 1 ? 1 : ratio < 0 ? 0 : ratio;
+        setRatio(ratio);
+        onScrub && onScrub(ratio);
+        e.stopPropagation();
+        e.preventDefault();
+    };
     React.useEffect(() => {
         draggingRef.current = dragging;
         if (draggingRef.current) {
             document.addEventListener("mousemove", onMouseMove);
-            document.addEventListener("drag", onMouseMove);
+            document.addEventListener("touchmove", onTouchMove);
             document.addEventListener("mouseup", onMouseUp);
         } else if (!draggingRef.current) {
             document.removeEventListener("mousemove", onMouseMove);
-            document.removeEventListener("drag", onMouseMove);
+            document.removeEventListener("touchmove", onTouchMove);
             document.removeEventListener("mouseup", onMouseUp);
         }
     }, [dragging]);
@@ -80,12 +101,13 @@ const RangeSlider: React.FC<IRangeSlider> = ({
             aria-valuemax={10000}
             aria-valuenow={10000 * ratio}
             onMouseDown={onMouseDown}
+            onTouchStart={onTouchStart}
             ref={parentSliderEl}
         >
             <div tw="h-px bg-indigo-300 absolute top-6 w-full"></div>
             <div
                 css={[
-                    tw`bg-indigo-400 absolute left-0 w-full origin-left ease-linear group-active:transition-none transition-transform duration-200`,
+                    tw`bg-indigo-400 absolute left-0 w-full origin-left ease-linear group-active:transition-none group-focus:transition-none transition-transform duration-200`,
                     `
                     top: 23px;
                     height: 3px;
@@ -94,7 +116,7 @@ const RangeSlider: React.FC<IRangeSlider> = ({
                 ]}
             />
             <div
-                tw="absolute w-4 h-4 -ml-2 rounded-full bg-indigo-400 top-4 transform transition-all duration-200 ease-linear group-active:transition-transform group-active:duration-300 group-active:scale-150"
+                tw="absolute w-4 h-4 -ml-2 rounded-full bg-indigo-400 top-4 transform transition-all duration-200 ease-linear group-active:transition-transform group-focus:transition-transform group-active:duration-300 group-active:scale-150 group-focus:scale-150"
                 css={`
                     left: ${ratio * 100}%;
                 `}
