@@ -16,9 +16,47 @@ export interface IMediaTrack {
 
 interface IMediaPlayer {
     track: IMediaTrack;
+    onStatusChange?: (status: PlayerStatus) => void;
+    // onPlayingChange?: (playing: boolean) => void;
+    // onLoadingChange?: (loading: boolean) => void;
 }
 
-const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
+export type PlayerStatus = "idle" | "loading" | "playing" | "paused";
+
+export const formatSeconds = (
+    rawSeconds: number,
+    format: "colon" | "text" = "colon"
+) => {
+    const days = Math.floor(rawSeconds / (60 * 60 * 24));
+    const hours = Math.floor((rawSeconds - days * 60 * 60 * 24) / (60 * 60));
+    const minutes = Math.floor((rawSeconds - hours * 60 * 60) / 60);
+    const seconds = Math.floor(rawSeconds - minutes * 60);
+
+    const pad = (val: number) => `${val}`.padStart(2, "0");
+
+    if (format == "text") {
+        return (
+            (days ? `${days} days, ` : "") +
+            (hours ? `${hours} hrs, ` : "") +
+            (minutes ? `${minutes} mins, ` : "") +
+            `${seconds} secs`
+        );
+    } else {
+        return (
+            (days ? `${pad(days)}:` : "") +
+            (hours ? `${pad(hours)}:` : "") +
+            (minutes ? `${pad(minutes)}:` : "00:") +
+            pad(seconds)
+        );
+    }
+};
+
+const MediaPlayer: React.FC<IMediaPlayer> = ({
+    track,
+    onStatusChange,
+    // onLoadingChange,
+    // onPlayingChange,
+}) => {
     const [playing, setPlaying] = React.useState(false);
     const [loading, setLoading] = React.useState(true);
     const [trackProgress, setTrackProgress] = React.useState(0);
@@ -27,15 +65,16 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
     // const { duration } = audioRef.current;
     const intervalRef = React.useRef<number>();
     const durationIntervalRef = React.useRef<number>();
+
     // const isReady = React.useRef(false);
 
     // define audio
-
     React.useEffect(() => {
         audioRef.current?.pause();
         clearInterval(durationIntervalRef.current);
         setDuration(0);
         setTrackProgress(0);
+        setLoading(true);
         audioRef.current = new Audio(track.fileUrl);
         audioRef.current.oncanplay = () => {
             setLoading(false);
@@ -54,6 +93,17 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
             audioRef.current?.pause();
         }
     }, [playing]);
+    React.useEffect(() => {
+        if (onStatusChange) {
+            if (loading) {
+                onStatusChange("loading");
+            } else if (playing) {
+                onStatusChange("playing");
+            } else if (!playing) {
+                onStatusChange("paused");
+            }
+        }
+    }, [loading, playing, onStatusChange]);
 
     // cleanup on unmount
     React.useEffect(() => {
@@ -61,6 +111,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
         return () => {
             audioRef.current?.pause();
             clearInterval(intervalRef.current);
+            onStatusChange && onStatusChange("idle");
         };
     }, []);
 
@@ -129,36 +180,6 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
         updateProgress(resultProgress);
     };
 
-    const formatSeconds = (
-        rawSeconds: number,
-        format: "colon" | "text" = "colon"
-    ) => {
-        const days = Math.floor(rawSeconds / (60 * 60 * 24));
-        const hours = Math.floor(
-            (rawSeconds - days * 60 * 60 * 24) / (60 * 60)
-        );
-        const minutes = Math.floor((rawSeconds - hours * 60 * 60) / 60);
-        const seconds = Math.floor(rawSeconds - minutes * 60);
-
-        const pad = (val: number) => `${val}`.padStart(2, "0");
-
-        if (format == "text") {
-            return (
-                (days ? `${days} days, ` : "") +
-                (hours ? `${hours} hrs, ` : "") +
-                (minutes ? `${minutes} mins, ` : "") +
-                `${seconds} secs`
-            );
-        } else {
-            return (
-                (days ? `${pad(days)}:` : "") +
-                (hours ? `${pad(hours)}:` : "") +
-                (minutes ? `${pad(minutes)}:` : "00:") +
-                pad(seconds)
-            );
-        }
-    };
-
     return (
         <div tw="fixed h-24 filter ring-2 ring-black ring-opacity-5 bg-gray-50 left-0 right-0 bottom-0 z-50">
             <div tw="absolute w-full -translate-y-1/2">
@@ -173,7 +194,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
                 />
             </div>
             <div tw="flex w-full justify-between">
-                <div tw="pt-6 pl-3 flex">
+                <div tw="flex-1 pt-6 pl-3 flex">
                     <div tw="mr-3">
                         <div tw="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden relative">
                             <Image
@@ -190,7 +211,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
                         </h3>
                         <p tw="text-sm text-gray-700">
                             {loading
-                                ? "Loading..."
+                                ? "Buffering..."
                                 : `${formatSeconds(
                                       duration - trackProgress,
                                       "text"
@@ -198,7 +219,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
                         </p>
                     </div>
                 </div>
-                <div tw="pt-4 flex text-gray-500">
+                <div tw="sm:flex-1 flex justify-end h-full sm:justify-center pt-7 text-gray-500">
                     <button
                         tw="hidden sm:block"
                         onClick={() => updateProgressBy(-10)}
@@ -219,11 +240,8 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
                         <ForwardThirtyIcon tw="w-8 h-8" />
                     </button>
                 </div>
-                {/* <div tw="hidden sm:block">
-                    volume slider
-                </div> */}
-                <div tw="hidden sm:block pt-9 pr-8 text-gray-700">
-                    <p>
+                <div tw="flex-1 justify-end hidden sm:block pt-9 pr-8 text-gray-700">
+                    <p tw="text-right">
                         {formatSeconds(trackProgress)}/{formatSeconds(duration)}
                     </p>
                 </div>

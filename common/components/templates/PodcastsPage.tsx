@@ -2,13 +2,19 @@
 import tw, { styled } from "twin.macro";
 import * as React from "react";
 import Image from "next/image";
-import { PlayIcon } from "@heroicons/react/outline";
+import { PauseIcon, PlayIcon } from "@heroicons/react/outline";
+import BarsIcon from "../assets/bars.svg";
+import SpinIcon from "../assets/tail-spin.svg";
 
 import ContentSection from "../elements/ContentSection";
 import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
 import { IPageData } from "./types";
 import TextHeader, { ITextHeader } from "../elements/TextHeader";
-import MediaPlayer, { IMediaTrack } from "../elements/MediaPlayer";
+import MediaPlayer, {
+    formatSeconds,
+    IMediaTrack,
+    PlayerStatus,
+} from "../elements/MediaPlayer";
 
 type IArticlesPageData = IPageData & {
     headerData: ITextHeader;
@@ -26,9 +32,11 @@ export interface IPodcastData {
     description: string;
     date: Date;
     fileUrl: string;
+    duration: number;
 }
 
 type IPodcastListEntry = IPodcastData & {
+    playStatus: PlayerStatus;
     onPlay: (track: IMediaTrack) => void;
 };
 
@@ -39,6 +47,8 @@ const PodcastListEntry: React.FC<IPodcastListEntry> = ({
     date,
     fileUrl,
     onPlay,
+    duration,
+    playStatus,
 }) => (
     <div tw="py-3 px-3 flex gap-3">
         <div>
@@ -59,14 +69,33 @@ const PodcastListEntry: React.FC<IPodcastListEntry> = ({
                     onClick={() => onPlay({ thumbnail: image, title, fileUrl })}
                     tw="flex items-center px-1 py-1 text-sm tracking-wide text-indigo-600 focus:text-white hover:text-white active:text-white uppercase transition-colors duration-200 rounded-full bg-indigo-200 hover:bg-indigo-500 focus:bg-indigo-500 active:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
                 >
-                    <PlayIcon tw="w-5 h-5 mx-1" />
-                    <span tw="mr-2">Play</span>
+                    {playStatus == "idle" ? (
+                        <>
+                            <PlayIcon tw="w-5 h-5 mx-1" />{" "}
+                            <span tw="mr-2">Play</span>
+                        </>
+                    ) : playStatus == "loading" ? (
+                        <>
+                            <SpinIcon tw="w-4 h-4 mx-1" />{" "}
+                            <span tw="mr-2">Loading</span>
+                        </>
+                    ) : playStatus == "playing" ? (
+                        <>
+                            <BarsIcon tw="w-4 h-4 mx-1" />{" "}
+                            <span tw="mr-2">Playing</span>
+                        </>
+                    ) : (
+                        <>
+                            <PauseIcon tw="w-5 h-5 mx-1" />{" "}
+                            <span tw="mr-2">Paused</span>
+                        </>
+                    )}
                 </button>
                 <span tw="text-gray-600 text-sm tracking-tight ml-3">
                     {`${date.toLocaleString("default", {
                         month: "short",
                         day: "2-digit",
-                    })} • 40 mins 11 sec`}
+                    })} • ${formatSeconds(duration, "text")}`}
                 </span>
             </div>
         </div>
@@ -78,6 +107,23 @@ const PodcastsPage: React.FC<IPodcastsPage> = ({
     pageData: { seo, headerData, podcasts },
 }) => {
     const [track, setTrack] = React.useState<IMediaTrack>();
+    const [trackIndex, setTrackIndex] = React.useState<number>();
+    const handleOnPlay = (track: IMediaTrack, index: number) => {
+        setTrackIndex(index);
+        setTrack(track);
+    };
+    const [playStatus, setPlayStatus] = React.useState<PlayerStatus>("idle");
+    const getStatus = (
+        i: number,
+        playStatus: PlayerStatus,
+        trackIndex?: number
+    ): PlayerStatus => {
+        if (i == trackIndex) {
+            return playStatus;
+        } else {
+            return "idle";
+        }
+    };
     return (
         <DefaultLayout global={globalData} seo={seo}>
             <ContentSection>
@@ -91,15 +137,24 @@ const PodcastsPage: React.FC<IPodcastsPage> = ({
                             <PodcastListEntry
                                 key={i}
                                 {...podcast}
-                                onPlay={setTrack}
+                                playStatus={getStatus(
+                                    i,
+                                    playStatus,
+                                    trackIndex
+                                )}
+                                onPlay={(track) => handleOnPlay(track, i)}
                             />
                         ))}
                     </div>
                 </div>
             </ContentSection>
-            {track && <MediaPlayer track={track} />}
+            {track && (
+                <MediaPlayer track={track} onStatusChange={setPlayStatus} />
+            )}
         </DefaultLayout>
     );
 };
 
 export default PodcastsPage;
+
+// onPlayingChange, onLoadingChange

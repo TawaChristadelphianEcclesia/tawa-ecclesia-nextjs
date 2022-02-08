@@ -1,3 +1,4 @@
+import { getAudioDurationInSeconds } from "get-audio-duration";
 import {
     IPodcastData,
     IPodcastsPage,
@@ -12,15 +13,19 @@ import { podcasts as tempStoryPodcasts } from "../components/templates/PodcastsP
 import { Podcasts } from "../api/__generated__/Podcasts";
 import { getImageData } from "./ImageData";
 
-// image: IImageData;
-// title: string;
-// description: string;
-// date: Date;
-// fileUrl: string;
+// function getDuration(src: string): Promise<number> {
+//     return new Promise(function (resolve) {
+//         var audio = new Audio();
+//         audio.onloadedmetadata = () => {
+//             resolve(audio.duration);
+//         };
+//         audio.src = src;
+//     });
+// }
 
-const getPodcastData = (data: Podcasts): IPodcastData[] => {
-    return (
-        data.podcasts?.data.map((podcast) => ({
+const getPodcastData = async (data: Podcasts): Promise<IPodcastData[]> => {
+    return Promise.all(
+        data.podcasts?.data.map(async (podcast) => ({
             title: podcast.attributes!.title,
             description: podcast.attributes!.description ?? "",
             date: new Date(podcast.attributes!.publishedAt as string),
@@ -28,6 +33,9 @@ const getPodcastData = (data: Podcasts): IPodcastData[] => {
                 podcast.attributes!.thumbnail.data?.attributes!
             ),
             fileUrl: podcast.attributes?.audio.data?.attributes?.url ?? "",
+            duration: await getAudioDurationInSeconds(
+                podcast.attributes?.audio.data?.attributes?.url ?? ""
+            ),
         })) || []
     );
 };
@@ -38,8 +46,7 @@ export const getPodcastHomePageData = async (): Promise<IPodcastsPage> => {
     ).podcastPage?.data?.attributes;
     const podcastsData = await getAPIPodcastsData();
     const seo = getSeoData(homepageData?.seo);
-    const podcasts = getPodcastData(podcastsData);
-    // const podcasts = tempStoryPodcasts;
+    const podcasts = await getPodcastData(podcastsData);
 
     const pageData: IPodcastsPage["pageData"] = {
         seo,
