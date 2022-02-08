@@ -20,6 +20,7 @@ interface IMediaPlayer {
 
 const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
     const [playing, setPlaying] = React.useState(false);
+    const [loading, setLoading] = React.useState(true);
     const [trackProgress, setTrackProgress] = React.useState(0);
     const [duration, setDuration] = React.useState(0);
     const audioRef = React.useRef<HTMLAudioElement>();
@@ -31,9 +32,18 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
     // define audio
 
     React.useEffect(() => {
+        audioRef.current?.pause();
+        clearInterval(durationIntervalRef.current);
+        setDuration(0);
+        setTrackProgress(0);
         audioRef.current = new Audio(track.fileUrl);
+        audioRef.current.oncanplay = () => {
+            setLoading(false);
+        };
+        setPlaying(true);
+        audioRef.current?.play();
         startDurationTimer();
-    }, []);
+    }, [track]);
 
     // play pause
     React.useEffect(() => {
@@ -58,6 +68,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
     const startDurationTimer = () => {
         clearInterval(durationIntervalRef.current);
         durationIntervalRef.current = window.setInterval(() => {
+            console.log(audioRef.current);
             if (
                 audioRef.current?.duration &&
                 !isNaN(audioRef.current?.duration)
@@ -178,8 +189,12 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({ track }) => {
                             {track.title}
                         </h3>
                         <p tw="text-sm text-gray-700">
-                            {formatSeconds(duration - trackProgress, "text")}{" "}
-                            left
+                            {loading
+                                ? "Loading..."
+                                : `${formatSeconds(
+                                      duration - trackProgress,
+                                      "text"
+                                  )} left`}
                         </p>
                     </div>
                 </div>

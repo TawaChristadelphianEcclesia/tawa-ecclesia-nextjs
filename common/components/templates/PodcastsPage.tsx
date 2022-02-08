@@ -20,7 +20,7 @@ export interface IPodcastsPage {
     pageData: IArticlesPageData;
 }
 
-interface IPodcastData {
+export interface IPodcastData {
     image: IImageData;
     title: string;
     description: string;
