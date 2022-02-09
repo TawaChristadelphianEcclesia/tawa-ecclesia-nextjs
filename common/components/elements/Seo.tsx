@@ -35,7 +35,7 @@ const Seo = ({
                 content="summary_large_image"
                 key="twitter:card"
             />
-            <meta property="og:url" content={"url"} key="og:url" />
+            {/* <meta property="og:url" content={"url"} key="og:url" /> */}
             <meta property="og:title" content={metaTitle} key="og:title" />
             <meta
                 property="og:description"
@@ -51,7 +51,7 @@ const Seo = ({
             )}
 
             <meta property="og:type" content="website" />
-            <link rel="canonical" href={"url"} />
+            {/* <link rel="canonical" href={"url"} /> */}
             {metaTags &&
                 metaTags.map((meta, index) => (
                     <meta name={meta.name} content={meta.content} key={index} />
