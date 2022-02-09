@@ -1,5 +1,5 @@
 interface IImageData {
-  url: string;
-  alt?: string;
-  blurDataURL?: string;
+    src: string;
+    alt?: string;
+    blurDataURL?: string;
 }

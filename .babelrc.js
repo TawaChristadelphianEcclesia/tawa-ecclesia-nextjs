@@ -11,5 +11,5 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['@emotion/babel-plugin', 'babel-plugin-macros'],
+  plugins: ['@emotion/babel-plugin', 'babel-plugin-macros', 'superjson-next'],
 }

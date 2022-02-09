@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: <site url - for sitemap>
+
+# Sitemaps
+Sitemap: <site url - for sitemap>/sitemap.xml
+Sitemap: <site url - for sitemap>/sitemap-0.xml
