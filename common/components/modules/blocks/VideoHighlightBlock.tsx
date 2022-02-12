@@ -46,7 +46,7 @@ const VideoHighlightBlock: React.FC<IVideoHighlightBlock> = ({
                             {subtitle && <i tw="text-gray-700">{subtitle}</i>}
                         </div>
                         <p tw="text-gray-900">{body}</p>
-                        <div tw="mt-auto flex justify-center gap-5">
+                        <div tw="mt-auto pt-5 flex justify-center gap-5">
                             <div>
                                 <Button
                                     variant="contained"

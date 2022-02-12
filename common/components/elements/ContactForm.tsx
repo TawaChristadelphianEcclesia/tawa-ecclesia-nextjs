@@ -26,9 +26,8 @@ const ContactForm: React.FC<IContactForm> = ({ endpoint, title }) => {
     const [name, setName] = useState<string>();
     const [message, setMessage] = useState<string>();
     // const [statusMessage, setStatusMessage] = useState<string>("send");
-    const [status, setStatus] = useState<
-        "ready" | "sending" | "sent" | "error"
-    >("ready");
+    const [status, setStatus] =
+        useState<"ready" | "sending" | "sent" | "error">("ready");
     return (
         <>
             <h2 tw="text-gray-900 text-4xl mb-5">{title}</h2>
@@ -50,7 +49,7 @@ const ContactForm: React.FC<IContactForm> = ({ endpoint, title }) => {
                     value={message}
                     setValue={setMessage}
                 />
-                <div tw="w-full grid justify-items-end">
+                <div tw="w-full grid justify-items-end pt-5">
                     <Button
                         onClick={handleSubmit}
                         color={

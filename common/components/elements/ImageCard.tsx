@@ -47,7 +47,7 @@ const ImageCard: React.FC<IImageCard> = ({
                     {subtitle && <i tw="text-gray-700">{subtitle}</i>}
                 </div>
                 <p tw="text-gray-900">{body}</p>
-                <div tw="mt-auto flex justify-center gap-5">
+                <div tw="mt-auto pt-5 flex justify-center gap-5">
                     {leftLink && (
                         <div>
                             <Button href={leftLink.url} variant="contained">
