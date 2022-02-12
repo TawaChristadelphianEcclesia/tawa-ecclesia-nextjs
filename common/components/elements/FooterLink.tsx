@@ -8,17 +8,16 @@ export interface ILinkData {
     url: string;
 }
 
-const FooterLink: React.FC<ILinkData> = ({
-    label,
-    url,
-  }) => {
+const FooterLink: React.FC<ILinkData> = ({ label, url }) => {
     return (
-      <li>
-        <Link href={url} passHref>
-          <a tw="text-gray-400 cursor-pointer hover:text-gray-500">{label}</a>
-        </Link>
-      </li>
+        <li>
+            <Link href={url} passHref>
+                <a tw="text-gray-400 cursor-pointer text-center hover:text-gray-500">
+                    {label}
+                </a>
+            </Link>
+        </li>
     );
-  };
+};
 
 export default FooterLink;
