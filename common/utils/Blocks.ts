@@ -128,8 +128,8 @@ export const mapAPIToBlock = async (
                 data: {
                     title: apiRelatedArticlesBlockData.Title,
                     articles: apiRelatedArticlesBlockData.articles
-                        ? apiRelatedArticlesBlockData.articles?.data.map(
-                              ({ attributes }) => ({
+                        ? apiRelatedArticlesBlockData.articles?.data
+                              .map(({ attributes }) => ({
                                   url:
                                       getPathFromSlug(
                                           attributes?.slug as string,
@@ -157,8 +157,12 @@ export const mapAPIToBlock = async (
                                   readingTime: getTextReadingTime(
                                       attributes!.content || ""
                                   ),
-                              })
-                          )
+                              }))
+                              .sort(
+                                  (a, b) =>
+                                      b.datePublished.getTime() -
+                                      a.datePublished.getTime()
+                              )
                         : [],
                 },
             };
