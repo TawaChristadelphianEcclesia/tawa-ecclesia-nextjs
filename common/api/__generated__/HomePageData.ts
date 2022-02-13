@@ -202,7 +202,7 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticle
   data: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_replaceimage_data | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data_attributes_image_data_attributes {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data_attributes_image_data_attributes {
   __typename: "UploadFile";
   name: string;
   alternativeText: string | null;
@@ -222,43 +222,45 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticle
   updatedAt: any | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data_attributes_image_data {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data_attributes_image_data {
   __typename: "UploadFileEntity";
   id: string | null;
-  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data_attributes_image_data_attributes | null;
+  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data_attributes_image_data_attributes | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data_attributes_image {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data_attributes_image {
   __typename: "UploadFileEntityResponse";
-  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data_attributes_image_data | null;
+  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data_attributes_image_data | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data_attributes {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data_attributes {
   __typename: "Article";
   slug: string;
-  image: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data_attributes_image;
+  image: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data_attributes_image;
   title: string;
   summary: string | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data {
   __typename: "ArticleEntity";
-  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data_attributes | null;
+  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data_attributes | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article {
-  __typename: "ArticleEntityResponse";
-  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article_data | null;
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles {
+  __typename: "ArticleRelationResponseCollection";
+  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles_data[];
 }
 
 export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight {
   __typename: "ComponentBlocksArticleHighlight";
   title: string;
+  subtitle: string | null;
+  description: string | null;
   replaceimage: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_replaceimage | null;
-  article: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_article | null;
+  articles: HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight_articles | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image_data_attributes {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data_attributes_image_data_attributes {
   __typename: "UploadFile";
   name: string;
   alternativeText: string | null;
@@ -278,34 +280,34 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHi
   updatedAt: any | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image_data {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data_attributes_image_data {
   __typename: "UploadFileEntity";
   id: string | null;
-  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image_data_attributes | null;
+  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data_attributes_image_data_attributes | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data_attributes_image {
   __typename: "UploadFileEntityResponse";
-  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image_data | null;
+  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data_attributes_image_data | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data_attributes {
   __typename: "Video";
   title: string;
   subtitle: string | null;
   description: string | null;
   url: string | null;
-  image: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes_image;
+  image: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data_attributes_image;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data {
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data {
   __typename: "VideoEntity";
-  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data_attributes | null;
+  attributes: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data_attributes | null;
 }
 
-export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video {
-  __typename: "VideoEntityResponse";
-  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video_data | null;
+export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos {
+  __typename: "VideoRelationResponseCollection";
+  data: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos_data[];
 }
 
 export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_replaceImage_data_attributes {
@@ -342,7 +344,9 @@ export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHi
 export interface HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight {
   __typename: "ComponentBlocksVideoHighlight";
   title: string;
-  video: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_video | null;
+  subtitle: string | null;
+  description: string | null;
+  videos: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_videos | null;
   replaceImage: HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight_replaceImage | null;
 }
 

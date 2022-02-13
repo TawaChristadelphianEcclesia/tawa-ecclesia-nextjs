@@ -3,17 +3,22 @@ import tw, { css, styled } from "twin.macro";
 import React from "react";
 import Card from "../../elements/Card";
 import ContentSection from "../../elements/ContentSection";
-import ImageCard from "../../elements/ImageCard";
 import VideoOverlay from "../../elements/VideoOverlay";
 import Image from "next/image";
 import Button from "../../elements/Button";
 
-export interface IVideoHighlightBlock {
+interface IVideoDetails {
     url: string;
+    title: string;
+    description?: string;
+}
+
+export interface IVideoHighlightBlock {
     image: IImageData;
     title: string;
     subtitle?: string;
     body: string;
+    highlightVideo?: IVideoDetails;
 }
 
 const VideoHighlightBlock: React.FC<IVideoHighlightBlock> = ({
@@ -21,7 +26,7 @@ const VideoHighlightBlock: React.FC<IVideoHighlightBlock> = ({
     title,
     subtitle,
     body,
-    url,
+    highlightVideo,
 }) => {
     const [overlayShowing, setOverlayShowing] = React.useState(false);
 
@@ -46,14 +51,26 @@ const VideoHighlightBlock: React.FC<IVideoHighlightBlock> = ({
                             {subtitle && <i tw="text-gray-700">{subtitle}</i>}
                         </div>
                         <p tw="text-gray-900">{body}</p>
+                        {highlightVideo && (
+                            <>
+                                <h2 tw="text-gray-900 font-sans text-lg sm:text-xl font-bold mt-2">
+                                    {highlightVideo.title}
+                                </h2>
+                                <p tw="text-gray-900 line-clamp-4 overflow-ellipsis">
+                                    {highlightVideo.description}
+                                </p>
+                            </>
+                        )}
                         <div tw="mt-auto pt-5 flex justify-center gap-5">
                             <div>
-                                <Button
-                                    variant="contained"
-                                    onClick={() => setOverlayShowing(true)}
-                                >
-                                    {"Watch"}
-                                </Button>
+                                {highlightVideo && (
+                                    <Button
+                                        variant="contained"
+                                        onClick={() => setOverlayShowing(true)}
+                                    >
+                                        {"Watch"}
+                                    </Button>
+                                )}
                             </div>
                             <div>
                                 <Button href={"/videos"} variant="contained">
@@ -64,13 +81,13 @@ const VideoHighlightBlock: React.FC<IVideoHighlightBlock> = ({
                     </div>
                 </div>
             </Card>
-            {/* {overlayShowing && ( */}
-            <VideoOverlay
-                url={url}
-                visible={overlayShowing}
-                onClose={() => setOverlayShowing(false)}
-            />
-            {/* )} */}
+            {highlightVideo && (
+                <VideoOverlay
+                    url={highlightVideo.url}
+                    visible={overlayShowing}
+                    onClose={() => setOverlayShowing(false)}
+                />
+            )}
         </ContentSection>
     );
 };

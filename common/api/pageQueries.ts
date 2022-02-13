@@ -82,15 +82,57 @@ export const getHomePageData = async () => {
                                 ... on ComponentBlocksArticleHighlight {
                                     __typename
                                     title
+                                    subtitle
+                                    description
                                     replaceimage {
-                                        ...UploadFileEntityResponseFragment
+                                        data {
+                                            id
+                                            attributes {
+                                                name
+                                                alternativeText
+                                                caption
+                                                width
+                                                height
+                                                formats
+                                                hash
+                                                ext
+                                                mime
+                                                size
+                                                url
+                                                previewUrl
+                                                provider
+                                                provider_metadata
+                                                createdAt
+                                                updatedAt
+                                            }
+                                        }
                                     }
-                                    article {
+                                    articles {
                                         data {
                                             attributes {
                                                 slug
                                                 image {
-                                                    ...UploadFileEntityResponseFragment
+                                                    data {
+                                                        id
+                                                        attributes {
+                                                            name
+                                                            alternativeText
+                                                            caption
+                                                            width
+                                                            height
+                                                            formats
+                                                            hash
+                                                            ext
+                                                            mime
+                                                            size
+                                                            url
+                                                            previewUrl
+                                                            provider
+                                                            provider_metadata
+                                                            createdAt
+                                                            updatedAt
+                                                        }
+                                                    }
                                                 }
                                                 title
                                                 summary
@@ -101,7 +143,9 @@ export const getHomePageData = async () => {
                                 ... on ComponentBlocksVideoHighlight {
                                     __typename
                                     title
-                                    video {
+                                    subtitle
+                                    description
+                                    videos {
                                         data {
                                             attributes {
                                                 title
