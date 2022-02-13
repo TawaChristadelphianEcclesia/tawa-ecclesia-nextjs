@@ -60,7 +60,7 @@ export const getArticleHomePageData = async (): Promise<IArticlesPage> => {
         ...(await getArticleList()),
     ]
         .map((articleData) => ({
-            url: getPathFromSlug(articleData.attributes?.slug || "", "article"),
+            url: getPathFromSlug(articleData.attributes?.slug || "", "article")!,
             title: articleData.attributes?.title || "",
             titleImage: getImageData(
                 articleData?.attributes?.image?.data?.attributes ?? undefined
