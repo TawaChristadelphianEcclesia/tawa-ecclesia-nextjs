@@ -14,15 +14,20 @@ const Template: ComponentStory<typeof VideoHighlightBlock> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-    url: "https://www.youtube.com/watch?time_continue=1&v=vDJzR6TIu9M",
+    // url: "https://www.youtube.com/watch?time_continue=1&v=vDJzR6TIu9M",
     image: {
         alt: "test",
         src: "undraw_podcast.svg",
-        blurDataURL: "undraw_podcast.svg"
+        blurDataURL: "undraw_podcast.svg",
     },
     title: "Test Title",
     subtitle: "Test Subtitle",
-    body: "Test Body"
+    body: "Test Body",
+    highlightVideo: {
+        url: "https://www.youtube.com/watch?time_continue=1&v=vDJzR6TIu9M",
+        title: "test",
+        description: "test",
+    },
 };
 // src,
 // alt,
