@@ -1,12 +1,9 @@
 import {
-    Article_articles_data,
-    Article_articles_data_attributes,
     Article_articles_data_attributes_blocks,
     Article_articles_data_attributes_blocks_ComponentBlocksRelatedArticles,
 } from "../api/__generated__/Article";
 import {
     GeneralPage_pages_data_attributes_blocks,
-    GeneralPage_pages_data_attributes_blocks_ComponentBlocksHero,
     GeneralPage_pages_data_attributes_blocks_ComponentBlocksStandardHeader,
     GeneralPage_pages_data_attributes_blocks_ComponentBlocksTextContent,
 } from "../api/__generated__/GeneralPage";
@@ -133,10 +130,11 @@ export const mapAPIToBlock = async (
                     articles: apiRelatedArticlesBlockData.articles
                         ? apiRelatedArticlesBlockData.articles?.data.map(
                               ({ attributes }) => ({
-                                  url: getPathFromSlug(
-                                      attributes?.slug as string,
-                                      "article"
-                                  ),
+                                  url:
+                                      getPathFromSlug(
+                                          attributes?.slug as string,
+                                          "article"
+                                      ) ?? "/",
                                   title: attributes!.title,
                                   titleImage: getImageData(
                                       attributes?.image?.data?.attributes ??
@@ -167,61 +165,60 @@ export const mapAPIToBlock = async (
         case "ComponentBlocksArticleHighlight":
             const apiArticleHighlightBlockData =
                 apiBlock as HomePageData_home_data_attributes_Blocks_ComponentBlocksArticleHighlight;
+            const articleBlockData: IArticleHighlightBlock = {
+                title: apiArticleHighlightBlockData.title,
+                subtitle: apiArticleHighlightBlockData.subtitle ?? "",
+                image: getImageData(
+                    apiArticleHighlightBlockData?.replaceimage?.data
+                        ?.attributes ?? undefined
+                ),
+                body: apiArticleHighlightBlockData.description ?? "",
+                highlightArticle: apiArticleHighlightBlockData.articles?.data[0]
+                    ? {
+                          url:
+                              getPathFromSlug(
+                                  apiArticleHighlightBlockData.articles?.data[0]
+                                      .attributes?.slug,
+                                  "article"
+                              ) ?? "/",
+                          title: apiArticleHighlightBlockData.articles?.data[0]
+                              .attributes!.title,
+                          description:
+                              apiArticleHighlightBlockData.articles?.data[0]
+                                  .attributes?.summary ?? "",
+                      }
+                    : undefined,
+            };
             return {
                 component: "articlehighlight" as IBlock["component"],
-                data: {
-                    title: apiArticleHighlightBlockData.title,
-                    subtitle:
-                        apiArticleHighlightBlockData.article?.data?.attributes
-                            ?.title,
-                    image: getImageData(
-                        apiArticleHighlightBlockData?.replaceimage?.data
-                            ?.attributes ?? undefined
-                    ),
-                    body:
-                        apiArticleHighlightBlockData.article?.data?.attributes
-                            ?.summary || "",
-                    leftLink: {
-                        label: "Read",
-                        url: getPathFromSlug(
-                            apiArticleHighlightBlockData.article?.data
-                                ?.attributes?.slug || "",
-                            "article"
-                        ),
-                    },
-                    rightLink: {
-                        label: "More",
-                        url: getPathFromSlug("", "article"),
-                    },
-                } as IArticleHighlightBlock,
+                data: articleBlockData,
             };
         case "ComponentBlocksVideoHighlight":
             const apiVideoHighlightBlockData =
                 apiBlock as HomePageData_home_data_attributes_Blocks_ComponentBlocksVideoHighlight;
+            const videoBlockData: IVideoHighlightBlock = {
+                image: getImageData(
+                    apiVideoHighlightBlockData.replaceImage?.data?.attributes ??
+                        undefined
+                ),
+                title: apiVideoHighlightBlockData.title,
+                subtitle: apiVideoHighlightBlockData.subtitle ?? undefined,
+                body: apiVideoHighlightBlockData.description ?? "",
+                highlightVideo: apiVideoHighlightBlockData.videos?.data[0]
+                    ? {
+                          url: apiVideoHighlightBlockData.videos!.data[0]
+                              .attributes!.url!,
+                          title: apiVideoHighlightBlockData.videos!.data[0]
+                              .attributes!.title!,
+                          description:
+                              apiVideoHighlightBlockData.videos!.data[0]
+                                  .attributes!.description ?? undefined,
+                      }
+                    : undefined,
+            };
             return {
                 component: "videohighlight",
-                data: {
-                    url:
-                        apiVideoHighlightBlockData.video?.data?.attributes
-                            ?.url || "",
-                    image: apiVideoHighlightBlockData.replaceImage?.data
-                        ?.attributes
-                        ? getImageData(
-                              apiVideoHighlightBlockData.replaceImage?.data
-                                  ?.attributes
-                          )
-                        : getImageData(
-                              apiVideoHighlightBlockData.video?.data?.attributes
-                                  ?.image.data?.attributes ?? undefined
-                          ),
-                    title: apiVideoHighlightBlockData.title,
-                    subtitle:
-                        apiVideoHighlightBlockData.video?.data?.attributes
-                            ?.title,
-                    body:
-                        apiVideoHighlightBlockData.video?.data?.attributes
-                            ?.description || "",
-                },
+                data: videoBlockData,
             };
     }
 };

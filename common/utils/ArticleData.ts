@@ -56,21 +56,26 @@ export const getArticleHomePageData = async (): Promise<IArticlesPage> => {
         await getAPIArticleHomePageData()
     ).blogPage?.data?.attributes;
     const seo = getSeoData(data?.seo);
-    const articles: IArticlesPage["pageData"]["articleData"] = await (
-        await getArticleList()
-    ).map((articleData) => ({
-        url: getPathFromSlug(articleData.attributes?.slug || "", "article"),
-        title: articleData.attributes?.title || "",
-        titleImage: getImageData(
-            articleData?.attributes?.image?.data?.attributes ?? undefined
-        ),
-        summary: articleData.attributes?.summary || "",
-        tags: articleData.attributes?.categories?.data
-            .filter((category) => category.attributes?.name)
-            .map((category) => category.attributes?.name || "") as string[],
-        datePublished: new Date(articleData.attributes?.publishedAt),
-        readingTime: getTextReadingTime(articleData.attributes?.content || ""),
-    }));
+    const articles: IArticlesPage["pageData"]["articleData"] = [
+        ...(await getArticleList()),
+    ]
+        .map((articleData) => ({
+            url: getPathFromSlug(articleData.attributes?.slug || "", "article"),
+            title: articleData.attributes?.title || "",
+            titleImage: getImageData(
+                articleData?.attributes?.image?.data?.attributes ?? undefined
+            ),
+            summary: articleData.attributes?.summary || "",
+            tags: articleData.attributes?.categories?.data
+                .filter((category) => category.attributes?.name)
+                .map((category) => category.attributes?.name || "") as string[],
+            datePublished: new Date(articleData.attributes?.publishedAt),
+            readingTime: getTextReadingTime(
+                articleData.attributes?.content || ""
+            ),
+        }))
+        .sort((a, b) => b.datePublished.getTime() - a.datePublished.getTime());
+    console.log();
     const pageData: IArticlesPage["pageData"] = {
         seo,
         headerData: {

@@ -35,8 +35,8 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         // if (e.button !== 0) return;
         setDragging(true);
         console.log("set dragging true");
-        e.stopPropagation();
-        e.preventDefault();
+        // e.stopPropagation();
+        // e.preventDefault();
     };
     const onMouseUp = (e: any) => {
         e.stopPropagation();
@@ -48,6 +48,19 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         ratio = ratio > 1 ? 1 : ratio < 0 ? 0 : ratio;
         setRatio(ratio);
         onScrub && onScrub(ratio);
+        setDragging(false);
+    };
+    const onTouchEnd = (e: any) => {
+        if (e.touches.length) return;
+        // e.stopPropagation();
+        // e.preventDefault();
+        if (!draggingRef.current) return;
+        // let ratio =
+        //     (e.pageX - parentSliderEl!.current!.getBoundingClientRect().left) /
+        //     parentSliderEl!.current!.getBoundingClientRect().width;
+        // ratio = ratio > 1 ? 1 : ratio < 0 ? 0 : ratio;
+        // setRatio(ratio);
+        // onScrub && onScrub(ratio);
         setDragging(false);
     };
     const onMouseMove = (e: any) => {
@@ -71,7 +84,7 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         setRatio(ratio);
         onScrub && onScrub(ratio);
         e.stopPropagation();
-        e.preventDefault();
+        // e.preventDefault();
     };
     React.useEffect(() => {
         draggingRef.current = dragging;
@@ -79,10 +92,12 @@ const RangeSlider: React.FC<IRangeSlider> = ({
             document.addEventListener("mousemove", onMouseMove);
             document.addEventListener("touchmove", onTouchMove);
             document.addEventListener("mouseup", onMouseUp);
+            document.addEventListener("touchend", onTouchEnd);
         } else if (!draggingRef.current) {
             document.removeEventListener("mousemove", onMouseMove);
             document.removeEventListener("touchmove", onTouchMove);
             document.removeEventListener("mouseup", onMouseUp);
+            document.removeEventListener("touchend", onTouchEnd);
         }
     }, [dragging]);
     React.useEffect(() => {
