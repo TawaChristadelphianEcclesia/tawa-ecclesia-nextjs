@@ -12,7 +12,7 @@ export const getSeoData = (
             content: meta?.content || "",
         })) || [],
     preventIndexing: apiSeoData?.preventIndexing || false,
-    structuredData: apiSeoData?.structuredData || "string",
+    structuredData: apiSeoData?.structuredData || undefined,
     metaImage: {
         src: apiSeoData?.metaImage?.data?.attributes?.url || "",
         alt: apiSeoData?.metaImage?.data?.attributes?.alternativeText || "",
