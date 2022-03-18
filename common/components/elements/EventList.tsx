@@ -46,11 +46,15 @@ const EventList: React.FC<IEventList> = ({
         <div tw="m-4 mb-6">
             <h2 tw="text-gray-900 text-4xl">{title}</h2>
         </div>
-        {!events.length && noEventsPlaceholder && (
-            <div tw="mx-4">
-                <p>{noEventsPlaceholder}</p>
-            </div>
-        )}
+        {(!events.length ||
+            !events.filter((event) =>
+                filterDates(event.datetime.toString(), filter)
+            ).length) &&
+            noEventsPlaceholder && (
+                <div tw="mx-4">
+                    <p>{noEventsPlaceholder}</p>
+                </div>
+            )}
         {events
             .filter((event) => filterDates(event.datetime.toString(), filter))
             .sort((eventA, eventB) =>
