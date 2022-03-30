@@ -4,7 +4,8 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import Event, { IEventData } from "../../common/components/templates/Event";
 
 const EventPage: React.FC<IEventData> = ({ pageData, globalData }) => {
-    return <Event pageData={pageData} globalData={globalData} />;
+    return <div></div>;
+    // return <Event pageData={pageData} globalData={globalData} />;
 };
 
 export default EventPage;
@@ -24,7 +25,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 // export const getStaticProps: GetStaticProps<IEventData> = async ({
 export const getStaticProps: GetStaticProps<any> = async ({ params }) => {
     // const data = await getEventData(params!.slug as string);
-    const data = undefined;
+    const data = {};
     return {
         props: data,
     };
