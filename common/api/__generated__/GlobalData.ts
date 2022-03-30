@@ -125,6 +125,9 @@ export interface GlobalData_global_data_attributes {
   __typename: "Global";
   SiteTitle: string | null;
   SiteTagline: string | null;
+  YouTubeLink: string | null;
+  FacebookLink: string | null;
+  InstagramLink: string | null;
   footer: GlobalData_global_data_attributes_footer | null;
   navigation: GlobalData_global_data_attributes_navigation | null;
 }

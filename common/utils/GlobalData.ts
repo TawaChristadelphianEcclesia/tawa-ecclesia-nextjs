@@ -43,6 +43,9 @@ export const getGlobalData = async (): Promise<IGlobalData> => {
                               ?.url || "",
                   }
                 : undefined,
+            youTubeLink: globalAPIData?.YouTubeLink ?? undefined,
+            faceBookLink: globalAPIData?.FacebookLink ?? undefined,
+            instagramLink: globalAPIData?.InstagramLink ?? undefined,
         },
     };
     return globalData;
