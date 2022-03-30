@@ -37,7 +37,7 @@ export interface IPodcastData {
 
 type IPodcastListEntry = IPodcastData & {
     playStatus: PlayerStatus;
-    onPlay: (track: IMediaTrack) => void;
+    onPlayToggle: (track: IMediaTrack) => void;
 };
 
 const PodcastListEntry: React.FC<IPodcastListEntry> = ({
@@ -46,7 +46,7 @@ const PodcastListEntry: React.FC<IPodcastListEntry> = ({
     description,
     date,
     fileUrl,
-    onPlay,
+    onPlayToggle,
     duration,
     playStatus,
 }) => (
@@ -66,7 +66,9 @@ const PodcastListEntry: React.FC<IPodcastListEntry> = ({
             <p tw="line-clamp-2 overflow-ellipsis">{description}</p>
             <div tw="mt-auto flex items-center">
                 <button
-                    onClick={() => onPlay({ thumbnail: image, title, fileUrl })}
+                    onClick={() =>
+                        onPlayToggle({ thumbnail: image, title, fileUrl })
+                    }
                     tw="flex items-center px-1 py-1 text-sm tracking-wide text-indigo-600 focus:text-white hover:text-white active:text-white uppercase transition-colors duration-200 rounded-full bg-indigo-200 hover:bg-indigo-500 focus:bg-indigo-500 active:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-80"
                 >
                     {playStatus == "idle" ? (
@@ -142,7 +144,7 @@ const PodcastsPage: React.FC<IPodcastsPage> = ({
                                     playStatus,
                                     trackIndex
                                 )}
-                                onPlay={(track) => handleOnPlay(track, i)}
+                                onPlayToggle={(track) => handleOnPlay(track, i)}
                             />
                         ))}
                     </div>

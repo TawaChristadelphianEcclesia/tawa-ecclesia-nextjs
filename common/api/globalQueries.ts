@@ -13,6 +13,9 @@ export const getGlobalData = async () => {
                         attributes {
                             SiteTitle
                             SiteTagline
+                            YouTubeLink
+                            FacebookLink
+                            InstagramLink
                             footer {
                                 footerColumns {
                                     title
