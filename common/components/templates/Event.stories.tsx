@@ -74,6 +74,10 @@ Default.args = {
         },
     },
     pageData: {
+        title: "test",
+        datetime: new Date(),
+        description:
+            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora quod officia dolorum magni nulla sunt enim labore voluptates accusantium, alias neque ducimus fugiat molestias corporis incidunt. Ipsum, vero. Vero, sed?",
         seo: {
             metaTitle: "Test",
             metaDescription: "Test default layout story",

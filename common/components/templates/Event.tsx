@@ -2,7 +2,7 @@
 import React from "react";
 import tw from "twin.macro";
 import Image from "next/image";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import dayjs from "dayjs";
 import { IPageData } from "./types";
 import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
 import ReactMarkdown from "react-markdown";
@@ -16,11 +16,12 @@ import DetailsIcon from "../assets/details.svg";
 import ContentSection from "../elements/ContentSection";
 
 type IEventPageData = IPageData & {
-    // title: string;
-    // summary: string;
-    // content: string;
+    title: string;
+    datetime: Date;
+    // presenter: string;
+    // location: string;
+    description: string;
     // image: IImageData;
-    // blocks?: IBlock[];
 };
 
 export interface IEventData {
@@ -43,12 +44,12 @@ const Event: React.FC<IEventData> = ({ globalData, pageData }) => (
                     }}
                 >
                     <Image
-                        src="./bible_photo.jpg"
+                        src="/bible_photo.jpg"
                         alt="event image"
                         layout="fill"
                         objectFit="cover"
                         placeholder="blur"
-                        blurDataURL="./bible_photo.jpg"
+                        blurDataURL="/bible_photo.jpg"
                     />
                 </div>
                 <div tw="p-5 space-y-4">
@@ -58,8 +59,14 @@ const Event: React.FC<IEventData> = ({ globalData, pageData }) => (
                         </div>
                         <div>
                             <h2>Date and Time</h2>
-                            <p>Tues, 29 March 2022</p>
-                            <p>7:30PM - 8:30PM</p>
+                            <p>
+                                {dayjs(pageData.datetime).format(
+                                    "ddd, D MMMM YYYY"
+                                )}
+                            </p>
+                            <p>{dayjs(pageData.datetime).format("h:mm A")}</p>
+                            {/* <p>Tues, 29 March 2022</p> */}
+                            {/* <p>7:30PM - 8:30PM</p> */}
                         </div>
                     </div>
                     <div tw="flex">
@@ -80,13 +87,7 @@ const Event: React.FC<IEventData> = ({ globalData, pageData }) => (
                         <div tw="mr-4">
                             <DetailsIcon tw="h-5 w-5 text-gray-700 mt-1" />
                         </div>
-                        <div>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Voluptatum ea qui vitae ut, modi quo
-                            perspiciatis, porro recusandae, totam ipsum dolorem
-                            deleniti inventore libero iusto laborum beatae
-                            doloremque reprehenderit magni.
-                        </div>
+                        <div>{pageData.description}</div>
                     </div>
                     <div tw="flex">
                         <div>Register</div>
