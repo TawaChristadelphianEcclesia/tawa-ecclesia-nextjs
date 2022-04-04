@@ -15,21 +15,19 @@ import LocationIcon from "../assets/location.svg";
 import DetailsIcon from "../assets/details.svg";
 import ContentSection from "../elements/ContentSection";
 
-type IEventPageData = IPageData & {
-    title: string;
-    datetime: Date;
-    // presenter: string;
-    // location: string;
-    description: string;
-    // image: IImageData;
-};
-
-export interface IEventData {
+export interface IEventPage {
     globalData: IGlobalData;
-    pageData: IEventPageData;
+    pageData:  IPageData & {
+        title: string;
+        datetime: Date;
+        // presenter: string;
+        // location: string;
+        description: string;
+        // image: IImageData;
+    };
 }
 
-const Event: React.FC<IEventData> = ({ globalData, pageData }) => (
+const EventPage: React.FC<IEventPage> = ({ globalData, pageData }) => (
     <DefaultLayout seo={pageData.seo} global={globalData}>
         <ContentSection padTop padBottom>
             <div
@@ -104,4 +102,4 @@ const Event: React.FC<IEventData> = ({ globalData, pageData }) => (
     </DefaultLayout>
 );
 
-export default Event;
+export default EventPage;

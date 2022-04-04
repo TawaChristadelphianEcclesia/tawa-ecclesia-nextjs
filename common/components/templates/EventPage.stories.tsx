@@ -1,14 +1,14 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Event from "./Event";
+import EventPage from "./EventPage";
 
 export default {
     title: "Templates/Event",
-    component: Event,
-} as ComponentMeta<typeof Event>;
+    component: EventPage,
+} as ComponentMeta<typeof EventPage>;
 
-const Template: ComponentStory<typeof Event> = (args) => (
-    <Event {...args}>{args.children}</Event>
+const Template: ComponentStory<typeof EventPage> = (args) => (
+    <EventPage {...args}>{args.children}</EventPage>
 );
 
 export const Default = Template.bind({});

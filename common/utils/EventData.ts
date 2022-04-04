@@ -5,7 +5,8 @@ import {
 } from "../api/eventQueries";
 import { IEventCard } from "../components/elements/EventCard";
 import { IEventList } from "../components/elements/EventList";
-import { IEventData } from "../components/templates/Event";
+import { IEventPage } from "../components/templates/EventPage";
+import { IEventsPage } from "../components/templates/EventsPage";
 import { getGlobalData } from "./GlobalData";
 import { getSeoData } from "./SeoData";
 
@@ -34,16 +35,24 @@ export const getAllEventSlugs = async () => {
         : [];
 };
 
-export const getEventPageData = async (slug: string): Promise<IEventData> => {
+export const getEventPageData = async (slug: string): Promise<IEventPage> => {
     const pageAPIData = await (await getAPIEventData(slug))?.attributes;
     // const seo = getSeoData(pageAPIData?.seo);
     const seo = getSeoData(undefined);
-    const pageData: IEventData["pageData"] = {
+    const pageData: IEventPage["pageData"] = {
         seo,
         title: pageAPIData?.title || "no title",
         datetime: new Date(pageAPIData?.time as string),
         description: pageAPIData?.description || "no description",
     };
+    const globalData = await getGlobalData();
+    return { pageData, globalData };
+};
+
+export const getEventHomePageData = async (): Promise<IEventsPage> => {
+    const pageAPIData = { title: "dummy title" };
+    const seo = getSeoData(undefined);
+    const pageData: IEventsPage["pageData"] = { seo, title: pageAPIData.title };
     const globalData = await getGlobalData();
     return { pageData, globalData };
 };
