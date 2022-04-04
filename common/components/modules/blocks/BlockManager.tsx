@@ -14,11 +14,15 @@ import RelatedArticlesBlock, {
 import ArticleHighlightBlock, {
     IArticleHighlightBlock,
 } from "./ArticleHighlightBlock";
-import VideoHighlightBlock, { IVideoHighlightBlock } from "./VideoHighlightBlock";
+import VideoHighlightBlock, {
+    IVideoHighlightBlock,
+} from "./VideoHighlightBlock";
+import CTABlock, { ICTABlock } from "./CTABlock";
 
 type ComponentType =
     | "hero"
     | "standardheader"
+    | "cta"
     | "events"
     | "contact"
     | "imagecard"
@@ -32,6 +36,7 @@ export interface IBlock {
     data:
         | IHeroHeaderBlock
         | IStandardHeaderBlock
+        | ICTABlock
         | IEventsBlock
         | IContactBlock
         | IImageCardBlock
@@ -62,6 +67,8 @@ const getBlockComponent = (block: IBlock, index: number) => {
                     key={index}
                 />
             );
+        case "cta":
+            return <CTABlock {...(block.data as ICTABlock)} key={index} />;
         case "events":
             return (
                 <EventsBlock {...(block.data as IEventsBlock)} key={index} />

@@ -42,21 +42,30 @@ const Footer: React.FC<IFooterData> = ({
                     </div>
                     <div tw="flex items-center sm:mr-auto">
                         {faceBookLink && (
-                            <ConditionalLinkWrapper href={faceBookLink}>
+                            <ConditionalLinkWrapper
+                                href={faceBookLink}
+                                target="_blank"
+                            >
                                 <div>
                                     <FacebookIcon tw="h-8 text-gray-300" />
                                 </div>
                             </ConditionalLinkWrapper>
                         )}
                         {youTubeLink && (
-                            <ConditionalLinkWrapper href={youTubeLink}>
+                            <ConditionalLinkWrapper
+                                href={youTubeLink}
+                                target="_blank"
+                            >
                                 <div>
                                     <YouTubeIcon tw="h-8 text-gray-300" />
                                 </div>
                             </ConditionalLinkWrapper>
                         )}
                         {instagramLink && (
-                            <ConditionalLinkWrapper href={instagramLink}>
+                            <ConditionalLinkWrapper
+                                href={instagramLink}
+                                target="_blank"
+                            >
                                 <div>
                                     <InstagramIcon tw="h-8 text-gray-300" />
                                 </div>
