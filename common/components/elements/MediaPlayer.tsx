@@ -2,7 +2,7 @@
 import tw, { styled } from "twin.macro";
 import React from "react";
 import Image from "next/image";
-import { PauseIcon, PlayIcon } from "@heroicons/react/outline";
+import { PauseIcon, PlayIcon } from "@heroicons/react/24/outline";
 import RewindTenIcon from "../assets/replayTen.svg";
 import ForwardThirtyIcon from "../assets/forwardThirty.svg";
 
@@ -61,17 +61,18 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({
     const [loading, setLoading] = React.useState(true);
     const [trackProgress, setTrackProgress] = React.useState(0);
     const [duration, setDuration] = React.useState(0);
-    const audioRef = React.useRef<HTMLAudioElement>();
+    const audioRef = React.useRef<HTMLAudioElement>(null);
     // const { duration } = audioRef.current;
-    const intervalRef = React.useRef<number>();
-    const durationIntervalRef = React.useRef<number>();
+    const intervalRef = React.useRef<number>(null);
+    const durationIntervalRef = React.useRef<number>(null);
 
     // const isReady = React.useRef(false);
 
     // define audio
     React.useEffect(() => {
         audioRef.current?.pause();
-        clearInterval(durationIntervalRef.current);
+        durationIntervalRef.current &&
+            clearInterval(durationIntervalRef.current);
         setDuration(0);
         setTrackProgress(0);
         setLoading(true);
@@ -110,14 +111,15 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({
         // Pause and clean up on unmount
         return () => {
             audioRef.current?.pause();
-            clearInterval(intervalRef.current);
+            intervalRef.current && clearInterval(intervalRef.current);
             onStatusChange && onStatusChange("idle");
         };
     }, []);
 
     // timer to set initial duration
     const startDurationTimer = () => {
-        clearInterval(durationIntervalRef.current);
+        durationIntervalRef.current &&
+            clearInterval(durationIntervalRef.current);
         durationIntervalRef.current = window.setInterval(() => {
             console.log(audioRef.current);
             if (
@@ -125,7 +127,8 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({
                 !isNaN(audioRef.current?.duration)
             ) {
                 setDuration(audioRef.current?.duration);
-                clearInterval(durationIntervalRef.current);
+                durationIntervalRef.current &&
+                    clearInterval(durationIntervalRef.current);
             }
         }, 100);
     };
@@ -133,7 +136,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({
     // timer to check on track and set progress
     const startProgressTimer = () => {
         // Clear any timers already running
-        clearInterval(intervalRef.current);
+        intervalRef.current && clearInterval(intervalRef.current);
 
         intervalRef.current = window.setInterval(() => {
             if (audioRef.current?.ended) {
@@ -153,7 +156,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({
     const updateProgress = (value: number) => {
         if (!audioRef.current) return;
         // Clear any timers already running
-        clearInterval(intervalRef.current);
+        intervalRef.current && clearInterval(intervalRef.current);
         audioRef.current.currentTime = value;
         setTrackProgress(audioRef.current.currentTime);
         startProgressTimer();
@@ -201,6 +204,7 @@ const MediaPlayer: React.FC<IMediaPlayer> = ({
                                 layout="fill"
                                 objectFit="cover"
                                 placeholder="blur"
+                                alt=""
                                 {...track.thumbnail}
                             />
                         </div>

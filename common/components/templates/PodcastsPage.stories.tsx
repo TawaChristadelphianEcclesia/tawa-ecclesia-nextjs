@@ -1,5 +1,5 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import PodcastsPage, { IPodcastsPage } from "./PodcastsPage";
 
@@ -10,16 +10,13 @@ import { IFooterData } from "../modules/Footer";
 import * as HomePage from "./HomePage.stories";
 import { ISeoData } from "../elements/Seo";
 
-export default {
+const meta: Meta<typeof PodcastsPage> = {
     title: "Templates/Podcasts Page",
     component: PodcastsPage,
-} as ComponentMeta<typeof PodcastsPage>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof PodcastsPage> = (args) => (
-    <PodcastsPage {...args} />
-);
-
-export const Default = Template.bind({});
+type Story = StoryObj<typeof PodcastsPage>;
 
 const templatePodcast: IPodcastsPage["pageData"]["podcasts"][0] = {
     image: {
@@ -29,39 +26,29 @@ const templatePodcast: IPodcastsPage["pageData"]["podcasts"][0] = {
     },
     title: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
     description:
-        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti quos quis architecto nobis, cumque quia recusandae voluptate ipsa eveniet voluptates aperiam laudantium necessitatibus, magnam ab dolorum, quisquam magni amet doloribus. ",
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti quos quis architecto nobis, cumque quia recusandae voluptate ipsa eveniet voluptates aperiam laudantium necessitatibus, magnam ab dolorum, quisquam magni amet doloribus.",
     date: new Date(),
     fileUrl: "/short_music_podcast_placeholder.mp3",
     duration: 65,
 };
 
-export const podcasts = Array.from({ length: 8 }, (_, i) => ({
+const podcasts = Array.from({ length: 8 }, () => ({
     ...templatePodcast,
 }));
 
-Default.args = {
-    globalData: {
-        headerData: Header.Default.args as IHeaderData,
-        footerData: Footer.Default.args as IFooterData,
-    },
-    pageData: {
-        seo: HomePage.Default.args?.pageData?.seo as ISeoData,
-        headerData: {
-            title: "Listen",
-            subtitle: "Listen these podcasts",
+export const Default: Story = {
+    args: {
+        globalData: {
+            headerData: Header.Default.args as IHeaderData,
+            footerData: Footer.Default.args as IFooterData,
         },
-        podcasts,
+        pageData: {
+            seo: HomePage.Default.args?.pageData?.seo as ISeoData,
+            headerData: {
+                title: "Listen",
+                subtitle: "Listen to these podcasts",
+            },
+            podcasts,
+        },
     },
 };
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
-    viewBox="0 0 20 20"
-    fill="currentColor"
->
-    <path
-        fillRule="evenodd"
-        d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-        clipRule="evenodd"
-    />
-</svg>;

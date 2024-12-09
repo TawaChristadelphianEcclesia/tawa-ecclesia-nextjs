@@ -7,16 +7,17 @@ interface IConditionalLinkWrapper {
     href?: string;
     passHref?: boolean;
     target?: string;
+    children?: React.ReactNode;
 }
 
 const ConditionalLinkWrapper: React.FC<IConditionalLinkWrapper> = ({
     href,
     passHref,
     children,
-    target
+    target,
 }) => {
     return href ? (
-        <Link href={href} passHref={passHref}>
+        <Link href={href} passHref={passHref} legacyBehavior>
             {!passHref ? <a target={target}>{children}</a> : <>{children}</>}
         </Link>
     ) : (

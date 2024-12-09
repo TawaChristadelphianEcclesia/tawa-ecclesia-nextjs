@@ -5,6 +5,7 @@ import * as React from "react";
 interface IGridSection {
     padTop?: boolean;
     padBottom?: boolean;
+    children?: React.ReactNode;
 }
 
 const GridSection: React.FC<IGridSection> = ({

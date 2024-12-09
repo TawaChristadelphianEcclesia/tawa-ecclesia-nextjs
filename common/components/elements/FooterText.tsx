@@ -15,7 +15,7 @@ const FooterText: React.FC<IFooterText> = ({ icon, text }) => {
                 {icon && (
                     <Image
                         src={icon.src}
-                        alt={icon.alt}
+                        alt={icon.alt || ""}
                         sizes="100%"
                         layout="fill"
                         objectFit="contain"

@@ -1,25 +1,25 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import TextInput from "./TextInput";
 
-export default {
+const meta: Meta<typeof TextInput> = {
     title: "Elements/Text Input",
     component: TextInput,
-} as ComponentMeta<typeof TextInput>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof TextInput> = (args) => (
-    <TextInput {...args}>{args.children}</TextInput>
-);
+type Story = StoryObj<typeof TextInput>;
 
-export const Default = Template.bind({});
-
-Default.args = {
-    type: "text",
-    placeholder: "Your Name",
+export const Default: Story = {
+    args: {
+        type: "text",
+        placeholder: "Your Name",
+    },
 };
 
-export const Email = Template.bind({});
-Email.args = {
-    type: "email",
-    placeholder: "Your Email",
+export const Email: Story = {
+    args: {
+        type: "email",
+        placeholder: "Your Email",
+    },
 };

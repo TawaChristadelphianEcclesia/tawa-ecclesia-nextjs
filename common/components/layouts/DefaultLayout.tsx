@@ -13,14 +13,13 @@ export interface IGlobalData {
 
 interface IDefaultLayout {
     seo: ISeoData;
-    global: IGlobalData
+    global: IGlobalData;
+    children?: React.ReactNode;
 }
-
-
 
 const DefaultLayout: React.FC<IDefaultLayout> = ({
     seo,
-    global: {headerData, footerData},
+    global: { headerData, footerData },
     children,
     ...rest
 }) => (

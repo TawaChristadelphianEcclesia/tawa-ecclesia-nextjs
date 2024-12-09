@@ -5,6 +5,7 @@ import tw, { css, styled } from "twin.macro";
 interface IContentSection {
     padTop?: boolean;
     padBottom?: boolean;
+    children?: ReactNode;
 }
 
 const ContentSection: React.FC<IContentSection> = ({

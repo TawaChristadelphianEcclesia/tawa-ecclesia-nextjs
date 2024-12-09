@@ -1,16 +1,15 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import ArticlePagination from "./ArticlePagination";
 
-export default {
+const meta: Meta<typeof ArticlePagination> = {
     title: "Elements/Article Pagination",
     component: ArticlePagination,
-} as ComponentMeta<typeof ArticlePagination>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof ArticlePagination> = (args) => (
-    <ArticlePagination {...args}>{args.children}</ArticlePagination>
-);
+type Story = StoryObj<typeof ArticlePagination>;
 
-export const Default = Template.bind({});
-
-Default.args = {};
+export const Default: Story = {
+    args: {},
+};

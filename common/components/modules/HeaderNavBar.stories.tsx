@@ -1,34 +1,35 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import HeaderNavBar from './HeaderNavBar';
+import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
+import HeaderNavBar from "./HeaderNavBar";
 
-export default {
-    title: 'Modules/HeaderNavBar',
-    component: HeaderNavBar
-} as ComponentMeta<typeof HeaderNavBar>;
+const meta: Meta<typeof HeaderNavBar> = {
+    title: "Modules/HeaderNavBar",
+    component: HeaderNavBar,
+};
+export default meta;
 
-const Template: ComponentStory<typeof HeaderNavBar> = (args) => <HeaderNavBar {...args}>Link</HeaderNavBar>;
+type Story = StoryObj<typeof HeaderNavBar>;
 
-export const Default = Template.bind({})
-
-Default.args = {
-    siteTitle: 'Tawa Christadelphians',
-    siteLogo: {
-        src: '/bible_logo.svg',
-        alt: 'logo'
+export const Default: Story = {
+    args: {
+        siteTitle: "Tawa Christadelphians",
+        siteLogo: {
+            src: "/bible_logo.svg",
+            alt: "logo",
+        },
+        headerLinks: [
+            {
+                url: "/articles",
+                label: "Articles",
+            },
+            {
+                url: "/articles/who-are-we",
+                label: "Who Are We?",
+            },
+            {
+                url: "/articles/gods-purpose-with-the-earth",
+                label: "Our Beliefs",
+            },
+        ],
     },
-    headerLinks: [
-        {
-            url: "/articles",
-            label: "Articles"
-        },
-        {
-            url: "/articles/who-are-we",
-            label: "Who Are We?"
-        },
-        {
-            url: "/articles/gods-purpose-with-the-earth",
-            label: "Our Beliefs"
-        }
-    ]
-}
+};

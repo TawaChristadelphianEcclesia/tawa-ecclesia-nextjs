@@ -1,16 +1,15 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import DummyComponent from "./DummyComponent";
 
-export default {
-    title: "Example/Dummy Component",
-    component: DummyComponent,
-} as ComponentMeta<typeof DummyComponent>;
+const meta: Meta<typeof DummyComponent> = {
+  title: "Example/Dummy Component",
+  component: DummyComponent,
+};
+export default meta;
 
-const Template: ComponentStory<typeof DummyComponent> = (args) => (
-    <DummyComponent {...args}>{args.children}</DummyComponent>
-);
+type Story = StoryObj<typeof DummyComponent>;
 
-export const Default = Template.bind({});
-
-Default.args = {};
+export const Default: Story = {
+  args: {},
+};
