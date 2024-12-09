@@ -2,7 +2,7 @@
 import tw from "twin.macro";
 import * as React from "react";
 import Image from "next/image";
-import { PlayIcon } from "@heroicons/react/outline";
+import { PlayIcon } from "@heroicons/react/24/outline";
 // import PlaySvg from "../assets/playIcon.svg";
 import VideoOverlay from "./VideoOverlay";
 
@@ -40,6 +40,7 @@ const VideoCard: React.FC<IVideoCard> = ({
                         layout="fill"
                         objectFit="cover"
                         placeholder="blur"
+                        alt=""
                         {...image}
                     />
                     <div tw="w-full h-full opacity-50 text-gray-300 hover:backdrop-blur-sm focus:backdrop-blur-sm active:backdrop-blur-md hover:opacity-75 focus:opacity-75 active:opacity-90 transition-all rounded-t-lg">

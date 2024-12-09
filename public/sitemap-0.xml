@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc><site url - for sitemap></loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.238Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.238Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/events</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/podcast</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/videos</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/our-beliefs</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/about-us</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/events/lecture-gods-purpose</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/events/seminar-gods-forgiveness</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/archaeology-and-the-bible</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/gods-purpose-and-character</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/jesus-christ-his-death-and-resurrection</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/bible-prophecy</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/the-fall-of-mankind</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/bible-basics-creation</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/jesus-christ-his-life-and-works</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/jesus-christ-his-return-and-the-kingdom</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/true-message-bible</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
-<url><loc>&lt;site url - for sitemap&gt;/articles/the-promises-to-abraham</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-04-04T01:10:43.239Z</lastmod></url>
+<url><loc>https://www.thebible.org.nz</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/events</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/podcast</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/videos</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/events/lecture-gods-purpose</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/events/seminar-gods-forgiveness</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/events/open-day</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/our-beliefs</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/about-us</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/archaeology-and-the-bible</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/gods-purpose-and-character</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/jesus-christ-his-death-and-resurrection</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/bible-prophecy</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/the-fall-of-mankind</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/bible-basics-creation</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/jesus-christ-his-life-and-works</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/jesus-christ-his-return-and-the-kingdom</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/true-message-bible</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.thebible.org.nz/articles/the-promises-to-abraham</loc><lastmod>2024-12-09T05:46:01.695Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

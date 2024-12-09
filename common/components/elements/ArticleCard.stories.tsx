@@ -1,30 +1,30 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { StoryFn, Meta, StoryObj } from "@storybook/react";
 import ArticleCard from "./ArticleCard";
 
-export default {
+const meta: Meta<typeof ArticleCard> = {
     title: "Elements/Article Card",
     component: ArticleCard,
-} as ComponentMeta<typeof ArticleCard>;
+};
 
-const Template: ComponentStory<typeof ArticleCard> = (args) => (
-    <ArticleCard {...args}>{args.children}</ArticleCard>
-);
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof ArticleCard>;
 
-Default.args = {
-    url: "/",
-    title: "God's Purpose and Character",
-    titleImage: {
-        src: "bible_photo.jpg",
-        alt: "bible photo",
-        blurDataURL: "bible_photo.jpg",
+export const Default: Story = {
+    args: {
+        url: "/",
+        title: "God's Purpose and Character",
+        titleImage: {
+            src: "bible_photo.jpg",
+            alt: "bible photo",
+            blurDataURL: "bible_photo.jpg",
+        },
+        summary: "Who is God, and what is His purpose with the earth?",
+        tags: [],
+        datePublished: new Date(),
+        readingTime: 1,
     },
-    summary: "Who is God, and what is His purpose with the earth?",
-    tags: [],
-    datePublished: new Date(),
-    readingTime: 1,
 };
 
 // url: string;

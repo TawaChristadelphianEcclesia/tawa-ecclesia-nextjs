@@ -1,23 +1,26 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
 
-import { Page } from './Page';
-import * as HeaderStories from './Header.stories';
+import { Page } from "./Page";
+import * as HeaderStories from "./Header.stories";
 
-export default {
-  title: 'Example/Page',
-  component: Page,
-} as ComponentMeta<typeof Page>;
+const meta: Meta<typeof Page> = {
+    title: "Example/Page",
+    component: Page,
+};
+export default meta;
 
-const Template: ComponentStory<typeof Page> = (args) => <Page {...args} />;
+type Story = StoryObj<typeof Page>;
 
-export const LoggedIn = Template.bind({});
-LoggedIn.args = {
-  // More on composing args: https://storybook.js.org/docs/react/writing-stories/args#args-composition
-  ...HeaderStories.LoggedIn.args,
+export const LoggedIn: Story = {
+    // More on composing args: https://storybook.js.org/docs/react/writing-stories/args#args-composition
+    args: {
+        ...HeaderStories.LoggedIn.args,
+    },
 };
 
-export const LoggedOut = Template.bind({});
-LoggedOut.args = {
-  ...HeaderStories.LoggedOut.args,
+export const LoggedOut: Story = {
+    args: {
+        ...HeaderStories.LoggedOut.args,
+    },
 };

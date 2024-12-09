@@ -1,18 +1,17 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import TextArea from "./TextArea";
 
-export default {
+const meta: Meta<typeof TextArea> = {
     title: "Elements/Text Input",
     component: TextArea,
-} as ComponentMeta<typeof TextArea>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof TextArea> = (args) => (
-    <TextArea {...args}>{args.children}</TextArea>
-);
+type Story = StoryObj<typeof TextArea>;
 
-export const Default = Template.bind({});
-
-Default.args = {
-    placeholder: "Message",
+export const Default: Story = {
+    args: {
+        placeholder: "Message",
+    },
 };

@@ -1,23 +1,22 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import EventCard from "./EventCard";
 
-export default {
+const meta: Meta<typeof EventCard> = {
     title: "Elements/Event Card",
     component: EventCard,
-} as ComponentMeta<typeof EventCard>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof EventCard> = (args) => (
-    <EventCard {...args}>{args.children}</EventCard>
-);
+type Story = StoryObj<typeof EventCard>;
 
-export const Default = Template.bind({});
-
-Default.args = {
-    title: "Event Title",
-    presenter: "Event Presenter",
-    datetime: new Date(),
-    description: "come to this event!",
-    location: "Tawa Christadelphian Ecclesia",
-    url: "/",
+export const Default: Story = {
+    args: {
+        title: "Event Title",
+        presenter: "Event Presenter",
+        datetime: new Date(),
+        description: "come to this event!",
+        location: "Tawa Christadelphian Ecclesia",
+        url: "/",
+    },
 };

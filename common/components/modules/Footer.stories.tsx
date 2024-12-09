@@ -1,48 +1,50 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import Footer from "./Footer";
 
-export default {
+const meta: Meta<typeof Footer> = {
     title: "Modules/Footer",
     component: Footer,
-} as ComponentMeta<typeof Footer>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />;
+type Story = StoryObj<typeof Footer>;
 
-export const Default = Template.bind({});
-Default.args = {
-    footerText: "Footer Text",
-    footerIcon: {
-        src: "./bible_logo.svg",
-        alt: "bible logo",
+export const Default: Story = {
+    args: {
+        footerText: "Footer Text",
+        footerIcon: {
+            src: "./bible_logo.svg",
+            alt: "bible logo",
+        },
+        footerColumns: [
+            {
+                title: "title",
+                links: [
+                    { url: "/", label: "Home" },
+                    { url: "/", label: "About Us" },
+                    { url: "/", label: "Our Beliefs" },
+                    { url: "/", label: "Articles" },
+                ],
+            },
+            {
+                title: "title",
+                links: [
+                    { url: "/", label: "Home" },
+                    { url: "/", label: "About Us" },
+                    { url: "/", label: "Our Beliefs" },
+                    { url: "/", label: "Articles" },
+                ],
+            },
+            {
+                title: "title",
+                links: [
+                    { url: "/", label: "Home" },
+                    { url: "/", label: "About Us" },
+                    { url: "/", label: "Our Beliefs" },
+                    { url: "/", label: "Articles" },
+                ],
+            },
+        ],
     },
-    footerColumns: [
-        {
-            title: "title",
-            links: [
-                { url: "/", label: "Home" },
-                { url: "/", label: "About Us" },
-                { url: "/", label: "Our Beliefs" },
-                { url: "/", label: "Articles" },
-            ],
-        },
-        {
-            title: "title",
-            links: [
-                { url: "/", label: "Home" },
-                { url: "/", label: "About Us" },
-                { url: "/", label: "Our Beliefs" },
-                { url: "/", label: "Articles" },
-            ],
-        },
-        {
-            title: "title",
-            links: [
-                { url: "/", label: "Home" },
-                { url: "/", label: "About Us" },
-                { url: "/", label: "Our Beliefs" },
-                { url: "/", label: "Articles" },
-            ],
-        },
-    ],
 };

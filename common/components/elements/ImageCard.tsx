@@ -33,7 +33,7 @@ const ImageCard: React.FC<IImageCard> = ({
                 {/* <div tw="aspect-w-3 aspect-h-2"> */}
                 <Image
                     src={image.src}
-                    alt={image.alt}
+                    alt={image.alt || ""}
                     layout="fill"
                     objectFit="contain"
                     sizes="100%"

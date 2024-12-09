@@ -1,5 +1,4 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { IPageData } from "./types";
 import DefaultLayout, { IGlobalData } from "../layouts/DefaultLayout";
 import ReactMarkdown from "react-markdown";

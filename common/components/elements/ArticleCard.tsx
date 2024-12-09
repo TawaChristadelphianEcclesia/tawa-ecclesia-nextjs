@@ -23,7 +23,7 @@ const ArticleCard: React.FC<IArticleCard> = ({
     datePublished,
     readingTime,
 }) => (
-    <Link href={url} passHref>
+    <Link href={url} passHref legacyBehavior>
         <a>
             <div tw="flex cursor-pointer">
                 <div tw="flex-1 p-1 pl-3 border border-gray-200 rounded-l-md">

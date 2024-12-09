@@ -51,7 +51,7 @@ const EventCardContents: React.FC<IEventCard> = ({
 
 const EventCard: React.FC<IEventCard> = (eventData) => {
     return eventData.url ? (
-        <Link href={eventData.url} passHref>
+        <Link href={eventData.url} passHref legacyBehavior>
             <a>
                 <EventCardContents {...eventData} />
             </a>

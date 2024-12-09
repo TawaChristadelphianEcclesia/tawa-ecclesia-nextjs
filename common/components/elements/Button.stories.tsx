@@ -1,54 +1,62 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import Button from "./Button";
 
-export default {
+const meta: Meta<typeof Button> = {
     title: "Elements/Button",
     component: Button,
-} as ComponentMeta<typeof Button>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof Button> = (args) => (
-    <Button {...args}>{args.children}</Button>
-);
+type Story = StoryObj<typeof Button>;
 
-export const Default = Template.bind({});
-Default.args = {
-    href: "",
-    children: "Link",
+export const Default: Story = {
+    args: {
+        href: "",
+        children: "Link",
+    },
 };
 
-export const NavBarLink = Template.bind({});
-NavBarLink.args = {
-    ...Default.args,
-    navBarLink: true,
+export const NavBarLink: Story = {
+    args: {
+        ...Default.args,
+        navBarLink: true,
+    },
 };
 
-export const NavBarBrand = Template.bind({});
-NavBarBrand.args = {
-    ...Default.args,
-    navBarBrand: true,
+export const NavBarBrand: Story = {
+    args: {
+        ...Default.args,
+        navBarBrand: true,
+    },
 };
 
-export const Pagination = Template.bind({});
-Pagination.args = {
-    ...Default.args,
-    paginationButton: true,
+export const Pagination: Story = {
+    args: {
+        ...Default.args,
+        paginationButton: true,
+    },
 };
 
-export const ContainedPrimary = Template.bind({});
-ContainedPrimary.args = {
-    ...Default.args,
-    variant: "contained",
+export const ContainedPrimary: Story = {
+    args: {
+        ...Default.args,
+        variant: "contained",
+    },
 };
-export const ContainedSuccess = Template.bind({});
-ContainedSuccess.args = {
-    ...Default.args,
-    variant: "contained",
-    color: "success",
+
+export const ContainedSuccess: Story = {
+    args: {
+        ...Default.args,
+        variant: "contained",
+        color: "success",
+    },
 };
-export const ContainedError = Template.bind({});
-ContainedError.args = {
-    ...Default.args,
-    variant: "contained",
-    color: "error",
+
+export const ContainedError: Story = {
+    args: {
+        ...Default.args,
+        variant: "contained",
+        color: "error",
+    },
 };

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { Fragment, ReactNode, useState } from "react";
 import tw, { css, styled } from "twin.macro";
-import { XIcon } from "@heroicons/react/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import Button from "./Button";
 import Transition from "./Transition";
 
@@ -12,16 +12,20 @@ interface IVideoOverlay {
 }
 
 const processUrl = (url: string) => {
-    var urlEl = new URL(url);
-    if (urlEl.hostname == "www.youtube.com" && urlEl.pathname == "/watch") {
-        urlEl = new URL(
-            "https://www.youtube.com/embed/" + urlEl.searchParams.get("v")
-        );
+    try {
+        var urlEl = new URL(url);
+        if (urlEl.hostname == "www.youtube.com" && urlEl.pathname == "/watch") {
+            urlEl = new URL(
+                "https://www.youtube.com/embed/" + urlEl.searchParams.get("v")
+            );
+        }
+        if (!urlEl.searchParams.get("rel")) {
+            urlEl.searchParams.append("rel", "0");
+        }
+        return urlEl.toString();
+    } catch (e) {
+        return "Error";
     }
-    if (!urlEl.searchParams.get("rel")) {
-        urlEl.searchParams.append("rel", "0");
-    }
-    return urlEl.toString();
 };
 
 const transitionProps = {
@@ -54,7 +58,7 @@ const VideoOverlay: React.FC<IVideoOverlay> = ({
                                 variant="transparent"
                                 onClick={onClose}
                             >
-                                <XIcon tw="h-5 w-5" />
+                                <XMarkIcon tw="h-5 w-5" />
                             </Button>
                         </div>
                     </div>

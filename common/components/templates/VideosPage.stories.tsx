@@ -1,8 +1,7 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import VideosPage from "./VideosPage";
-
 import * as Footer from "../modules/Footer.stories";
 import * as Header from "../modules/HeaderNavBar.stories";
 import { IHeaderData } from "../modules/HeaderNavBar";
@@ -10,16 +9,13 @@ import { IFooterData } from "../modules/Footer";
 import * as HomePage from "./HomePage.stories";
 import { ISeoData } from "../elements/Seo";
 
-export default {
+const meta: Meta<typeof VideosPage> = {
     title: "Templates/Videos Page",
     component: VideosPage,
-} as ComponentMeta<typeof VideosPage>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof VideosPage> = (args) => (
-    <VideosPage {...args} />
-);
-
-export const Default = Template.bind({});
+type Story = StoryObj<typeof VideosPage>;
 
 const templateVideo = {
     image: {
@@ -35,19 +31,21 @@ const templateVideo = {
     videoUrl: "https://www.youtube.com/watch?time_continue=1&v=vDJzR6TIu9M",
 };
 
-const videos = Array.from({ length: 8 }, (_, i) => ({ ...templateVideo }));
+const videos = Array.from({ length: 8 }, () => ({ ...templateVideo }));
 
-Default.args = {
-    globalData: {
-        headerData: Header.Default.args as IHeaderData,
-        footerData: Footer.Default.args as IFooterData,
-    },
-    pageData: {
-        seo: HomePage.Default.args?.pageData?.seo as ISeoData,
-        headerData: {
-            title: "Watch",
-            subtitle: "Watch these videos",
+export const Default: Story = {
+    args: {
+        globalData: {
+            headerData: Header.Default.args as IHeaderData,
+            footerData: Footer.Default.args as IFooterData,
         },
-        videos,
+        pageData: {
+            seo: HomePage.Default.args?.pageData?.seo as ISeoData,
+            headerData: {
+                title: "Watch",
+                subtitle: "Watch these videos",
+            },
+            videos,
+        },
     },
 };

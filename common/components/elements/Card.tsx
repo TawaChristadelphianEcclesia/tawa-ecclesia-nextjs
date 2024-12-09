@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { ReactNode } from "react";
 import tw from "twin.macro";
 interface ICard {
     animate?: boolean;
+    children?: ReactNode;
 }
 const Card: React.FC<ICard> = ({ animate, children }) => (
     <div
