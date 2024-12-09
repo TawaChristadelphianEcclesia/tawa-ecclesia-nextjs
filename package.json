@@ -14,7 +14,7 @@
     "codegen": "yarn run download-schema && apollo codegen:generate --localSchemaFile=./common/api/graphql-schema.json --target=typescript --tagName=gql"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.7",
+    "@apollo/client": "^3.12.2",
     "@emotion/babel-plugin": "^11.7.2",
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/css": "^11.7.1",
@@ -32,7 +32,6 @@
     "@tailwindcss/line-clamp": "^0.3.1",
     "@tailwindcss/typography": "^0.4.0",
     "@types/react-transition-group": "^4.4.4",
-    "apollo": "^2.33.9",
     "autoprefixer": "^10.4.0",
     "babel-plugin-macros": "^3.1.0",
     "dayjs": "^1.11.0",
