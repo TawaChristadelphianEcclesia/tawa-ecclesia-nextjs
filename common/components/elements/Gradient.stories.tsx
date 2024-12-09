@@ -1,19 +1,20 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import React, { ComponentProps } from "react";
+import { Meta, StoryObj } from "@storybook/react";
 import Gradient from "./Gradient";
 import Card from "./Card";
 
-export default {
+const meta: Meta<typeof Gradient> = {
     title: "Elements/Gradient",
     component: Gradient,
-} as ComponentMeta<typeof Gradient>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof Gradient> = (args) => (
-    <Gradient {...args}>
-        {args.children}
-    </Gradient>
-);
+type Story = StoryObj<typeof Gradient>;
 
-export const Default = Template.bind({});
-
-Default.args = { children: <Card>child card</Card> };
+export const Default: Story = {
+    render: (args: ComponentProps<typeof Card>) => (
+        <Gradient {...args}>
+            <Card>child card</Card>
+        </Gradient>
+    ),
+};

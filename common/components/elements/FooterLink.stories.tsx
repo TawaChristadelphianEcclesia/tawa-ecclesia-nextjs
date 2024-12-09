@@ -1,16 +1,18 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import FooterLink from './FooterLink';
+import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
+import FooterLink from "./FooterLink";
 
-export default {
-    title: 'Elements/Footer Link',
-    component: FooterLink
-} as ComponentMeta<typeof FooterLink>;
+const meta: Meta<typeof FooterLink> = {
+    title: "Elements/Footer Link",
+    component: FooterLink,
+};
+export default meta;
 
-const Template: ComponentStory<typeof FooterLink> = (args) => <FooterLink {...args} />;
+type Story = StoryObj<typeof FooterLink>;
 
-export const Default = Template.bind({})
-Default.args = {
-    label: "link",
-    url: "link"
-}
+export const Default: Story = {
+    args: {
+        label: "link",
+        url: "link",
+    },
+};

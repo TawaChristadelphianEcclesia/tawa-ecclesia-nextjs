@@ -1,16 +1,15 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import TextHeader from "./TextHeader";
 
-export default {
+const meta: Meta<typeof TextHeader> = {
     title: "Elements/Headers/Text Header",
     component: TextHeader,
-} as ComponentMeta<typeof TextHeader>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof TextHeader> = (args) => (
-    <TextHeader {...args}>{args.children}</TextHeader>
-);
+type Story = StoryObj<typeof TextHeader>;
 
-export const Default = Template.bind({});
-
-Default.args = {};
+export const Default: Story = {
+    args: {},
+};

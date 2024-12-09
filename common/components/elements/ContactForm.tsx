@@ -8,6 +8,7 @@ import TextInput from "./TextInput";
 export interface IContactForm {
     endpoint: string;
     title: string;
+    children?: React.ReactNode;
 }
 
 const ContactForm: React.FC<IContactForm> = ({ endpoint, title }) => {
@@ -26,8 +27,9 @@ const ContactForm: React.FC<IContactForm> = ({ endpoint, title }) => {
     const [name, setName] = useState<string>();
     const [message, setMessage] = useState<string>();
     // const [statusMessage, setStatusMessage] = useState<string>("send");
-    const [status, setStatus] =
-        useState<"ready" | "sending" | "sent" | "error">("ready");
+    const [status, setStatus] = useState<
+        "ready" | "sending" | "sent" | "error"
+    >("ready");
     return (
         <>
             <h2 tw="text-gray-900 text-4xl mb-5">{title}</h2>

@@ -41,7 +41,7 @@ const HeroHeader: React.FC<IHeroHeader> = ({
         >
             <Image
                 src={image.src}
-                alt={image.alt}
+                alt={image.alt || ""}
                 layout="fill"
                 sizes="100%"
                 objectFit="cover"

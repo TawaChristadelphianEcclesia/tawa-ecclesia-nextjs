@@ -13,6 +13,7 @@ interface IButton {
     variant?: "contained" | "transparent";
     href?: string;
     onClick?: React.MouseEventHandler<HTMLElement>;
+    children?: React.ReactNode;
 }
 
 const Button: React.FC<IButton> = ({

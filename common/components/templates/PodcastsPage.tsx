@@ -2,7 +2,7 @@
 import tw, { styled } from "twin.macro";
 import * as React from "react";
 import Image from "next/image";
-import { PauseIcon, PlayIcon } from "@heroicons/react/outline";
+import { PauseIcon, PlayIcon } from "@heroicons/react/24/outline";
 import BarsIcon from "../assets/bars.svg";
 import SpinIcon from "../assets/tail-spin.svg";
 
@@ -57,6 +57,7 @@ const PodcastListEntry: React.FC<IPodcastListEntry> = ({
                     layout="fill"
                     objectFit="cover"
                     placeholder="blur"
+                    alt=""
                     {...image}
                 />
             </div>

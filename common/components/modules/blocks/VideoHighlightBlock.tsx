@@ -37,7 +37,7 @@ const VideoHighlightBlock: React.FC<IVideoHighlightBlock> = ({
                     <div tw="relative h-52 md:h-80 md:flex-1">
                         <Image
                             src={image.src}
-                            alt={image.alt}
+                            alt={image.alt || ""}
                             layout="fill"
                             objectFit="contain"
                             sizes="100%"

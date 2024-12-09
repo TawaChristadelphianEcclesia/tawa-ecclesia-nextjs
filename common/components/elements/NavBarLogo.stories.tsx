@@ -1,19 +1,21 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import NavBarLogo from './NavBarLogo';
+import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
+import NavBarLogo from "./NavBarLogo";
 
-export default {
-    title: 'Elements/Nav Bar Logo',
+const meta: Meta<typeof NavBarLogo> = {
+    title: "Elements/Nav Bar Logo",
     component: NavBarLogo,
-    argTypes: { setOpen: { action: "clicked" } }
-} as ComponentMeta<typeof NavBarLogo>;
+    argTypes: { setOpen: { action: "clicked" } },
+};
+export default meta;
 
-const Template: ComponentStory<typeof NavBarLogo> = (args) => <NavBarLogo {...args} />;
+type Story = StoryObj<typeof NavBarLogo>;
 
-export const Default = Template.bind({})
-Default.args = {
-    logo: {
-        src: './bible_logo.svg',
-        alt: "bible logo"
-    }
-}
+export const Default: Story = {
+    args: {
+        logo: {
+            src: "./bible_logo.svg",
+            alt: "bible logo",
+        },
+    },
+};

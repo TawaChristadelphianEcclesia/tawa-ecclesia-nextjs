@@ -1,19 +1,18 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import ContentSection from "./ContentSection";
 import Card from "./Card";
 
-export default {
+const meta: Meta<typeof ContentSection> = {
     title: "Elements/Content Section",
     component: ContentSection,
-} as ComponentMeta<typeof ContentSection>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof ContentSection> = (args) => (
-    <ContentSection {...args}>
-        {args.children}
-    </ContentSection>
-);
+type Story = StoryObj<typeof ContentSection>;
 
-export const Default = Template.bind({});
-
-Default.args = { children: <Card>child card</Card> };
+export const Default: Story = {
+    args: {
+        children: <Card>child card</Card>,
+    },
+};

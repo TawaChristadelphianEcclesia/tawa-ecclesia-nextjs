@@ -1,31 +1,31 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import BlockManager from "./BlockManager";
 
-export default {
+const meta: Meta<typeof BlockManager> = {
     title: "Modules/Blocks/BlockManager",
     component: BlockManager,
-} as ComponentMeta<typeof BlockManager>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof BlockManager> = (args) => (
-    <BlockManager {...args}>{args.children}</BlockManager>
-);
+type Story = StoryObj<typeof BlockManager>;
 
-export const Default = Template.bind({});
-
-Default.args = {
-    blocks: [
-        {
-            component: "hero",
-            data: {
-                image: {
-                    src: "bible_photo.jpg",
-                    blurDataURL: "bible_photo.jpg",
+export const Default: Story = {
+    args: {
+        // List of blocks to render
+        blocks: [
+            {
+                component: "hero", // The type of block, e.g., "hero"
+                data: {
+                    image: {
+                        src: "bible_photo.jpg", // Image source for the hero block
+                        blurDataURL: "bible_photo.jpg", // Placeholder image for lazy loading
+                    },
+                    title: "Tawa Christadelphians", // Title for the hero block
+                    subtitle:
+                        "The fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance: against such there is no law.", // Subtitle for the hero block
                 },
-                title: "Tawa Christadelphians",
-                subtitle:
-                    "The fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance: against such there is no law.",
             },
-        },
-    ],
+        ],
+    },
 };

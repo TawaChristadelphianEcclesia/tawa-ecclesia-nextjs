@@ -1,19 +1,21 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import FooterText from './FooterText';
+import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
+import FooterText from "./FooterText";
 
-export default {
-    title: 'Elements/Footer Text Section',
-    component: FooterText
-} as ComponentMeta<typeof FooterText>;
+const meta: Meta<typeof FooterText> = {
+    title: "Elements/Footer Text Section",
+    component: FooterText,
+};
+export default meta;
 
-const Template: ComponentStory<typeof FooterText> = (args) => <FooterText {...args} />;
+type Story = StoryObj<typeof FooterText>;
 
-export const Default = Template.bind({})
-Default.args = {
-    text: "Footer Text",
-    icon: {
-        src: "./bible_logo.svg",
-        alt: "bible logo",
-    }
-}
+export const Default: Story = {
+    args: {
+        text: "Footer Text",
+        icon: {
+            src: "./bible_logo.svg",
+            alt: "bible logo",
+        },
+    },
+};

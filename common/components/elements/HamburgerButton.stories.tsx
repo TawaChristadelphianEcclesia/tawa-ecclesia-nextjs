@@ -1,21 +1,24 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import HamburgerButton from './HamburgerButton';
+import React from "react";
+import { Meta, StoryObj } from "@storybook/react";
+import HamburgerButton from "./HamburgerButton";
 
-export default {
-    title: 'Elements/Hamburger Button',
+const meta: Meta<typeof HamburgerButton> = {
+    title: "Elements/Hamburger Button",
     component: HamburgerButton,
-    argTypes: { setOpen: { action: "clicked" } }
-} as ComponentMeta<typeof HamburgerButton>;
+    argTypes: { setOpen: { action: "clicked" } },
+};
+export default meta;
 
-const Template: ComponentStory<typeof HamburgerButton> = (args) => <HamburgerButton {...args} />;
+type Story = StoryObj<typeof HamburgerButton>;
 
-export const Open = Template.bind({})
-Open.args = {
-    open: true
-}
+export const Open: Story = {
+    args: {
+        open: true,
+    },
+};
 
-export const Closed = Template.bind({})
-Closed.args = {
-    open: false
-}
+export const Closed: Story = {
+    args: {
+        open: false,
+    },
+};

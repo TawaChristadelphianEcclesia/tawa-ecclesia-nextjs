@@ -9,7 +9,6 @@ import {
 } from "../api/podcastQueries";
 import { getSeoData } from "./SeoData";
 import { getGlobalData } from "./GlobalData";
-import { podcasts as tempStoryPodcasts } from "../components/templates/PodcastsPage.stories";
 import { Podcasts } from "../api/__generated__/Podcasts";
 import { getImageData } from "./ImageData";
 

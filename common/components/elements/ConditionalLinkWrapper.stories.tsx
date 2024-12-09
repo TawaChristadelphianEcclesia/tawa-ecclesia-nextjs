@@ -1,22 +1,21 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import ConditionalLinkWrapper from "./ConditionalLinkWrapper";
 
-export default {
+const meta: Meta<typeof ConditionalLinkWrapper> = {
     title: "Elements/Conditional Link Wrapper",
     component: ConditionalLinkWrapper,
-} as ComponentMeta<typeof ConditionalLinkWrapper>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof ConditionalLinkWrapper> = (args) => (
-    <ConditionalLinkWrapper {...args}>{args.children}</ConditionalLinkWrapper>
-);
+type Story = StoryObj<typeof ConditionalLinkWrapper>;
 
-export const Default = Template.bind({});
-
-Default.args = {
-    href: "/",
+export const Default: Story = {
+    args: {
+        href: "/",
+    },
 };
 
-export const NoHref = Template.bind({});
-
-NoHref.args = {};
+export const NoHref: Story = {
+    args: {},
+};
